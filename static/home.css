@@ -1,0 +1,91 @@
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid var(--highlight);
+    box-shadow: 0 0 15px var(--highlight);
+    margin-right: 20px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.links p {
+    margin: 5px 0;
+}
+
+.bio {
+    margin-bottom: 20px;
+}
+
+.dynamic-text {
+    color: var(--highlight);
+    display: inline-block;
+    width: 50ch;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.terminal {
+    border: 1px solid var(--text-primary);
+    padding: 10px;
+    background-color: var(--background-medium);
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+#chat-messages {
+    color: var(--accent);
+    margin-bottom: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+}
+
+#user-input {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+}
+
+/* Typewriter effect */
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid var(--main-text);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--main-text); }
+}

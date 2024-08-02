@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>k3nn.computer - blog</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/blog.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/android-icon-192x192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>> blog_</h1>
+            <nav>
+                <a href="/">home</a> / <a href="https://x.com/k3nndot">x</a>
+            </nav>
+        </header>
+        <main>
+            <section class="intro">
+                <p>Some thoughts on technology, philosophy, psychology, and the future.</p>
+            </section>
+            <section class="post-list">
+                {% for post in posts %}
+                <article class="post-item">
+                    <span class="post-date">[ {{ post.date.strftime('%Y-%m-%d') }} ]</span>
+                    <a href="/post/{{ post.filename }}" class="post-title">{{ post.title }}</a>
+                    <span class="post-tags">[ {{ post.tags|join(', ') }} ]</span>
+                </article>
+                {% endfor %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>

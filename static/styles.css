@@ -1,0 +1,83 @@
+:root {
+  /* Primary colors */
+  --background-dark: #161A3C;  /* Dark background color */
+  --background-medium: #2D3142;  /* Slightly lighter background for contrast */
+  
+  /* Text colors */
+  --text-primary: #9097C0;  /* Main text color */
+  --text-secondary: #FBFFF1;  /* For headers and important text */
+  
+  /* Accent colors */
+  --red-neon: #EB5160;  /* Keeping the existing red accent */
+  --link-color: #FBFFF1;  /* White color for links, matching the header in the image */
+  
+  /* Functional colors */
+  --body-bg: var(--background-dark);
+  --body-text: var(--text-primary);
+  --highlight: var(--red-neon);
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    background-color: var(--body-bg);
+    color: var(--body-text);
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    color: #fffffe;
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--highlight);  /* Red highlight on hover */
+    text-decoration: underline;
+}
+
+/* CRT effect and scanlines */
+.crt-effect {
+    animation: flicker 0.15s infinite;
+    background: linear-gradient(var(--background-dark) 50%, #000 50%);
+    background-size: 100% 4px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+@keyframes flicker {
+    0% { opacity: 0.97; }
+    100% { opacity: 1; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
