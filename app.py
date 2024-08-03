@@ -131,7 +131,7 @@ async def chat(request: ChatRequest):
         return {"response": ollama_response['response']}
     except requests.RequestException as e:
         logging.error(f"Error communicating with Ollama API: {str(e)}")
-        raise HTTPException(status_code=500, detail="Error communicating with AI model")
+        raise HTTPException(status_code=500, detail=f"Error communicating with AI model: {str(e)}")
     except Exception as e:
         logging.error(f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
