@@ -12,153 +12,45 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/android-icon-192x192.png">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="/static/profile.PNG" alt="Kenneth's profile picture" class="profile-pic">
-            <div class="intro">
-                <h1>> hello_</h1>
-                <div class="links">
-                    <p><a href="https://github.com/k3nnethfrancis">[github]</a></p>
-                    <p><a href="https://x.com/k3nndot">[x dot com]</a></p>
-                    <p><a href="/listings">[blog]</a></p>
+    <button id="mode-toggle" aria-label="Toggle dark mode">🌓</button>
+    <div class="content-wrapper">
+        <header>
+            <div class="profile-section">
+                <div class="profile-pic-container">
+                    <img src="/static/profile.PNG" alt="Kenneth's profile picture" class="profile-pic">
+                </div>
+                <div class="intro">
+                    <h1>> hello_</h1>
+                    <p>i'm ken. i'm a <span id="dynamic-text" class="dynamic-text" aria-live="polite"></span></p>
+                    <p>and i'm interested in <span id="dynamic-interest" class="dynamic-text" aria-live="polite"></span></p>
                 </div>
             </div>
-        </div>
-        <div class="bio">
-            <p>i'm a <span id="dynamic-text" class="dynamic-text"></span></p>
-            <p>and i'm interested in <span id="dynamic-interest" class="dynamic-text"></span></p>
-        </div>
-        <p>my day job is at <a href="https://x.com/spacex">spaceX</a> where i apply analytics to talent operations. i love a good side quest and have always had a passion for building things. 
-            <br><br> in previous adventures, i co-created <a href="https://x.com/noometicai">noometic ai</a>, a semantic search engine for creative talent sourcing. i also helped found <a href="https://x.com/talentDAO_">talentDAO</a> where i <a href="https://talentdao.mirror.xyz/">published work</a> on psychometrics and built <a href="https://github.com/Project-LION-AI">LLM tools</a> for discord community analytics.
-            <br><br> currently, i'm building memetic infrastructure on top of apple silicon — learning MLX for training small models with evolutionary algorithms — to create psychometrically aligned digital minds.
-        </p>
-        <div class="terminal">
-            <div id="chat-messages"></div>
-            <div class="input-line">
-                <span class="prompt">&gt;</span>
-                <input type="text" id="user-input" placeholder="Ask me a question...">
-            </div>
-        </div>
+        </header>
+        <nav class="links">
+            <a href="https://github.com/k3nnethfrancis">[github]</a>
+            <a href="https://x.com/k3nndot">[x dot com]</a>
+            <a href="/listings">[blog]</a>
+        </nav>
+        <hr>
+        <main>
+            <section class="bio">
+                <p>i'm a lead operations analyst at <a href="https://x.com/spacex">spaceX</a> and a hobbyist ai developer. i'm currently exploring a side quest to train <a href="/terminal">my digital twin</a>. i see artificial intelligence as both a technological and cultural phenomenon. i think aligning minds in a direction that serves us all is one of the great challenges of civilization.</p>
+            </section>
+            <hr>
+            <section class="recent-posts">
+                <h2>recent posts_</h2>
+                <ul>
+                    {% for post in recent_posts %}
+                    <li>
+                        <a href="/post/{{ post.filename }}">{{ post.title }}</a>
+                        <span class="post-date">{{ post.date.strftime('%B %d, %Y') }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </main>
     </div>
-    <script>
-        let chatHistory = [];
-
-        document.getElementById('user-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const userMessage = this.value;
-                addMessage('user', userMessage);
-                this.value = '';
-
-                console.log('Sending message:', userMessage);
-                fetch('/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                    },
-                    body: JSON.stringify({message: userMessage}),
-                })
-                .then(response => {
-                    console.log('Response status:', response.status);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Received response:', data);
-                    addMessage('assistant', 'mind: ' + data.response);
-                })
-                .catch(error => {
-                    console.error('Fetch error:', error);
-                    addMessage('assistant', 'Error: ' + error.message);
-                });
-            }
-        });
-
-        function addMessage(sender, message) {
-            chatHistory.push({role: sender, content: message});
-            
-            const chatMessages = document.getElementById('chat-messages');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', sender);
-            messageElement.textContent = sender === 'user' ? `> ${message}` : message;
-            chatMessages.appendChild(messageElement);
-            
-            // Trigger reflow to ensure the transition works
-            messageElement.offsetHeight;
-            
-            setTimeout(() => {
-                messageElement.classList.add('visible');
-            }, 20);
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Dynamic typing effect for roles
-        const roles = ["data scientist", "hacker", "researcher", "teacher"];
-        const interests = ["ai", "psychometrics", "crypto", "social science", "the role of talent in creating the future."];
-        let roleIndex = 0;
-        let interestIndex = 0;
-        let charIndex = 0;
-        let interestCharIndex = 0;
-        let prevRoleIndex = -1;
-        let prevInterestIndex = -1;
-        const dynamicText = document.getElementById("dynamic-text");
-        const dynamicInterest = document.getElementById("dynamic-interest");
-
-        function typeRole() {
-            if (charIndex < roles[roleIndex].length) {
-                dynamicText.textContent += roles[roleIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(typeRole, 50); // Faster typing speed
-            } else {
-                setTimeout(eraseRole, 1500); // Shorter pause before erasing
-            }
-        }
-
-        function eraseRole() {
-            if (charIndex > 0) {
-                dynamicText.textContent = roles[roleIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(eraseRole, 15); // Faster erasing speed
-            } else {
-                do {
-                    roleIndex = Math.floor(Math.random() * roles.length); // Randomize role
-                } while (roleIndex === prevRoleIndex);
-                prevRoleIndex = roleIndex;
-                setTimeout(typeRole, 200); // Shorter pause before typing the next role
-            }
-        }
-
-        function typeInterest() {
-            if (interestCharIndex < interests[interestIndex].length) {
-                dynamicInterest.textContent += interests[interestIndex].charAt(interestCharIndex);
-                interestCharIndex++;
-                setTimeout(typeInterest, 50); // Faster typing speed
-            } else {
-                setTimeout(eraseInterest, 3000); // Longer pause before erasing
-            }
-        }
-
-        function eraseInterest() {
-            if (interestCharIndex > 0) {
-                dynamicInterest.textContent = interests[interestIndex].substring(0, interestCharIndex - 1);
-                interestCharIndex--;
-                setTimeout(eraseInterest, 15); // Faster erasing speed
-            } else {
-                do {
-                    interestIndex = Math.floor(Math.random() * interests.length); // Randomize interest
-                } while (interestIndex === prevInterestIndex);
-                prevInterestIndex = interestIndex;
-                setTimeout(typeInterest, 200); // Shorter pause before typing the next interest
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            typeRole();
-            typeInterest();
-        });
-    </script>
+    <script src="/components/typing-effect.js"></script>
+    <script src="/components/mode-toggle.js"></script>
 </body>
 </html>

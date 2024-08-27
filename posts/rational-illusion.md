@@ -1,5 +1,5 @@
 ---
-date: 2024-07-01
+date: 2024-07-05
 tags: [psychology, philosophy, rationality]
 readTime: 2 minutes
 ---

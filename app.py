@@ -1,43 +1,58 @@
 import os
+from pathlib import Path
+import uvicorn
 import logging
+
 import glob
+import yaml
 import markdown2
-import requests
+
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
-from dotenv import load_dotenv
+
+from dotenv import load_dotenv; load_dotenv()
+
 from datetime import datetime, date
 from image_generator import generate_post_image
-import yaml
-
-# Load environment variables at the very beginning of your app
-load_dotenv()
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
+# Define paths for SSL certificates
+# CERTS_DIR = "/Users/kenneth/Desktop/lab/k3nn.computer/certs"
+# ssl_keyfile = os.getenv('SSL_KEYFILE', CERTS_DIR + '/key.pem')
+# ssl_certfile = os.getenv('SSL_CERTFILE', CERTS_DIR + '/cert.pem')
+
+# Initialize FastAPI app
 app = FastAPI()
 
-# Mount the static files directory
+# CORS configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3333",
+        "http://0.0.0.0:3333",
+        "http://127.0.0.1:3333",
+        "http://localhost:1337",
+        "http://0.0.0.0:1337",
+        "http://127.0.0.1:1337",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Mount the static files directories
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/pages", StaticFiles(directory="pages"), name="pages")
+app.mount("/components", StaticFiles(directory="components"), name="components")
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
-app.mount("/posts", StaticFiles(directory="posts"), name="posts")
 
 # Set up Jinja2 templates, now using the "pages" directory
 pages = Jinja2Templates(directory="pages")
-
-# Ollama API URL
-OLLAMA_API_URL = "http://localhost:1337"
-
-class ChatRequest(BaseModel):
-    message: str
-
-# Set up logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
 def read_markdown_files():
     posts = []
@@ -69,9 +84,16 @@ def read_markdown_files():
     posts.sort(key=lambda x: x["date"], reverse=True)
     return posts
 
+# @app.middleware("http")
+# async def log_requests(request: Request, call_next):
+#     if request.url.path.startswith("/ISAPI/"):
+#         return JSONResponse(status_code=404, content={"message": "Not Found"})
+#     return await call_next(request)
+
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return pages.TemplateResponse("index.html", {"request": request})
+    posts = read_markdown_files()[:3]  # Get the 3 most recent posts
+    return pages.TemplateResponse("index.html", {"request": request, "recent_posts": posts})
 
 @app.get("/listings", response_class=HTMLResponse)
 async def read_listings(request: Request):
@@ -111,31 +133,21 @@ async def read_post(request: Request, post_name: str):
             }
         )
 
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    try:
-        logging.info(f"Received message: {request.message}")
-        
-        # Prepare the request for the Ollama API
-        ollama_request = {
-            "message": request.message
-        }
-        
-        # Send the request to the Ollama API
-        response = requests.post(f"{OLLAMA_API_URL}/chat", json=ollama_request)
-        response.raise_for_status()  # Raise an exception for bad status codes
-        
-        ollama_response = response.json()
-        logging.info(f"Response from model: {ollama_response['response']}")
-        
-        return {"response": ollama_response['response']}
-    except requests.RequestException as e:
-        logging.error(f"Error communicating with Ollama API: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error communicating with AI model: {str(e)}")
-    except Exception as e:
-        logging.error(f"Error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/timeline", response_class=HTMLResponse)
+async def read_my_work(request: Request):
+    return pages.TemplateResponse("timeline.html", {"request": request})
+
+# Serve the terminal page
+@app.get("/terminal", response_class=HTMLResponse)
+async def terminal_page(request: Request):
+    return pages.TemplateResponse("terminal.html", {"request": request})
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(
+        app, 
+        host="0.0.0.0", 
+        port=3333,
+        # Comment out SSL for now
+        # ssl_keyfile=ssl_keyfile,
+        # ssl_certfile=ssl_certfile
+    )

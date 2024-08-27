@@ -1,26 +1,54 @@
-.header {
+.profile-section {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.profile-pic {
+.profile-pic-container {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
-    border: 2px solid var(--highlight);
-    box-shadow: 0 0 15px var(--highlight);
+    overflow: hidden;
+    border-radius: 15px;
     margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
 }
 
 .intro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-grow: 1;
 }
 
-.links p {
+.intro h1 {
+    margin-bottom: 10px;
+    color: var(--highlight);
+}
+
+.intro p {
     margin: 5px 0;
+}
+
+.links {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    justify-content: flex-start; /* Change this line */
+}
+
+.links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.links a:hover {
+    color: var(--highlight);
+    text-decoration: underline;
 }
 
 .bio {
@@ -30,62 +58,35 @@
 .dynamic-text {
     color: var(--highlight);
     display: inline-block;
-    width: 50ch;
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: bottom;
+    min-width: 10ch;
 }
 
-.terminal {
-    border: 1px solid var(--text-primary);
-    padding: 10px;
-    background-color: var(--background-medium);
-    width: 100%;
+.recent-posts {
     margin-top: 20px;
-    border-radius: 8px;
-    text-align: left;
 }
 
-#chat-messages {
-    color: var(--accent);
+.recent-posts h2 {
+    font-size: 1.5em;
+    color: var(--highlight);
+}
+
+.recent-posts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recent-posts li {
     margin-bottom: 10px;
-    max-height: 200px;
-    overflow-y: auto;
 }
 
-.input-line {
-    display: flex;
-    align-items: center;
+.recent-posts .post-date {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    margin-left: 10px;
 }
 
-#user-input {
-    flex-grow: 1;
-    background-color: transparent;
+hr {
     border: none;
-    color: var(--accent);
-    font-family: inherit;
-    font-size: inherit;
-    outline: none;
-}
-
-/* Typewriter effect */
-.typewriter {
-    overflow: hidden;
-    border-right: .15em solid var(--main-text);
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: .15em;
-    animation: 
-        typing 3.5s steps(40, end),
-        blink-caret .75s step-end infinite;
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--main-text); }
+    border-top: 1px solid var(--text-secondary);
+    margin: 20px 0;
 }

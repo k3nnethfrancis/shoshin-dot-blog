@@ -1,63 +1,60 @@
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* General blog styles */
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.post-item {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-}
-
-.post-date {
+.blog-title {
+    font-size: 2.5rem;
     color: var(--text-primary);
-    margin-right: 10px;
+    margin-bottom: 1rem;
+}
+
+.blog-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.blog-content {
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* Blog post list styles */
+.blog-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-list-item {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.blog-list-item:last-child {
+    border-bottom: none;
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid var(--main-text);
     white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
 }
 
-.post-title {
-    color: var(--text-secondary);
-    text-decoration: none;
-    margin-right: 10px;
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
 }
 
-.post-title:hover {
-    color: var(--highlight);
-}
-
-.post-tags {
-    color: var(--red-dark);
-    font-style: italic;
-    font-size: 0.9em;
-}
-
-.intro {
-    color: var(--text-secondary);
-}
-
-.post-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 20px;
-}
-
-.metadata {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
-}
-
-.metadata-separator {
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: none;
-    border-top: 1px solid var(--indigo-light);
-}
-
-.footnotes {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--indigo-light);
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--main-text); }
 }

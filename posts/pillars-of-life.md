@@ -1,5 +1,5 @@
 ---
-date: 2024-07-01
+date: 2024-07-10
 tags: [life, philosophy]
 readTime: 2 minutes
 ---
