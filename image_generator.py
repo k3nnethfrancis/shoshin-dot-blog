@@ -8,14 +8,18 @@ from io import BytesIO
 import re
 
 # Load environment variables
-load_dotenv()
+load_dotenv()  # This loads the environment variables from .env file
 
-# Initialize clients
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    raise ValueError("OPENAI_API_KEY environment variable is not set")
+
+openai_client = OpenAI(api_key=openai_api_key)
+
 anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-def generate_image_prompt(post_content):
-    """Generate an image prompt using Claude."""
+def generate_image_prompt(post_content, client='openai'):
+    """Generate an image prompt using Claude or GPT."""
     system_prompt = (
         "You are an AI assistant tasked with creating image prompts for blog posts. "
         "Given the content of a blog post, create a concise and vivid prompt for "
@@ -23,16 +27,27 @@ def generate_image_prompt(post_content):
         "suitable for an AI image generation model like DALL-E. "
         "Styles we like are glitch, pixel art, and retro, bladerunner, and cyberpunk, trippy, and renaissance surreal."
     )
-    
-    response = anthropic_client.messages.create(
-        model="claude-3-sonnet-20240229",
-        max_tokens=100,
-        system=system_prompt,
-        messages=[
-            {"role": "user", "content": f"Create an image prompt for this blog post:\n\n{post_content}"}
-        ]
-    )
-    return response.content[0].text.strip()
+    if client == 'anthropic':
+        response = anthropic_client.messages.create(
+            model="claude-3-sonnet-20240229",
+            max_tokens=100,
+            system=system_prompt,
+            messages=[
+                {"role": "user", "content": f"Create an image prompt for this blog post:\n\n{post_content}"}
+            ]
+        )
+        return response.content[0].text.strip()
+    elif client == 'openai':
+        response = openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": post_content}
+            ]
+        )
+        return response.choices[0].message.content
+    else:
+        raise ValueError(f"Invalid client: {client}")
 
 def generate_and_save_image(prompt, filename):
     """Generate an image using DALL-E, crop it, and save it."""
