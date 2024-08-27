@@ -1,0 +1,68 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Fira Code', monospace;
+    font-size: 24px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+#terminal {
+    height: calc(100vh - 40px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#output {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#input-line {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.prompt {
+    margin-right: 10px;
+}
+
+#user-input {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    flex-grow: 1;
+}
+
+.exit-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.boot-message {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.boot-message.visible {
+    opacity: 1;
+}
+
+.success-message {
+    color: #00FF00;
+}
+
+.error-message {
+    color: #FF0000;
+}

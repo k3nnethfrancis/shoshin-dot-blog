@@ -29,7 +29,6 @@ logging.basicConfig(level=logging.INFO)
 # Initialize FastAPI app
 app = FastAPI()
 
-# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -39,6 +38,7 @@ app.add_middleware(
         "http://localhost:1337",
         "http://0.0.0.0:1337",
         "http://127.0.0.1:1337",
+        "https://k3nn-dot-computer-b1daf058c82e.herokuapp.com",  # Heroku app URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -142,12 +142,19 @@ async def read_my_work(request: Request):
 async def terminal_page(request: Request):
     return pages.TemplateResponse("terminal.html", {"request": request})
 
+
+# local deployment
+# if __name__ == "__main__":
+#     uvicorn.run(
+#         app, 
+#         host="0.0.0.0", 
+#         port=3333,
+#         # Comment out SSL for now
+#         # ssl_keyfile=ssl_keyfile,
+#         # ssl_certfile=ssl_certfile
+#     )
+
 if __name__ == "__main__":
-    uvicorn.run(
-        app, 
-        host="0.0.0.0", 
-        port=3333,
-        # Comment out SSL for now
-        # ssl_keyfile=ssl_keyfile,
-        # ssl_certfile=ssl_certfile
-    )
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
