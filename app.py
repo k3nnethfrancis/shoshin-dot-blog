@@ -149,21 +149,27 @@ async def terminal_page(request: Request):
 
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
-    headers = {
-        "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
-        "Content-Type": "application/json"
-    }
-    
-    async with httpx.AsyncClient() as client:
-        response = await client.post(HF_API_URL, json=request.dict(), headers=headers)
-    
-    if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail="Error from Hugging Face API")
-    
-    result = response.json()
-    ai_response = result[0]['generated_text'].split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].strip()
-    
-    return {"generated_text": ai_response}
+    logging.info(f"Received chat request: {request}")
+    try:
+        headers = {
+            "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
+            "Content-Type": "application/json"
+        }
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(HF_API_URL, json=request.dict(), headers=headers)
+        
+        if response.status_code != 200:
+            logging.error(f"Hugging Face API error: {response.status_code} - {response.text}")
+            raise HTTPException(status_code=response.status_code, detail=f"Error from Hugging Face API: {response.text}")
+        
+        result = response.json()
+        ai_response = result[0]['generated_text'].split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].strip()
+        
+        return {"generated_text": ai_response}
+    except Exception as e:
+        logging.exception("Error in chat endpoint")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

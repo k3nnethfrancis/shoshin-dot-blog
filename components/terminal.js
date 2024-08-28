@@ -29,22 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            const formattedConversation = formatConversationForModel(currentSessionHistory);
+            const requestBody = {
+                inputs: formatConversationForModel(currentSessionHistory),
+                parameters: {
+                    max_new_tokens: 250,  // Increased for potentially longer responses
+                    temperature: 0.7,
+                    top_p: 0.95,
+                    do_sample: true
+                }
+            };
+            console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    inputs: formattedConversation,
-                    parameters: {
-                        max_new_tokens: 1024,
-                        temperature: 0.7,
-                        top_p: 0.95,
-                        do_sample: true
-                    }
-                }),
+                body: JSON.stringify(requestBody),
             });
 
             if (!response.ok) {
@@ -65,13 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatConversationForModel(history) {
-        const systemPrompt = "<|im_start|>system\nYou are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself.<|im_end|>\n";
+        let formattedConversation = "<|im_start|>system\nYou are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself.<|im_end|>\n";
         
-        const formattedMessages = history.messages.map(message => 
-            `<|im_start|>${message.role}\n${message.content}<|im_end|>\n`
-        ).join('');
+        for (const message of history.messages) {
+            formattedConversation += `<|im_start|>${message.role}\n${message.content}<|im_end|>\n`;
+        }
         
-        return systemPrompt + formattedMessages + "<|im_start|>assistant\n";
+        formattedConversation += "<|im_start|>assistant\n";
+        return formattedConversation;
     }
 
     function addMessage(sender, text, className = '') {
