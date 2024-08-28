@@ -1,34 +1,34 @@
 import os
 from pathlib import Path
-import uvicorn
 import logging
-
 import glob
 import yaml
 import markdown2
+from datetime import datetime, date
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
-from dotenv import load_dotenv; load_dotenv()
+from pydantic import BaseModel
+import httpx
 
-from datetime import datetime, date
+from dotenv import load_dotenv
 from image_generator import generate_post_image
+
+# Load environment variables
+load_dotenv()
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 
-# Define paths for SSL certificates
-# CERTS_DIR = "/Users/kenneth/Desktop/lab/k3nn.computer/certs"
-# ssl_keyfile = os.getenv('SSL_KEYFILE', CERTS_DIR + '/key.pem')
-# ssl_certfile = os.getenv('SSL_CERTFILE', CERTS_DIR + '/cert.pem')
-
 # Initialize FastAPI app
 app = FastAPI()
 
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -46,14 +46,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount the static files directories
+# HTTPS redirect middleware
+app.add_middleware(HTTPSRedirectMiddleware)
+
+# Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/pages", StaticFiles(directory="pages"), name="pages")
 app.mount("/components", StaticFiles(directory="components"), name="components")
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
-# Set up Jinja2 templates, now using the "pages" directory
+# Set up Jinja2 templates
 pages = Jinja2Templates(directory="pages")
+
+# Hugging Face API configuration
+HUGGING_FACE_API_TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
+HF_API_URL = "https://api-inference.huggingface.co/models/cognitivecomputations/dolphin-2.9.4-llama3.1-8b"
+
+class ChatRequest(BaseModel):
+    inputs: str
+    parameters: dict
 
 def read_markdown_files():
     posts = []
@@ -84,12 +95,6 @@ def read_markdown_files():
     
     posts.sort(key=lambda x: x["date"], reverse=True)
     return posts
-
-# @app.middleware("http")
-# async def log_requests(request: Request, call_next):
-#     if request.url.path.startswith("/ISAPI/"):
-#         return JSONResponse(status_code=404, content={"message": "Not Found"})
-#     return await call_next(request)
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
@@ -138,28 +143,29 @@ async def read_post(request: Request, post_name: str):
 async def read_my_work(request: Request):
     return pages.TemplateResponse("timeline.html", {"request": request})
 
-# Serve the terminal page
 @app.get("/terminal", response_class=HTMLResponse)
 async def terminal_page(request: Request):
     return pages.TemplateResponse("terminal.html", {"request": request})
 
-
-# local deployment
-# if __name__ == "__main__":
-#     uvicorn.run(
-#         app, 
-#         host="0.0.0.0", 
-#         port=3333,
-#         # Comment out SSL for now
-#         # ssl_keyfile=ssl_keyfile,
-#         # ssl_certfile=ssl_certfile
-#     )
+@app.post("/api/chat")
+async def chat(request: ChatRequest):
+    headers = {
+        "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.post(HF_API_URL, json=request.dict(), headers=headers)
+    
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail="Error from Hugging Face API")
+    
+    result = response.json()
+    ai_response = result[0]['generated_text'].split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].strip()
+    
+    return {"generated_text": ai_response}
 
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
-
-from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
-
-app.add_middleware(HTTPSRedirectMiddleware)

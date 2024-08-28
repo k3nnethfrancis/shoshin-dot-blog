@@ -24,23 +24,22 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     async function getChatResponse(message) {
-        console.log(`Sending message to Hugging Face API: ${message}`);
+        console.log(`Sending message to API: ${message}`);
         try {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
             const formattedConversation = formatConversationForModel(currentSessionHistory);
 
-            const response = await fetch('https://api-inference.huggingface.co/models/cognitivecomputations/dolphin-2.9.4-llama3.1-8b', {
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${process.env.HUGGING_FACE_API_TOKEN}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     inputs: formattedConversation,
                     parameters: {
-                        max_new_tokens: 150,
+                        max_new_tokens: 1024,
                         temperature: 0.7,
                         top_p: 0.95,
                         do_sample: true
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const result = await response.json();
-            const aiResponse = result[0].generated_text.split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].trim();
+            const aiResponse = result.generated_text;
             
             // Update current session history with the AI's response
             currentSessionHistory.messages.push({ role: "assistant", content: aiResponse });
@@ -61,23 +60,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return aiResponse;
         } catch (error) {
             console.error('Error:', error);
-            return "Error: Failed to get response from the Hugging Face API. Please check the console for more details.";
+            return "Error: Failed to get response from the API. Please check the console for more details.";
         }
     }
 
     function formatConversationForModel(history) {
-        let formattedConversation = "<|im_start|>system\nYou are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself.<|im_end|>\n";
+        const systemPrompt = "<|im_start|>system\nYou are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself.<|im_end|>\n";
         
-        for (const message of history.messages) {
-            if (message.role === "user") {
-                formattedConversation += `<|im_start|>user\n${message.content}<|im_end|>\n`;
-            } else if (message.role === "assistant") {
-                formattedConversation += `<|im_start|>assistant\n${message.content}<|im_end|>\n`;
-            }
-        }
+        const formattedMessages = history.messages.map(message => 
+            `<|im_start|>${message.role}\n${message.content}<|im_end|>\n`
+        ).join('');
         
-        formattedConversation += "<|im_start|>assistant\n";
-        return formattedConversation;
+        return systemPrompt + formattedMessages + "<|im_start|>assistant\n";
     }
 
     function addMessage(sender, text, className = '') {
