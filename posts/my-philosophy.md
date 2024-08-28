@@ -1,5 +1,5 @@
 ---
-date: 2024-08-23
+date: 2024-06-23
 tags: [philosophy]
 readTime: 2 minutes
 ---
