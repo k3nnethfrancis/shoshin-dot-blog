@@ -24,36 +24,60 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     async function getChatResponse(message) {
-        console.log(`Sending message to API: ${message}`);
+        console.log(`Sending message to Hugging Face API: ${message}`);
         try {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            const response = await fetch('http://0.0.0.0:1337/chat', {
+            const formattedConversation = formatConversationForModel(currentSessionHistory);
+
+            const response = await fetch('https://api-inference.huggingface.co/models/cognitivecomputations/dolphin-2.9.4-llama3.1-8b', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${process.env.HUGGING_FACE_API_TOKEN}`
                 },
-                body: JSON.stringify(currentSessionHistory),
-                credentials: 'include',
+                body: JSON.stringify({
+                    inputs: formattedConversation,
+                    parameters: {
+                        max_new_tokens: 150,
+                        temperature: 0.7,
+                        top_p: 0.95,
+                        do_sample: true
+                    }
+                }),
             });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const updatedHistory = await response.json();
-            console.log(`Received response from API:`, updatedHistory);
+            const result = await response.json();
+            const aiResponse = result[0].generated_text.split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].trim();
             
-            // Update current session history with the response from the server
-            currentSessionHistory = updatedHistory;
+            // Update current session history with the AI's response
+            currentSessionHistory.messages.push({ role: "assistant", content: aiResponse });
             
-            // Return only the last message (AI's response)
-            return currentSessionHistory.messages[currentSessionHistory.messages.length - 1].content;
+            return aiResponse;
         } catch (error) {
             console.error('Error:', error);
-            return "Error: Failed to get response from the server. Please check the console for more details.";
+            return "Error: Failed to get response from the Hugging Face API. Please check the console for more details.";
         }
+    }
+
+    function formatConversationForModel(history) {
+        let formattedConversation = "<|im_start|>system\nYou are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself.<|im_end|>\n";
+        
+        for (const message of history.messages) {
+            if (message.role === "user") {
+                formattedConversation += `<|im_start|>user\n${message.content}<|im_end|>\n`;
+            } else if (message.role === "assistant") {
+                formattedConversation += `<|im_start|>assistant\n${message.content}<|im_end|>\n`;
+            }
+        }
+        
+        formattedConversation += "<|im_start|>assistant\n";
+        return formattedConversation;
     }
 
     function addMessage(sender, text, className = '') {
