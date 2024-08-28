@@ -14,6 +14,7 @@ from fastapi.templating import Jinja2Templates
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 from pydantic import BaseModel
+from typing import List, Dict
 import httpx
 
 from dotenv import load_dotenv
@@ -60,11 +61,14 @@ pages = Jinja2Templates(directory="pages")
 
 # Hugging Face API configuration
 HUGGING_FACE_API_TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
-HF_API_URL = "https://api-inference.huggingface.co/models/cognitivecomputations/dolphin-2.9.4-llama3.1-8b"
+HF_API_URL = "https://api-inference.huggingface.co/models/NousResearch/Hermes-3-Llama-3.1-8B"
+
+class Message(BaseModel):
+    role: str
+    content: str
 
 class ChatRequest(BaseModel):
-    inputs: str
-    parameters: dict
+    messages: list
 
 def read_markdown_files():
     posts = []
@@ -149,26 +153,44 @@ async def terminal_page(request: Request):
 
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
-    logging.info(f"Received chat request: {request}")
     try:
         headers = {
             "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
             "Content-Type": "application/json"
         }
         
+        # Format the conversation history for Hermes-3
+        formatted_messages = []
+        for message in request.messages:
+            formatted_messages.append(f"<|im_start|>{message['role']}\n{message['content']}<|im_end|>")
+        
+        # Add the assistant prompt
+        formatted_messages.append("<|im_start|>assistant\n")
+        
+        payload = {
+            "inputs": "\n".join(formatted_messages),
+            "parameters": {
+                "max_new_tokens": 250,
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "do_sample": True
+            }
+        }
+        
         async with httpx.AsyncClient() as client:
-            response = await client.post(HF_API_URL, json=request.dict(), headers=headers)
+            response = await client.post(HF_API_URL, json=payload, headers=headers)
         
         if response.status_code != 200:
-            logging.error(f"Hugging Face API error: {response.status_code} - {response.text}")
             raise HTTPException(status_code=response.status_code, detail=f"Error from Hugging Face API: {response.text}")
         
         result = response.json()
-        ai_response = result[0]['generated_text'].split('<|im_start|>assistant\n')[1].split('<|im_end|>')[0].strip()
+        ai_response = result[0]['generated_text']
         
-        return {"generated_text": ai_response}
+        # Extract only the assistant's response
+        assistant_response = ai_response.split("<|im_start|>assistant\n")[-1].split("<|im_end|>")[0].strip()
+        
+        return {"generated_text": assistant_response}
     except Exception as e:
-        logging.exception("Error in chat endpoint")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":

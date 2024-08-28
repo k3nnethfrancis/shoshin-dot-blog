@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize an empty chat history for the current session
     let currentSessionHistory = {
-        messages: []
+        messages: [
+            {role: "system", content: "You are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself."}
+        ]
     };
 
     async function getChatResponse(message) {
@@ -30,13 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSessionHistory.messages.push({ role: "user", content: message });
 
             const requestBody = {
-                inputs: formatConversationForModel(currentSessionHistory),
-                parameters: {
-                    max_new_tokens: 250,  // Increased for potentially longer responses
-                    temperature: 0.7,
-                    top_p: 0.95,
-                    do_sample: true
-                }
+                messages: currentSessionHistory.messages
             };
             console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
@@ -49,10 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`API Error: ${response.status} - ${errorText}`);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
+            console.log('API Response:', result);
             const aiResponse = result.generated_text;
             
             // Update current session history with the AI's response
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return aiResponse;
         } catch (error) {
             console.error('Error:', error);
-            return "Error: Failed to get response from the API. Please check the console for more details.";
+            return `Error: Failed to get response from the API. ${error.message}`;
         }
     }
 
