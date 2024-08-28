@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const bootSequence = [
         { text: "initializing memetic.computer v0.42...", delay: 800 },
-        { text: "loading mind: k3nneth francis...", delay: 600 },
         { text: "calibrating memetic distance...", delay: 1000 },
-        { text: "SUCCESS: mind stable.", delay: 800, class: "success-message" },
+        { text: "loading mind module: kenneth francis...", delay: 600 },
+        { text: "stabilizing...", delay: 600 },
+        { text: "SUCCESS: mind stable...", delay: 800, class: "success-message" },
         { text: "awaiting message...", delay: 400}
     ];
 
