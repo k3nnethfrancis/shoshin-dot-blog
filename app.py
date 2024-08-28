@@ -38,6 +38,7 @@ app.add_middleware(
         "http://localhost:1337",
         "http://0.0.0.0:1337",
         "http://127.0.0.1:1337",
+        "https://k3nn.computer",
         "https://k3nn-dot-computer-b1daf058c82e.herokuapp.com",  # Heroku app URL
     ],
     allow_credentials=True,
@@ -158,3 +159,7 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
+
+from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
+
+app.add_middleware(HTTPSRedirectMiddleware)
