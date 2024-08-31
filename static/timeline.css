@@ -16,6 +16,33 @@
     margin-left: -1px;
 }
 
+@media screen and (max-width: 600px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .timeline-item::before {
+        left: 60px;
+        border: medium solid #313244;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #313244 transparent transparent;
+    }
+
+    .left::after, .right::after {
+        left: 15px;
+    }
+
+    .right {
+        left: 0%;
+    }
+}
+
 .timeline-item {
     padding: 20px 0;
     position: relative;
@@ -77,6 +104,15 @@
     margin-bottom: 0;
     font-size: 0.9em;
     line-height: 1.4;
+}
+
+.content a {
+    color: #89b4fa;
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
 }
 
 .json-response {
