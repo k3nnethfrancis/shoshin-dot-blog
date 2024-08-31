@@ -22,6 +22,8 @@ from image_generator import generate_post_image
 
 # Load environment variables
 load_dotenv()
+# API_ENDPOINT = os.getenv("API_ENDPOINT")
+API_ENDPOINT = "https://1762-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/api/chat"
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -58,10 +60,6 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 # Set up Jinja2 templates
 pages = Jinja2Templates(directory="pages")
-
-# Hugging Face API configuration
-HUGGING_FACE_API_TOKEN = os.getenv("HUGGING_FACE_API_TOKEN")
-HF_API_URL = "https://api-inference.huggingface.co/models/NousResearch/Hermes-3-Llama-3.1-8B"
 
 class Message(BaseModel):
     role: str
@@ -154,42 +152,24 @@ async def terminal_page(request: Request):
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
     try:
+        # Remove the Hugging Face API token header
         headers = {
-            "Authorization": f"Bearer {HUGGING_FACE_API_TOKEN}",
             "Content-Type": "application/json"
         }
         
-        # Format the conversation history for Hermes-3
-        formatted_messages = []
-        for message in request.messages:
-            formatted_messages.append(f"<|im_start|>{message['role']}\n{message['content']}<|im_end|>")
-        
-        # Add the assistant prompt
-        formatted_messages.append("<|im_start|>assistant\n")
-        
+        # Simplify the payload to match your local server's expected format
         payload = {
-            "inputs": "\n".join(formatted_messages),
-            "parameters": {
-                "max_new_tokens": 250,
-                "temperature": 0.7,
-                "top_p": 0.95,
-                "do_sample": True
-            }
+            "messages": request.messages
         }
         
         async with httpx.AsyncClient() as client:
-            response = await client.post(HF_API_URL, json=payload, headers=headers)
+            response = await client.post(API_ENDPOINT, json=payload, headers=headers)
         
         if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail=f"Error from Hugging Face API: {response.text}")
+            raise HTTPException(status_code=response.status_code, detail=f"Error from local API: {response.text}")
         
         result = response.json()
-        ai_response = result[0]['generated_text']
-        
-        # Extract only the assistant's response
-        assistant_response = ai_response.split("<|im_start|>assistant\n")[-1].split("<|im_end|>")[0].strip()
-        
-        return {"generated_text": assistant_response}
+        return result  # Assuming your local API returns the response in the correct format
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
