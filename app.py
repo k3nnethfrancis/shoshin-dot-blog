@@ -13,17 +13,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
-from pydantic import BaseModel
-from typing import List, Dict
-import httpx
-
 from dotenv import load_dotenv
 from image_generator import generate_post_image
 
 # Load environment variables
 load_dotenv()
 # API_ENDPOINT = os.getenv("API_ENDPOINT")
-API_ENDPOINT = "https://1762-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/api/chat"
+# API_ENDPOINT = "https://1762-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/api/chat"
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -60,13 +56,6 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 # Set up Jinja2 templates
 pages = Jinja2Templates(directory="pages")
-
-class Message(BaseModel):
-    role: str
-    content: str
-
-class ChatRequest(BaseModel):
-    messages: list
 
 def read_markdown_files():
     posts = []
@@ -148,30 +137,6 @@ async def read_my_work(request: Request):
 @app.get("/terminal", response_class=HTMLResponse)
 async def terminal_page(request: Request):
     return pages.TemplateResponse("terminal.html", {"request": request})
-
-@app.post("/api/chat")
-async def chat(request: ChatRequest):
-    try:
-        # Remove the Hugging Face API token header
-        headers = {
-            "Content-Type": "application/json"
-        }
-        
-        # Simplify the payload to match your local server's expected format
-        payload = {
-            "messages": request.messages
-        }
-        
-        async with httpx.AsyncClient() as client:
-            response = await client.post(API_ENDPOINT, json=payload, headers=headers)
-        
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail=f"Error from local API: {response.text}")
-        
-        result = response.json()
-        return result  # Assuming your local API returns the response in the correct format
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

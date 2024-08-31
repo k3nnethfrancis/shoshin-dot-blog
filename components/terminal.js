@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize an empty chat history for the current session
     let currentSessionHistory = {
-        messages: [
-            {role: "system", content: "You are memetic.computer, a digital twin engine created by kenneth francis. you are currently modeling his mind. ken is a psychohistorian on a mission to augment his intelligence with ai. you are inquisitive, friendly, funny, charming, and helpful. you are very interested in philosophy, psychology, and the nature of intelligence. the current experiment takes place inside a terminal. the user is typing their message now. you are to help them explore the inner workings of language based intelligence like yourself."}
-        ]
+        messages: []
     };
 
     async function getChatResponse(message) {
@@ -31,17 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            const requestBody = {
-                messages: currentSessionHistory.messages
-            };
-            console.log('Request body:', JSON.stringify(requestBody, null, 2));
-
-            const response = await fetch('/api/chat', {
+            const response = await fetch('https://1762-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(requestBody),
+                body: JSON.stringify(currentSessionHistory),
             });
 
             if (!response.ok) {
@@ -52,10 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const result = await response.json();
             console.log('API Response:', result);
-            const aiResponse = result.generated_text;
             
-            // Update current session history with the AI's response
-            currentSessionHistory.messages.push({ role: "assistant", content: aiResponse });
+            // Update the current session history with the full response from the server
+            currentSessionHistory = result;
+            
+            // The AI's response is the last message in the history
+            const aiResponse = currentSessionHistory.messages[currentSessionHistory.messages.length - 1].content;
             
             return aiResponse;
         } catch (error) {
