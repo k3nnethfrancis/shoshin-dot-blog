@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            const response = await fetch('https://a825-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/chat', {
+            const response = await fetch('https://dbf5-2600-1700-b2a-695f-dd30-7a4c-519b-ea6.ngrok-free.app/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
