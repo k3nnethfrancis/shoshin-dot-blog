@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
+            
+            // TODO: update this to use the correct API endpoint
             const response = await fetch('https://ecc4-2600-1700-b2a-695f-dd30-7a4c-519b-ea6.ngrok-free.app/chat', {
                 method: 'POST',
                 headers: {
