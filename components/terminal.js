@@ -29,13 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            const API_ENDPOINT = process.env.API_ENDPOINT;
-
-            if (!API_ENDPOINT) {
-                throw new Error('API_ENDPOINT is not defined');
-            }
-
-            const response = await fetch(API_ENDPOINT, {
+            const response = await fetch('/api-proxy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

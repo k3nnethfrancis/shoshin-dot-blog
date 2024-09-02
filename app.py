@@ -138,6 +138,18 @@ async def read_my_work(request: Request):
 async def terminal_page(request: Request):
     return pages.TemplateResponse("terminal.html", {"request": request})
 
+@app.post("/api-proxy")
+async def api_proxy(request: Request):
+    api_endpoint = os.getenv("API_ENDPOINT")
+    if not api_endpoint:
+        raise HTTPException(status_code=500, detail="API endpoint not configured")
+    
+    body = await request.json()
+    async with httpx.AsyncClient() as client:
+        response = await client.post(api_endpoint, json=body)
+    
+    return JSONResponse(content=response.json(), status_code=response.status_code)
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
