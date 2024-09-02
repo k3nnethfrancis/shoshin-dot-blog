@@ -24,14 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     async function getChatResponse(message) {
-        console.log(`Sending message to API: ${message}`);
+        console.log(`Sending message to API`);
         try {
             // Add user message to current session history
             currentSessionHistory.messages.push({ role: "user", content: message });
 
-            
-            // TODO: update this to use the correct API endpoint
-            const response = await fetch('https://ecc4-2600-1700-b2a-695f-dd30-7a4c-519b-ea6.ngrok-free.app/chat', {
+            const API_ENDPOINT = process.env.API_ENDPOINT;
+
+            if (!API_ENDPOINT) {
+                throw new Error('API_ENDPOINT is not defined');
+            }
+
+            const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,12 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error(`API Error: ${response.status} - ${errorText}`);
+                console.error(`API Error: ${response.status}`);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
-            console.log('API Response:', result);
+            console.log('API Response received');
             
             // Update the current session history with the full response from the server
             currentSessionHistory = result;
@@ -56,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             return aiResponse;
         } catch (error) {
-            console.error('Error:', error);
-            return `Error: Failed to get response from the API. ${error.message}`;
+            console.error('Error:', error.message);
+            return `Error: Failed to get response from the API. Please try again later.`;
         }
     }
 
