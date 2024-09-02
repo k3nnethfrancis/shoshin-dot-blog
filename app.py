@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
+import httpx
 
 from dotenv import load_dotenv
 from image_generator import generate_post_image
