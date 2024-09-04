@@ -15,13 +15,13 @@
     --highlight-dark: #EB5160;
     --link-color-dark: #FBFFF1;
   
-    /* Default to light mode */
-    --background: var(--background-light);
-    --background-medium: var(--background-medium-light);
-    --text-primary: var(--text-primary-light);
-    --text-secondary: var(--text-secondary-light);
-    --highlight: var(--highlight-light);
-    --link-color: var(--link-color-light);
+    /* Default to dark mode */
+    --background: var(--background-dark);
+    --background-medium: var(--background-medium-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --highlight: var(--highlight-dark);
+    --link-color: var(--link-color-dark);
   }
   
   /* Dark mode class */

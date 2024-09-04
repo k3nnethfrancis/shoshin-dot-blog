@@ -2,9 +2,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modeToggle = document.getElementById('mode-toggle');
     const htmlElement = document.documentElement;
 
-    // Check for saved user preference
+    // Check for saved user preference, default to dark if not set
     const savedMode = localStorage.getItem('mode');
-    if (savedMode === 'dark') {
+    if (savedMode === 'light') {
+        htmlElement.classList.remove('dark-mode');
+    } else {
         htmlElement.classList.add('dark-mode');
     }
 

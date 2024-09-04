@@ -1,80 +1,93 @@
+"""
+FastAPI application for a personal blog.
+
+This module sets up a FastAPI application to serve a personal blog with
+markdown-based posts, caching, and image generation capabilities.
+"""
+
 import os
-from pathlib import Path
 import logging
+from datetime import datetime, date
+from pathlib import Path
+from typing import List, Dict, Any
+
 import glob
 import yaml
 import markdown2
-from datetime import datetime, date
-
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
-import httpx
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.decorator import cache
 
-from dotenv import load_dotenv
 from image_generator import generate_post_image
 
 # Load environment variables
 load_dotenv()
-# API_ENDPOINT = os.getenv("API_ENDPOINT")
-# API_ENDPOINT = "https://1762-2600-1700-b2a-695f-5b2-c4e9-a308-d00f.ngrok-free.app/api/chat"
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
 app = FastAPI()
 
-# CORS middleware
+# CORS middleware setup
+ALLOWED_ORIGINS = [
+    "https://k3nn.computer",
+    "https://k3nn-dot-computer-b1daf058c82e.herokuapp.com",  # Heroku app URL
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3333",
-        "http://0.0.0.0:3333",
-        "http://127.0.0.1:3333",
-        "http://localhost:1337",
-        "http://0.0.0.0:1337",
-        "http://127.0.0.1:1337",
-        "https://k3nn.computer",
-        "https://k3nn-dot-computer-b1daf058c82e.herokuapp.com",  # Heroku app URL
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# HTTPS redirect middleware
-app.add_middleware(HTTPSRedirectMiddleware)
+# Mount static file directories
+STATIC_DIRS = {
+    "/static": "static",
+    "/pages": "pages",
+    "/components": "components",
+    "/assets": "assets",
+}
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/pages", StaticFiles(directory="pages"), name="pages")
-app.mount("/components", StaticFiles(directory="components"), name="components")
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+for route, directory in STATIC_DIRS.items():
+    app.mount(route, StaticFiles(directory=directory), name=directory)
 
 # Set up Jinja2 templates
-pages = Jinja2Templates(directory="pages")
+templates = Jinja2Templates(directory="pages")
 
-def read_markdown_files():
+
+def read_markdown_files() -> List[Dict[str, Any]]:
+    """
+    Read and parse all markdown files in the 'posts' directory.
+
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries containing post information,
+                              sorted by date (newest first).
+    """
     posts = []
     for filepath in glob.glob("posts/*.md"):
-        with open(filepath, "r") as file:
+        with open(filepath, "r", encoding="utf-8") as file:
             content = file.read()
             _, frontmatter, body = content.split('---', 2)
             metadata = yaml.safe_load(frontmatter)
-            
+
+            # Extract title from the first line of the body
             title = body.strip().split('\n')[0].lstrip('# ').strip()
-            
+
             # Handle the date whether it's a string or already a date object
             post_date = metadata["date"]
             if isinstance(post_date, str):
                 post_date = datetime.strptime(post_date, "%Y-%m-%d").date()
-            elif isinstance(post_date, date):
-                post_date = post_date
-            else:
+            elif not isinstance(post_date, date):
                 raise ValueError(f"Unexpected date format in {filepath}")
 
             posts.append({
@@ -82,74 +95,81 @@ def read_markdown_files():
                 "date": post_date,
                 "tags": metadata.get("tags", []),
                 "read_time": metadata.get("readTime", "N/A"),
-                "filename": os.path.basename(filepath).replace(".md", "")
+                "filename": Path(filepath).stem
             })
-    
-    posts.sort(key=lambda x: x["date"], reverse=True)
-    return posts
+
+    # Sort posts by date, newest first
+    return sorted(posts, key=lambda x: x["date"], reverse=True)
+
+
+@app.on_event("startup")
+async def startup():
+    """Initialize the FastAPI cache on app startup."""
+    FastAPICache.init(InMemoryBackend())
+
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
+    """Render the home page with the 3 most recent blog posts."""
     posts = read_markdown_files()[:3]  # Get the 3 most recent posts
-    return pages.TemplateResponse("index.html", {"request": request, "recent_posts": posts})
+    return templates.TemplateResponse("index.html", {"request": request, "recent_posts": posts})
+
 
 @app.get("/listings", response_class=HTMLResponse)
 async def read_listings(request: Request):
+    """Render the blog listings page with all posts."""
     posts = read_markdown_files()
-    return pages.TemplateResponse("listings.html", {"request": request, "posts": posts})
+    return templates.TemplateResponse("listings.html", {"request": request, "posts": posts})
+
 
 @app.get("/post/{post_name}", response_class=HTMLResponse)
 async def read_post(request: Request, post_name: str):
-    logging.info(f"Accessing post: {post_name}")
-    filepath = f"posts/{post_name}.md"
-    if not os.path.exists(filepath):
-        logging.error(f"Post not found: {filepath}")
+    """
+    Render a specific blog post.
+
+    Args:
+        request (Request): The FastAPI request object.
+        post_name (str): The name of the post to render.
+
+    Raises:
+        HTTPException: If the post is not found.
+    """
+    logger.info("Accessing post: %s", post_name)
+    filepath = Path(f"posts/{post_name}.md")
+    if not filepath.exists():
+        logger.error("Post not found: %s", filepath)
         raise HTTPException(status_code=404, detail="Post not found")
-    
-    with open(filepath, "r") as file:
-        content = file.read()
-        md = markdown2.Markdown(extras=["metadata"])
-        html = md.convert(content)
-        metadata = md.metadata
-        
-        # Generate image if it doesn't exist
-        img_path = f"assets/img/{post_name}.png"
-        if not os.path.exists(img_path):
-            img_path = generate_post_image(content, metadata.get("title", post_name))
-        
-        # Ensure img_path is relative to the static directory
-        img_path = img_path.replace("assets/", "")
-        
-        logging.info(f"Successfully rendered post: {post_name}")
-        return pages.TemplateResponse(
-            "post.html", 
-            {
-                "request": request, 
-                "content": html, 
-                "metadata": metadata,
-                "img_path": img_path
-            }
-        )
+
+    content = filepath.read_text(encoding="utf-8")
+    md = markdown2.Markdown(extras=["metadata"])
+    html = md.convert(content)
+    metadata = md.metadata
+
+    # Generate image if it doesn't exist
+    img_path = Path(f"assets/img/{post_name}.png")
+    if not img_path.exists():
+        img_path = generate_post_image(content, metadata.get("title", post_name))
+
+    # Ensure img_path is relative to the static directory
+    img_path = str(img_path).replace("assets/", "")
+
+    logger.info("Successfully rendered post: %s", post_name)
+    return templates.TemplateResponse(
+        "post.html",
+        {
+            "request": request,
+            "content": html,
+            "metadata": metadata,
+            "img_path": img_path
+        }
+    )
+
 
 @app.get("/timeline", response_class=HTMLResponse)
 async def read_my_work(request: Request):
-    return pages.TemplateResponse("timeline.html", {"request": request})
+    """Render the timeline page."""
+    return templates.TemplateResponse("timeline.html", {"request": request})
 
-@app.get("/terminal", response_class=HTMLResponse)
-async def terminal_page(request: Request):
-    return pages.TemplateResponse("terminal.html", {"request": request})
-
-@app.post("/api-proxy")
-async def api_proxy(request: Request):
-    api_endpoint = os.getenv("API_ENDPOINT")
-    if not api_endpoint:
-        raise HTTPException(status_code=500, detail="API endpoint not configured")
-    
-    body = await request.json()
-    async with httpx.AsyncClient() as client:
-        response = await client.post(api_endpoint, json=body)
-    
-    return JSONResponse(content=response.json(), status_code=response.status_code)
 
 if __name__ == "__main__":
     import uvicorn
