@@ -1,5 +1,5 @@
 ---
-date: 2024-08-25
+date: 2021-05-23
 tags: [philosophy, psychology, ar/vr]
 readTime: 2 minutes
 ---

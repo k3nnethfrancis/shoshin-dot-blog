@@ -1,128 +1,82 @@
 :root {
-    /* Light mode (default) */
-    --background-light: #f0f0f0;
-    --background-medium-light: #e0e0e0;
-    --text-primary-light: #333333;
-    --text-secondary-light: #666666;
-    --highlight-light: #ff6b6b;
-    --link-color-light: #0066cc;
-  
-    /* Dark mode */
-    --background-dark: #161A3C;
-    --background-medium-dark: #2D3142;
-    --text-primary-dark: #9097C0;
-    --text-secondary-dark: #FBFFF1;
-    --highlight-dark: #EB5160;
-    --link-color-dark: #FBFFF1;
-  
-    /* Default to dark mode */
-    --background: var(--background-dark);
-    --background-medium: var(--background-medium-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --highlight: var(--highlight-dark);
-    --link-color: var(--link-color-dark);
-  }
-  
-  /* Dark mode class */
-  html.dark-mode {
-    --background: var(--background-dark);
-    --background-medium: var(--background-medium-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --highlight: var(--highlight-dark);
-    --link-color: var(--link-color-dark);
+    --background: #161A3C;
+    --background-medium: #2D3142;
+    --text-primary: #9097C0;
+    --text-secondary: #FBFFF1;
+    --highlight: #EB5160;
+    --link-color: #FBFFF1;
   }
   
   body {
-      font-family: 'Fira Code', monospace;
-      line-height: 1.6;
-      color: var(--text-primary);
-      background-color: var(--background);
-      margin: 0;
-      padding: 20px;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    font-family: 'Fira Code', monospace;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--background);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .content-wrapper {
-      max-width: 800px;
-      width: 100%;
+    max-width: 800px;
+    width: 100%;
   }
   
   main {
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
   }
   
   h1, h2 {
-      color: var(--highlight);
-      margin-bottom: 10px;
+    color: var(--highlight);
+    margin-bottom: 10px;
   }
   
   h2::before {
-      content: "> ";
+    content: "> ";
   }
   
   a {
-      color: var(--link-color);
-      text-decoration: none;
+    color: var(--link-color);
+    text-decoration: none;
   }
   
   a:hover {
-      color: var(--highlight);
-      text-decoration: underline;
+    color: var(--highlight);
+    text-decoration: underline;
   }
   
   /* CRT effect and scanlines */
   .crt-effect {
-      animation: flicker 0.15s infinite;
-      background: linear-gradient(var(--background) 50%, #000 50%);
-      background-size: 100% 4px;
-      box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+    animation: flicker 0.15s infinite;
+    background: linear-gradient(var(--background) 50%, #000 50%);
+    background-size: 100% 4px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
   }
   
   @keyframes flicker {
-      0% { opacity: 0.97; }
-      100% { opacity: 1; }
+    0% { opacity: 0.97; }
+    100% { opacity: 1; }
   }
   
   body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: repeating-linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0.03),
-          rgba(255, 255, 255, 0.03) 1px,
-          transparent 1px,
-          transparent 2px
-      );
-      pointer-events: none;
-      z-index: 9999;
-  }
-  
-  #mode-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--background-medium);
-      border: none;
-      color: var(--text-primary);
-      font-size: 1.5em;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 50%;
-      transition: background-color 0.3s, color 0.3s;
-  }
-  
-  #mode-toggle:hover {
-      background-color: var(--highlight);
-      color: var(--background);
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
   }

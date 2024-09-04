@@ -22,9 +22,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.inmemory import InMemoryBackend
-from fastapi_cache.decorator import cache
-
 from image_generator import generate_post_image
+from contextlib import asynccontextmanager
 
 # Load environment variables
 load_dotenv()
@@ -34,7 +33,15 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan event handler for FastAPI."""
+    # Initialize the FastAPI cache
+    FastAPICache.init(InMemoryBackend())
+    yield
+    # Cleanup code (if any) goes here
+
+app = FastAPI(lifespan=lifespan)
 
 # CORS middleware setup
 ALLOWED_ORIGINS = [
@@ -102,12 +109,6 @@ def read_markdown_files() -> List[Dict[str, Any]]:
     return sorted(posts, key=lambda x: x["date"], reverse=True)
 
 
-@app.on_event("startup")
-async def startup():
-    """Initialize the FastAPI cache on app startup."""
-    FastAPICache.init(InMemoryBackend())
-
-
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     """Render the home page with the 3 most recent blog posts."""
@@ -165,10 +166,10 @@ async def read_post(request: Request, post_name: str):
     )
 
 
-@app.get("/timeline", response_class=HTMLResponse)
-async def read_my_work(request: Request):
-    """Render the timeline page."""
-    return templates.TemplateResponse("timeline.html", {"request": request})
+@app.get("/skilltree", response_class=HTMLResponse)
+async def read_skill_tree(request: Request):
+    """Render the skill tree page."""
+    return templates.TemplateResponse("skilltree.html", {"request": request})
 
 
 if __name__ == "__main__":
