@@ -1,5 +1,5 @@
 ---
-date: 2022-09-06
+date: 2024-09-06
 tags: [ai, technology]
 readTime: 10 minutes
 ---
@@ -8,7 +8,7 @@ readTime: 10 minutes
 
 It’s never been easier to build a search engine.
 
-Since the emergence of large language models [LLMS], vector embeddings have gained widespread adoption. Their ability to capture semantic relationships across large sets of text pairs perfectly with LLMs ability to provide great answers to questions given the right context. The combination of the two have given birth to the answer engine [1 - what is an answer engine], which has sent the Google search monopoly on a run for its money. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code.
+Since the emergence of large language models, vector embeddings have gained widespread adoption. Their ability to capture semantic relationships across large sets of text pairs perfectly with LLMs ability to provide great answers to questions given the right context. The combination of the two have given birth to the answer engine [^1], which has sent the Google search monopoly on a run for its money. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code.
 
 Like language models, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, developers quickly fall for the demo mirage—an illusion that leads one to believe that since their demo works, it shouldn’t be hard to put it into production.
 
@@ -22,7 +22,7 @@ When it comes to AI, we ought to consider how “pretty-good-out-of-the-box” s
 
 It’s incredible that vector embeddings work at all. And yet using them can feel almost like magic.
 
-Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [2 - calculating vector embeddings Jeremy h]
+Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [2]
 
 When calculating embeddings, we train the model using the contexts in which a word appears. This process captures semantic relationships based on co-occurrence patterns across the corpus. This is like using math to derive context clues from surrounding words to understanding the meaning of the target word.
 
@@ -101,3 +101,6 @@ In a world where we often reach for the newest, shiniest tool, BM25 reminds us o
 Does this mean BM25 is always the answer? Of course not. But it does mean that before you jump into complex vector search implementations, it's worth considering whether BM25 might solve your problem just as well, if not better. Often, it offers the best balance of simplicity, performance, and cost-effectiveness.
 
 Ultimately, the right search solution depends on your specific use case. But don't overlook BM25 – sometimes, it really is all you need.
+
+### Notes
+[^1]: [What is an answer engine?](https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw)

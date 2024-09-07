@@ -4,7 +4,7 @@ tags: [investing, philosophy]
 readTime: 2 minutes
 ---
 
-# on investing
+# meditations on investing
 
 we shouldn’t overcomplicate investing, but we should be consciously aware of when we walk the line of the gambler. 
 
