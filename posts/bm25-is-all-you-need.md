@@ -1,5 +1,5 @@
 ---
-date: 2024-09-06
+date: 2024-09-01
 tags: [ai, technology]
 readTime: 10 minutes
 ---
@@ -22,7 +22,7 @@ When it comes to AI, we ought to consider how “pretty-good-out-of-the-box” s
 
 It’s incredible that vector embeddings work at all. And yet using them can feel almost like magic.
 
-Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [2]
+Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [^2]
 
 When calculating embeddings, we train the model using the contexts in which a word appears. This process captures semantic relationships based on co-occurrence patterns across the corpus. This is like using math to derive context clues from surrounding words to understanding the meaning of the target word.
 
@@ -38,11 +38,11 @@ For many use cases, especially demos, these limitations don’t reveal themselve
 
 New paradigms often bring in new players, and just as transformers revolutionized NLP, the rise of vector embeddings has shifted the landscape of search. These shifts can sometimes result in what looks like collective forgetting—where solutions of the previous era get lost among new entrants. Bag-of-words approaches to NLP seems like one of them. 
 
-Bag-of-words is a pre-transformer approach to NLP, where text is reduced to a collection of individual words, ignoring order and context. This simplicity allows for fast computation and is useful for text classification or clustering tasks, where the presence or frequency of words can indicate certain patterns. It's like dumping all your words into a bag and counting how often each one appears, which can be used to create a sparse vector [4 - what is] representing the text. However, bag-of-words ignores the relationships between words, such as syntax and semantics, and fails to capture context, making it less effective for tasks that require understanding the meaning or nuances of the text. Modern approaches, such as word embeddings and transformers, address these limitations by incorporating word context and meaning into the representations.
+Bag-of-words is a pre-transformer approach to NLP, where text is reduced to a collection of individual words, ignoring order and context. This simplicity allows for fast computation and is useful for text classification or clustering tasks, where the presence or frequency of words can indicate certain patterns. It's like dumping all your words into a bag and counting how often each one appears, which can be used to create a sparse vector representing the text. However, bag-of-words ignores the relationships between words, such as syntax and semantics, and fails to capture context, making it less effective for tasks that require understanding the meaning or nuances of the text. Modern approaches, such as word embeddings and transformers, address these limitations by incorporating word context and meaning into the representations.
 
 While fairly limited compared to transformers, we can still get fairly sophisticated by building on this approach. TF-IDF (Term Frequency-Inverse Document Frequency) is one example of how bag-of-words can get us to some pretty interesting NLP algorithms.
 
-TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and."
+TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and." [^3]
 
 This approach turns out to be pretty useful because it helps identify the most important or distinguishing terms in a document, making it easier to retrieve relevant information. By balancing term frequency with how rare a word is across the corpus, TF-IDF improves search and retrieval tasks by emphasizing the words that truly matter in a specific context.
 
@@ -50,7 +50,7 @@ But most importantly, from TF-IDF we got BM25.
 
 ## BM25 
 
-BM25 is a direct descendant of TF-IDF, built to address some of its shortcomings by introducing more flexibility and nuance in calculating document relevance [5 - link to paper and explanation of shortcomings (long docs, linear relationships btw term freq and relevance]. It refines the process by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
+BM25 is a direct descendant of TF-IDF, built to address some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. It refines the process by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
 
 BM25 doesn't impose a limit on the number of results it retrieves, ensuring exhaustive recall while balancing relevance and performance, making it a more reliable option for large-scale search. It’s also computationally efficient, able to process large document sets on a single CPU with a fraction of the memory requirements.
 
@@ -68,7 +68,7 @@ Where:
 - avgdl is the average document length
 - k1 and b are free parameters
 
-This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF.
+This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF. [^4]
 
 ## Battle of the search algos
 
@@ -84,7 +84,7 @@ While BM25 doesn't capture semantic nuances like vector search does, for many ap
 
 BM25 shines in scenarios where precision and recall are paramount. For instance, in scientific or medical databases where exact terminology is crucial, BM25’s focus on term frequency and document length can deliver more precise results than vector search, which might misinterpret technical terms.
 
-If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast [6 - link]: the biggest search competitor to Google is using BM25.
+If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast [^5]: the biggest search competitor to Google is using BM25.
 
 On a personal level, I used BM25 for searching my local notes database. It lets me quickly search a large set of notes and return everything related to my query at fast speeds, with quick reindexing. I can use this as a tool for local LLMs to help me write posts like these.
 
@@ -104,3 +104,7 @@ Ultimately, the right search solution depends on your specific use case. But don
 
 ### Notes
 [^1]: [What is an answer engine?](https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw)
+[^2]: [What is the difference between embeddings and transformers?](https://www.perplexity.ai/search/what-is-the-difference-between-Tr.H2evOS5qK.7MPKR3bxg)
+[^3]: [TF-DF and it's shortcomings](https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ)
+[^4]: [What is BM25?](https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce)
+[^5]: [Perplexity CEO on Lex Friedman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)
