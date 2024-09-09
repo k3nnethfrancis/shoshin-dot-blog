@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}shoshin.blog{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <header>
+        <div class="profile-section">
+            <div class="profile-pic-container">
+                <img src="/static/images/pfp/profile.png" alt="kenneth's pfp" class="profile-image">
+            </div>
+            <div class="intro">
+                <h1>> hello_</h1>
+                <p>i'm ken. i'm a <span id="dynamic-text" class="dynamic-text" aria-live="polite"></span></p>
+                <p>interested in <span id="dynamic-interest" class="dynamic-text" aria-live="polite"></span></p>
+            </div>
+        </div>
+    </header>
+    <nav class="links">
+        <a href="https://github.com/k3nnethfrancis">[github]</a>
+        <a href="https://x.com/local0ptimist">[x dot com]</a>
+        <a href="/listings.html">[blog]</a>
+    </nav>
+    <hr>
+    <main>
+        <section class="bio">
+            <p>i'm a technologist interested in ai systems, memetics, decentralization, and other bits of philosophy and futurism. i like building things and logging my journey.</p>
+            <p>shoshin (<a href="https://www.perplexity.ai/search?q=what+are+shoshin+s+origins+and+meanings">初心</a>) is the zen buddhists term for beginner's mind. it serves as a reminder for embodying humility and curiosity in everything we do.</p>
+        </section>
+        <hr>
+        <section class="recent-posts">
+            <h2>recent posts_</h2>
+            <ul>
+                {% for post in recent_posts %}
+                <li>
+                    <a href="/post/{{ post.filename }}.html">{{ post.title }}</a>
+                    <span>{{ post.date }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/typing-effect.js"></script>
+{% endblock %}

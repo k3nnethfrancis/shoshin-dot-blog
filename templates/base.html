@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}k3nn.computer{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    {% block additional_css %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-icon-192x192.png">
+</head>
+<body>
+    <div class="content-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

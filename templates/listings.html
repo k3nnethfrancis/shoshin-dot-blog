@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}shoshin.blog - Blog{% endblock %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="/static/css/blog.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>> blog_</h1>
+        <nav>
+            <a href="/">home</a> / <a href="https://x.com/k3nndot">x</a>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <p>thoughts on technology, philosophy, psychology, and the future.</p>
+        </section>
+        <section class="post-list">
+            {% for post in posts %}
+            <article class="post-item">
+                <h2 class="post-title"><a href="/post/{{ post.filename }}.html">{{ post.title }}</a></h2>
+                <span class="post-metadata">[ {{ post.date }} ] [ {{ post.tags | join(', ') }} ]</span>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+</div>
+{% endblock %}
