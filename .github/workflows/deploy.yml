@@ -1,9 +1,9 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
     branches:
-      - main  # Set this to your default branch name
+      - main
 
 permissions:
   contents: write
@@ -12,10 +12,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4  # Updated to v4
+      - uses: actions/checkout@v4
       
       - name: Set up Python
-        uses: actions/setup-python@v5  # Updated to v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
       
@@ -27,8 +27,9 @@ jobs:
       - name: Build site
         run: python site_generator.py
       
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output  # Adjust this to your output directory
+          publish_dir: ./output
+          force_orphan: true

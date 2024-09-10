@@ -85,6 +85,10 @@ def main():
     # Copy CNAME file to output directory
     shutil.copy('CNAME', 'output/CNAME')
     
+    # Add .nojekyll file
+    with open('output/.nojekyll', 'w') as f:
+        pass
+    
     print("Static site generated successfully.")
 
 if __name__ == "__main__":
