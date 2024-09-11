@@ -52,6 +52,6 @@ Organizations with well-leveraged information systems have the foundations for c
 
 The most effective organizations in the future of work will learn how to make this happen.
 
-#### Notes
+### Notes
 [^1]: Actions are not mental states but are often the result of them.
 [^2]: The social subsystem refers to the division of labor and methods of coordination used to transform inputs into outputs in an organization. The technical subsystem refers to the tools, systems, and procedures used in that organization's transformation process.

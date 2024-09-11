@@ -142,14 +142,9 @@ Given the opportunity, we ought to consider that building redundancies for the s
 
 Surpassing the great filter requires embracing technology to achieve things that we were never before able to do. And to do so without fear–with love and admiration for humankind.
 
-## Notes
-
-[^1] How to quantify decentralization—MartianDAO will need to use indicators like the Nakamoto coefficient to maintain the optimal level of decentralization for Martian progress.
-
-[^2] Of course, voters could overrule the constitutional reset with something like a supermajority ruling.
-
-[^3] "'The rules to make the rules', an important post by Paul Frazee" — Vitalik Buterin, co-founder of Ethereum; tweeted,1.26.22.
-
-[^4] Interplanetary transfer is possible with the technology we have today. However, there is approximately 20-minutes of latency between data transfers from Earth to Mars. A protocol would likely need to be devised to account for this. However, I imagine that this would be relatively feasible to accomplish without much concern over price changes if such transfers could only be made in the form of stablecoins.
-
-[^5] e.g., Ethereum Name Service [ENS] governance airdrop, Uniswap airdrop, SOS airdrop, etc.
+### Notes
+[^1]: How to quantify decentralization—MartianDAO will need to use indicators like the Nakamoto coefficient to maintain the optimal level of decentralization for Martian progress.
+[^2]: Of course, voters could overrule the constitutional reset with something like a supermajority ruling.
+[^3]: "'The rules to make the rules', an important post by Paul Frazee" — Vitalik Buterin, co-founder of Ethereum; tweeted,1.26.22.
+[^4]: Interplanetary transfer is possible with the technology we have today. However, there is approximately 20-minutes of latency between data transfers from Earth to Mars. A protocol would likely need to be devised to account for this. However, I imagine that this would be relatively feasible to accomplish without much concern over price changes if such transfers could only be made in the form of stablecoins.
+[^5]: e.g., Ethereum Name Service [ENS] governance airdrop, Uniswap airdrop, SOS airdrop, etc.

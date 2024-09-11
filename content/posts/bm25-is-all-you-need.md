@@ -113,6 +113,6 @@ Ultimately, the right search solution depends on your specific use case. But don
 [^1]: [What is an answer engine?](https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw)
 [^2]: [What is the difference between embeddings and transformers?](https://www.perplexity.ai/search/what-is-the-difference-between-Tr.H2evOS5qK.7MPKR3bxg)
 [^3]: [TF-DF and it's shortcomings](https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ)
-[^4]  [The OKAPI Information Retrieval System](https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html)
+[^4]:  [The OKAPI Information Retrieval System](https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html)
 [^5]: [What is BM25?](https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce)
 [^6]: [Perplexity CEO on Lex Friedman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)

@@ -64,6 +64,12 @@ body {
     background-color: var(--background);
     color: var(--text-primary);
     line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -107,7 +113,7 @@ nav a:hover {
 .post-title {
     font-size: 1em;
     margin: 0;
-    color: #ffffff;
+    color: var(--text-secondary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,12 +125,12 @@ nav a:hover {
 }
 
 .post-title a:hover {
-    color: #f7768e;
+    color: var(--highlight);
 }
 
 .post-metadata {
     font-size: 0.9em;
-    color: #565f89;
+    color: var(--text-primary);
     white-space: nowrap;
     margin-left: 20px;
 }
@@ -139,4 +145,35 @@ nav a:hover {
         margin-left: 0;
         margin-top: 5px;
     }
+}
+
+/* CRT effect and scanlines */
+.crt-effect {
+    animation: flicker 0.15s infinite;
+    background: linear-gradient(var(--background) 50%, #000 50%);
+    background-size: 100% 4px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+@keyframes flicker {
+    0% { opacity: 0.97; }
+    100% { opacity: 1; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
 }

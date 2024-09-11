@@ -45,13 +45,23 @@
                     {{ content | safe }}
                 </div>
                 
+                {% if footnotes %}
+                <div class="footnotes">
+                    <hr>
+                    <ol>
+                        {% for footnote in footnotes %}
+                        <li id="fn:{{ post_filename }}-{{ footnote.id }}">
+                            {{ footnote.text | safe }}
+                            <a href="#fnref:{{ post_filename }}-{{ footnote.id }}" class="footnote-backref">↩</a>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                {% endif %}
+                
                 <footer>
                     <p><a href="/listings.html" class="back-link">> blog_</a></p>
                 </footer>
-                
-                <div class="footnote">
-                    {{ content.footnotes | safe }}
-                </div>
             </article>
         </div>
     </div>

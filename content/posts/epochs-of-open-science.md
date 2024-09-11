@@ -82,7 +82,7 @@ I'm excited to see more of this behavior as DeSci moves to becomes the macro-mov
 
 While web3 isn't without its flaws, its the first reasonable strategy I've heard for fixing science. To see it through, we'll have to keep innovating; sharing our ideas, resources, and learnings with one another. The scientific system is one of the most fundamental elements of a functioning society, decentralized or otherwise. Rebuilding it will take a village.
 
-## Notes
+### Notes
 [^1] Severy, Merle Thomas B Allen; Ross Bennett; Jules B Billard; Russell Bourne; Edward Lanoutte; David F Robinson; Verla Lee Smith, The renaissance – maker of modern man, 1970
 [^2] Philipp Koellinger, Christian Roessler, Christopher Hill, Why we need to fundamentally rethink scientific publishing, 2021
 [^3] E.g., Gitcoin, SCRF, and OceanDAO; more significantly, DAOs can launch their own tokens to raise money for scientific work.
