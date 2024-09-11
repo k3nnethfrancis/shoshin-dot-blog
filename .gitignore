@@ -4,4 +4,5 @@ __pycache__/
 venv/
 .DS_Store
 certs/
-aicontext.md
+.cursorrules
+content/drafts/

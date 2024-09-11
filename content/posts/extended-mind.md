@@ -4,7 +4,7 @@ tags: [philosophy, psychology, ar/vr]
 readTime: 2 minutes
 ---
 
-# work systems and the extended mind
+# Work systems and the extended mind
 
 As it turns out, On information technology was a discussion of the extended mind hypothesis.
 

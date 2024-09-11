@@ -5,6 +5,8 @@ import markdown
 import shutil
 from jinja2 import Environment, FileSystemLoader
 from markdown.extensions import fenced_code, tables
+from markdown.extensions.footnotes import FootnoteExtension
+from markdown_katex import KatexExtension
 
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader('templates'))
@@ -40,17 +42,29 @@ def generate_index():
 
 def generate_posts():
     template = env.get_template('post.html')
-    md = markdown.Markdown(extensions=['fenced_code', 'tables'])
+    md = markdown.Markdown(extensions=['fenced_code', 'tables', FootnoteExtension(), KatexExtension()])
+    
     for filepath in os.listdir('content/posts'):
         if filepath.endswith('.md'):
             with open(os.path.join('content/posts', filepath), 'r', encoding='utf-8') as file:
                 content = file.read()
                 _, frontmatter, body = content.split('---', 2)
                 metadata = yaml.safe_load(frontmatter)
+                
+                # Extract title from the first # in the body
+                title_match = re.search(r'^#\s*(.+)$', body, re.MULTILINE)
+                title = title_match.group(1) if title_match else metadata.get('title', os.path.splitext(filepath)[0])
+                
+                # Remove the title from the body
+                body = re.sub(r'^#\s*.+\n', '', body, 1, re.MULTILINE)
+                
+                # We no longer need to process LaTeX separately as KatexExtension will handle it
+                # body = process_latex(body)
+                
                 html_content = md.convert(body)
                 post_filename = os.path.splitext(filepath)[0]
                 html = template.render(
-                    title=metadata.get('title', post_filename),
+                    title=title,
                     content=html_content,
                     metadata=metadata,
                     img_path=f"/static/images/posts/{post_filename}.png"
@@ -59,6 +73,10 @@ def generate_posts():
                 with open(f'output/post/{post_filename}.html', 'w', encoding='utf-8') as output_file:
                     output_file.write(html)
 
+# We can remove the process_latex function as it's no longer needed
+# def process_latex(content):
+#     ...
+    
 def generate_listings():
     template = env.get_template('listings.html')
     posts = read_markdown_files()

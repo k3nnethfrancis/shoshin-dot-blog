@@ -4,7 +4,7 @@ tags: [science, web3, open source, culture]
 readTime: 7 minutes
 ---
 
-# epochs of open science
+# Epochs of open science
 
 The coordination layer of the internet is expanding.
 

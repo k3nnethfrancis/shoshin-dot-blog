@@ -61,8 +61,8 @@
 
 body {
     font-family: 'Fira Code', monospace;
-    background-color: #1a1b26;
-    color: #a9b1d6;
+    background-color: var(--background);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
@@ -73,17 +73,18 @@ body {
 }
 
 header h1 {
-    color: #f7768e;
+    color: var(--highlight);
     font-size: 2em;
     margin-bottom: 10px;
 }
 
 nav a {
-    color: #7aa2f7;
+    color: var(--link-color);
     text-decoration: none;
 }
 
 nav a:hover {
+    color: var(--highlight);
     text-decoration: underline;
 }
 

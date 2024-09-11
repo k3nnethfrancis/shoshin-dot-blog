@@ -4,7 +4,7 @@ tags: [space, crypto, decentralization]
 readTime: 7 minutes
 ---
 
-# governing the red planet
+# Governing the red planet
 
 Imagine the year is 2199.
 

@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>governing-the-red-planet - shoshin.blog</title>
+    <title>Governing the red planet - shoshin.blog</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    
-<link rel="stylesheet" href="/static/css/post.css">
-
+    <link rel="stylesheet" href="/static/css/post.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-icon-192x192.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ]
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="content-wrapper">
-        
-<div class="post-container">
-    <article class="blog-post">
-        <header>
-            <h1 class="post-title">governing-the-red-planet</h1>
-            <div class="post-metadata">
-                <span class="metadata-item">2022-04-15</span>
-                <span class="metadata-item">[ space, crypto, decentralization ]</span>
-                <span class="metadata-item">7 minutes</span>
-            </div>
-        </header>
-        
-        <img src="/static/images/posts/governing-the-red-planet.png" alt="governing-the-red-planet" class="post-image">
-        
-        <div class="post-content">
-            <h1>governing the red planet</h1>
-<p>Imagine the year is 2199.</p>
+        <div class="post-container">
+            <article class="blog-post">
+                <header>
+                    <h1 class="post-title">Governing the red planet</h1>
+                    <div class="post-metadata">
+                        <span class="metadata-item">2022-04-15</span>
+                        <span class="metadata-item">[ space, crypto, decentralization ]</span>
+                        <span class="metadata-item">7 minutes</span>
+                    </div>
+                </header>
+                
+                <img src="/static/images/posts/governing-the-red-planet.png" alt="Governing the red planet" class="post-image">
+                
+                <div class="post-content">
+                    <p>Imagine the year is 2199.</p>
 <p>It’s been nearly two centuries since the first humans arrived on Mars. The people of Earth have since constructed launch sites, underground scientific labs, and production facilities that operate within an economy of their own. The Mars colonial system is on the verge of self-reliance.</p>
 <p>As a neutral territory dedicated to the expansion of human civilization, the red planet is governed by a diverse community of colonists who operate without a centralized authority. Colonists are empowered to vote on issues facing the colony and the people of Earth are included in decisions that pertain to humanity. Interplanetary trade and communication are a core part of the Earth-Martian relationship.</p>
 <p>For people on Earth, the high-risk high-reward asteroid mining industry presents an appealing reason to make the journey. A colonist's family back on Earth would be well cared for thanks to the industry's outsized returns. For the people of Earth, Mars is the Silicon Valley of the 2190s.</p>
@@ -115,15 +126,13 @@ While many other features of a blockchain like non-fungible tokens [NFTs] and on
 <p>[^3] "'The rules to make the rules', an important post by Paul Frazee" — Vitalik Buterin, co-founder of Ethereum; tweeted,1.26.22.</p>
 <p>[^4] Interplanetary transfer is possible with the technology we have today. However, there is approximately 20-minutes of latency between data transfers from Earth to Mars. A protocol would likely need to be devised to account for this. However, I imagine that this would be relatively feasible to accomplish without much concern over price changes if such transfers could only be made in the form of stablecoins.</p>
 <p>[^5] e.g., Ethereum Name Service [ENS] governance airdrop, Uniswap airdrop, SOS airdrop, etc.</p>
+                </div>
+                
+                <footer>
+                    <p><a href="/listings.html" class="back-link">> blog_</a></p>
+                </footer>
+            </article>
         </div>
-        
-        <footer>
-            <p><a href="/listings.html" class="back-link">> listings_</a></p>
-        </footer>
-    </article>
-</div>
-
     </div>
-    
 </body>
 </html>

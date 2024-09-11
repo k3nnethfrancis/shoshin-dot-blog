@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>world-model - shoshin.blog</title>
+    <title>World model - shoshin.blog</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    
-<link rel="stylesheet" href="/static/css/post.css">
-
+    <link rel="stylesheet" href="/static/css/post.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-icon-192x192.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ]
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="content-wrapper">
-        
-<div class="post-container">
-    <article class="blog-post">
-        <header>
-            <h1 class="post-title">world-model</h1>
-            <div class="post-metadata">
-                <span class="metadata-item">2024-08-23</span>
-                <span class="metadata-item">[ philosophy ]</span>
-                <span class="metadata-item">2 minutes</span>
-            </div>
-        </header>
-        
-        <img src="/static/images/posts/world-model.png" alt="world-model" class="post-image">
-        
-        <div class="post-content">
-            <h1>world model</h1>
-<p>I put together this document as an attempt to capture my world model. It is in no way exhaustive. I update it as I update my model of the world.</p>
+        <div class="post-container">
+            <article class="blog-post">
+                <header>
+                    <h1 class="post-title">World model</h1>
+                    <div class="post-metadata">
+                        <span class="metadata-item">2024-08-23</span>
+                        <span class="metadata-item">[ philosophy ]</span>
+                        <span class="metadata-item">2 minutes</span>
+                    </div>
+                </header>
+                
+                <img src="/static/images/posts/world-model.png" alt="World model" class="post-image">
+                
+                <div class="post-content">
+                    <p>I put together this document as an attempt to capture my world model. It is in no way exhaustive. I update it as I update my model of the world.</p>
 <ul>
 <li>There are no defined paths, only routes taken by many and others less traveled.</li>
 <li>Kindness is an important virtue but is easily confused for weakness. Use that to your advantage.</li>
@@ -59,15 +70,34 @@
 </ul>
 </li>
 </ul>
-        </div>
-        
-        <footer>
-            <p><a href="/listings.html" class="back-link">> listings_</a></p>
-        </footer>
-    </article>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.brandvm.com/post/patagonias-marketing-strategy">Don't buy this jacket</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Rory's book, Alchemy is where the term psycho-logic comes from. It's also the inspiration for this post. For a summary, I recommend listening to <a href="https://www.youtube.com/watch?v=YErOtGMgTNg">this episode</a> of Lenny Rachitsky's podcast, where he was a guest.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ">TF-DF and it's shortcomings</a>
+[^4]  <a href="https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html">The OKAPI Information Retrieval System</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce">What is BM25?</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&amp;t=6987">Perplexity CEO on Lex Friedman Podcast</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
 </div>
-
+                </div>
+                
+                <footer>
+                    <p><a href="/listings.html" class="back-link">> blog_</a></p>
+                </footer>
+            </article>
+        </div>
     </div>
-    
 </body>
 </html>

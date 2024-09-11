@@ -3,35 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>on-taking-gpt4-out-of-the-box - shoshin.blog</title>
+    <title>On taking gpt-4 out of the box - shoshin.blog</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    
-<link rel="stylesheet" href="/static/css/post.css">
-
+    <link rel="stylesheet" href="/static/css/post.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-icon-192x192.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ]
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="content-wrapper">
-        
-<div class="post-container">
-    <article class="blog-post">
-        <header>
-            <h1 class="post-title">on-taking-gpt4-out-of-the-box</h1>
-            <div class="post-metadata">
-                <span class="metadata-item">2023-05-02</span>
-                <span class="metadata-item">[ ai, philosophy, science ]</span>
-                <span class="metadata-item">7 minutes</span>
-            </div>
-        </header>
-        
-        <img src="/static/images/posts/on-taking-gpt4-out-of-the-box.png" alt="on-taking-gpt4-out-of-the-box" class="post-image">
-        
-        <div class="post-content">
-            <h1>taking gpt-4 out of the box</h1>
-<p>Microsoft researchers claim OpenAI's latest model has the 'sparks of AGI'. I think when we look back at this time it will seem obvious. It probably won't ever be clear-cut, but GPT-4's capacity to generalize over almost anything in the form of text doesn't look like narrow intelligence to me. At the same time, it's possible that stacking more layers onto the underlying neural network might not be needed for fully realizing artificial general intelligence.</p>
+        <div class="post-container">
+            <article class="blog-post">
+                <header>
+                    <h1 class="post-title">On taking gpt-4 out of the box</h1>
+                    <div class="post-metadata">
+                        <span class="metadata-item">2023-05-02</span>
+                        <span class="metadata-item">[ ai, philosophy, science ]</span>
+                        <span class="metadata-item">7 minutes</span>
+                    </div>
+                </header>
+                
+                <img src="/static/images/posts/on-taking-gpt4-out-of-the-box.png" alt="On taking gpt-4 out of the box" class="post-image">
+                
+                <div class="post-content">
+                    <p>Microsoft researchers claim OpenAI's latest model has the 'sparks of AGI'. I think when we look back at this time it will seem obvious. It probably won't ever be clear-cut, but GPT-4's capacity to generalize over almost anything in the form of text doesn't look like narrow intelligence to me. At the same time, it's possible that stacking more layers onto the underlying neural network might not be needed for fully realizing artificial general intelligence.</p>
 <p>Microsoft researchers, in their extensive paper, "Sparks of artificial general intelligence: early experiments with GPT-4," [^1] make a compelling case for why GPT-4 may have crossed a key threshold.</p>
 <p>[If you are skeptical of these claims and haven't read or skimmed it, I would suggest at least watching this to get up to speed.]</p>
 <p>The experiments they conducted, however, all occurred inside GPT-4's box. That is, they chatted with GPT-4 but did not integrate it with external systems. They, rightfully, assessed its base intelligence.</p>
@@ -80,15 +91,13 @@ Building AI systems that can pursue goals reliably in the world isn't trivial, b
 <p>[^8] Post on the implications of agents like AutoGPT.</p>
 <p>[^9] Post about forecasting AI science capabilities.</p>
 <p>[^10] <em>Epistemic status: shoshin. ~4 years in analytics sparsely using ML. Self taught cs &amp; ai. ~2 years tinkering with LLM projects. GPT-4 access for 1-month.</em></p>
+                </div>
+                
+                <footer>
+                    <p><a href="/listings.html" class="back-link">> blog_</a></p>
+                </footer>
+            </article>
         </div>
-        
-        <footer>
-            <p><a href="/listings.html" class="back-link">> listings_</a></p>
-        </footer>
-    </article>
-</div>
-
     </div>
-    
 </body>
 </html>

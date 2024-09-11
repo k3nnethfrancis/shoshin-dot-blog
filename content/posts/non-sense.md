@@ -16,9 +16,9 @@ There is a class of solutions to problems that are nonsensical in the traditiona
 
 If you present a solution to a problem at work that follows sound logic and reasoning, your boss will applaud you and, if it doesn’t work out, you’ll get a pat on the back and a “we’ll get ‘em next time.” but rarely will you be fired when everyone agrees with your reasoning. conversely, if you have a ridiculous idea like “let’s run a 'do not buy this jacket' campaign” when your goal is to increase jacket sales, you might be laughed out of the room. not only that, but if you did it anyway and it failed, you’re probably getting fired. 
 
-Yet in 2012 Patagonia did exactly this, resulting in a 30% increase in sales. [^1]
+Yet in 2012 Patagonia did exactly this, resulting in a 30% increase in sales.[^1]
 
-Rory Sutherland is the chairman of [Ogilvy](https://www.ogilvy.com/), one of the most successful marketing agencies in the world, and he calls this psycho-logic. [^2]
+Rory Sutherland is the chairman of [Ogilvy](https://www.ogilvy.com/), one of the most successful marketing agencies in the world, and he calls this psycho-logic.[^2]
 
 Psycho-logic represents a kind of thinking about the world that incorporates a model of human behavior. It often leads to non-conventional thinking and surprisingly effective solutions.
 

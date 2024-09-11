@@ -4,7 +4,7 @@ tags: [ai, philosophy, science]
 readTime: 7 minutes
 ---
 
-# taking gpt-4 out of the box
+# On taking gpt-4 out of the box
 
 Microsoft researchers claim OpenAI's latest model has the 'sparks of AGI'. I think when we look back at this time it will seem obvious. It probably won't ever be clear-cut, but GPT-4's capacity to generalize over almost anything in the form of text doesn't look like narrow intelligence to me. At the same time, it's possible that stacking more layers onto the underlying neural network might not be needed for fully realizing artificial general intelligence.
 

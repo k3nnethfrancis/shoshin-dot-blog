@@ -4,7 +4,7 @@ tags: [science, web3, culture]
 readTime: 3 minutes
 ---
 
-# venture into the noosphere
+# Venture into the noosphere
 
 Maybe its not falsifiable, but I can't shake the feeling that everything's connected.
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>party-politics - shoshin.blog</title>
+    <title>meditations on party politics - shoshin.blog</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     
 <link rel="stylesheet" href="/static/css/post.css">
@@ -19,7 +19,7 @@
 <div class="post-container">
     <article class="blog-post">
         <header>
-            <h1 class="post-title">party-politics</h1>
+            <h1 class="post-title">meditations on party politics</h1>
             <div class="post-metadata">
                 <span class="metadata-item">2024-06-29</span>
                 <span class="metadata-item">[ politics, game theory ]</span>
@@ -27,11 +27,10 @@
             </div>
         </header>
         
-        <img src="/static/images/posts/party-politics.png" alt="party-politics" class="post-image">
+        <img src="/static/images/posts/party-politics.png" alt="meditations on party politics" class="post-image">
         
         <div class="post-content">
-            <h1>meditations on party politics</h1>
-<p>the operational efficiencies of democracy seem to be in their infancy, despite a couple hundred years of work. while a two party system is probably the worst version of this,  it surprises me that any democracy can function at all, let alone be the most successful form of government in terms of average GDP. </p>
+            <p>the operational efficiencies of democracy seem to be in their infancy, despite a couple hundred years of work. while a two party system is probably the worst version of this,  it surprises me that any democracy can function at all, let alone be the most successful form of government in terms of average GDP. </p>
 <p>the multidimensional nature of belief simply cannot be expressed via anything short of an infinite spectrum of ideology where we can, at best, form clusters of beliefs that are close enough together such that we can at least all vote for the same person, or at least bucket ourselves into a set of them. </p>
 <p>it seems to me that democracy and the two party system have been at nash equilibrium for some time, which explains why nothing ever changes. </p>
 <p>history tends to be written by the victor in the form of a heroes journey. “it was george washington who led the american army to victory!” and “it was abe lincoln who freed the slaves!” — when in fact it was just the right person in the right place at the right time. </p>
@@ -40,10 +39,32 @@
         </div>
         
         <footer>
-            <p><a href="/listings.html" class="back-link">> listings_</a></p>
+            <p><a href="/listings.html" class="back-link">> blog_</a></p>
         </footer>
     </article>
 </div>
+
+<!-- LaTeX Test -->
+<div class="latex-test">
+    <h2>LaTeX Test</h2>
+    <p>Inline LaTeX: \( E = mc^2 \)</p>
+    <p>Display LaTeX:</p>
+    <p>
+    \[
+    \text{score}(D,Q) = \sum \text{IDF}(q_i) \cdot \frac{f(q_i,D) \cdot (k_1 + 1)}{f(q_i,D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{\text{avgdl}})}
+    \]
+    </p>
+</div>
+
+<script>
+  MathJax.startup = {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        MathJax.typesetPromise();
+      });
+    }
+  };
+</script>
 
     </div>
     

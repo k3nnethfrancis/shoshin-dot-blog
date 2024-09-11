@@ -4,7 +4,7 @@ tags: [philosophy]
 readTime: 2 minutes
 ---
 
-# world model
+# World model
 
 I put together this document as an attempt to capture my world model. It is in no way exhaustive. I update it as I update my model of the world.
 

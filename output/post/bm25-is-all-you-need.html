@@ -3,43 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bm25-is-all-you-need - shoshin.blog</title>
+    <title>BM25 is all you need - shoshin.blog</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    
-<link rel="stylesheet" href="/static/css/post.css">
-
+    <link rel="stylesheet" href="/static/css/post.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-icon-192x192.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ]
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="content-wrapper">
-        
-<div class="post-container">
-    <article class="blog-post">
-        <header>
-            <h1 class="post-title">bm25-is-all-you-need</h1>
-            <div class="post-metadata">
-                <span class="metadata-item">2024-09-01</span>
-                <span class="metadata-item">[ ai, technology ]</span>
-                <span class="metadata-item">10 minutes</span>
-            </div>
-        </header>
-        
-        <img src="/static/images/posts/bm25-is-all-you-need.png" alt="bm25-is-all-you-need" class="post-image">
-        
-        <div class="post-content">
-            <h1>BM25 Is All You Need</h1>
-<p>It’s never been easier to build a search engine.</p>
-<p>Since the emergence of large language models, vector embeddings have gained widespread adoption. Their ability to capture semantic relationships across large sets of text pairs perfectly with LLMs ability to provide great answers to questions given the right context. The combination of the two have given birth to the answer engine [^1], which has sent the Google search monopoly on a run for its money. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code.</p>
-<p>Like language models, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, developers quickly fall for the demo mirage—an illusion that leads one to believe that since their demo works, it shouldn’t be hard to put it into production.</p>
-<p>Spoiler alert: it’s not.</p>
-<p>In practice, production is a lot harder than building a demo. This is especially true with the current wave of AI tech. One of the key reasons for this is a feature, not a bug—the non-deterministic nature of AI technology suggests that the range of inputs and outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your thing really works.</p>
-<p>When it comes to AI, we ought to consider how “pretty-good-out-of-the-box” solutions can create these illusions.</p>
+        <div class="post-container">
+            <article class="blog-post">
+                <header>
+                    <h1 class="post-title">BM25 is all you need</h1>
+                    <div class="post-metadata">
+                        <span class="metadata-item">2024-09-01</span>
+                        <span class="metadata-item">[ ai, technology ]</span>
+                        <span class="metadata-item">10 minutes</span>
+                    </div>
+                </header>
+                
+                <img src="/static/images/posts/bm25-is-all-you-need.png" alt="BM25 is all you need" class="post-image">
+                
+                <div class="post-content">
+                    <p>It’s never been easier to build a search engine.</p>
+<p>When LLMs took off, vector embeddings followed. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code. As it turns out, there are benefits to molding language space into coherent semantic clusters. The result of which, for these two technologies, gave birth to the answer engine<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<p>Another reason reason adoption has been smooth is that for many cases, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, we can quickly fall for demo mirages: illusions that demos will be easy to scale into production, especially across the range of inputs for your users.</p>
+<p>In practice, production is a lot harder than building a demo. This is especially true with the current wave of AI tech. This is a feature, not a bug. The nondeterminism in LLM models suggests that the range of inputs and outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your thing really works.</p>
+<p>It's proabably good for someone building in AI to consider how “pretty-good-out-of-the-box” solutions can create these kinds of illusions.</p>
 <h2>Vector search and it’s problems</h2>
 <p>It’s incredible that vector embeddings work at all. And yet using them can feel almost like magic.</p>
-<p>Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [^2]</p>
+<p>Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
 <p>When calculating embeddings, we train the model using the contexts in which a word appears. This process captures semantic relationships based on co-occurrence patterns across the corpus. This is like using math to derive context clues from surrounding words to understanding the meaning of the target word.</p>
 <p>Modern approaches like Word2Vec or GloVe learn these embeddings through optimization techniques, iterating over many examples to capture nuanced meanings and relationships between words.</p>
 <p>Imagine words and sentences as points in high-dimensional space. Similar concepts cluster together, so "Goku" and "super saiyan" would be neighbors, while "panda" would be in a different neighborhood entirely. This is what allows vector embedding based search engines to grasp the semantics of queries and return relevant documents, even without exact word matches.</p>
@@ -49,24 +59,27 @@
 <p>New paradigms often bring in new players, and just as transformers revolutionized NLP, the rise of vector embeddings has shifted the landscape of search. These shifts can sometimes result in what looks like collective forgetting—where solutions of the previous era get lost among new entrants. Bag-of-words approaches to NLP seems like one of them. </p>
 <p>Bag-of-words is a pre-transformer approach to NLP, where text is reduced to a collection of individual words, ignoring order and context. This simplicity allows for fast computation and is useful for text classification or clustering tasks, where the presence or frequency of words can indicate certain patterns. It's like dumping all your words into a bag and counting how often each one appears, which can be used to create a sparse vector representing the text. However, bag-of-words ignores the relationships between words, such as syntax and semantics, and fails to capture context, making it less effective for tasks that require understanding the meaning or nuances of the text. Modern approaches, such as word embeddings and transformers, address these limitations by incorporating word context and meaning into the representations.</p>
 <p>While fairly limited compared to transformers, we can still get fairly sophisticated by building on this approach. TF-IDF (Term Frequency-Inverse Document Frequency) is one example of how bag-of-words can get us to some pretty interesting NLP algorithms.</p>
-<p>TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and." [^3]</p>
+<p>TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and."<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
 <p>This approach turns out to be pretty useful because it helps identify the most important or distinguishing terms in a document, making it easier to retrieve relevant information. By balancing term frequency with how rare a word is across the corpus, TF-IDF improves search and retrieval tasks by emphasizing the words that truly matter in a specific context.</p>
 <p>But most importantly, from TF-IDF we got BM25.</p>
-<h2>BM25</h2>
-<p>BM25 is a direct descendant of TF-IDF, built to address some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. It refines the process by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.</p>
-<p>BM25 doesn't impose a limit on the number of results it retrieves, ensuring exhaustive recall while balancing relevance and performance, making it a more reliable option for large-scale search. It’s also computationally efficient, able to process large document sets on a single CPU with a fraction of the memory requirements.</p>
-<p>BM25 is essentially a souped-up version of TF-IDF. Here's a simplified version of how it calculates the relevance score for a document:</p>
-<pre><code>score(D,Q) = ∑ IDF(qi) * (f(qi,D) * (k1 + 1)) / (f(qi,D) + k1 * (1 - b + b * |D| / avgdl))
-</code></pre>
-<p>Where:
-- D is the document
-- Q is the query
-- qi is a term in the query
-- f(qi,D) is the frequency of qi in D
-- |D| is the length of the document
-- avgdl is the average document length
-- k1 and b are free parameters</p>
-<p>This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF. [^4]</p>
+<h2>Okapi: best matching 25</h2>
+<p>BM25 is a direct descendant of TF-IDF. It's full name is Okapi BM25, after the experimental retrival systemed developed by the Center for Interactive Systems Research in the Department of Information Science at City Univeristy, London.[^4] It addresses some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. The process is refined by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.</p>
+<p>An important feature of BM25 is its ability to assign a relevance score to each document, including scores of 0 or effectively no score at all. This allows for potentially high recall by not imposing arbitrary limits on the number of results retrieved. BM25 balances this potential for high recall with its nuanced scoring approach, which considers relevance factors like term frequency and document length. This makes it well-suited for large-scale search applications. Additionally, BM25 is computationally efficient, capable of processing substantial document collections with relatively modest hardware requirements compared to more complex algorithms.</p>
+<p>Here's a simplified version of how it calculates the relevance score for a document:</p>
+<p>$$
+\text{score}(D,Q) = \sum \text{IDF}(q_i) \cdot \frac{f(q_i,D) \cdot (k_1 + 1)}{f(q_i,D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{\text{avgdl}})}
+$$</p>
+<p>Where:</p>
+<ul>
+<li>$D$ is the document</li>
+<li>$Q$ is the query</li>
+<li>$q_i$ is a term in the query</li>
+<li>$f(q_i,D)$ is the frequency of $q_i$ in $D$</li>
+<li>$|D|$ is the length of the document</li>
+<li>$\text{avgdl}$ is the average document length</li>
+<li>$k_1$ and $b$ are free parameters</li>
+</ul>
+<p>What is happening here is that we are taking the inverse document frequency of the term, multiplying it by the frequency of the term in the document, and then scaling it by the document length. We then sum this value for all terms in the query to get the final score. This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF.<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">4</a></sup></p>
 <h2>Battle of the search algos</h2>
 <p>When you compare vector search and BM25 side-by-side, it's hard to say one is definitively better. They each have trade-offs:</p>
 <ol>
@@ -77,7 +90,7 @@
 <p>For example, in legal document search or e-commerce, where exact keyword matches often matter more than nuanced meaning, BM25 tends to outperform vector search because of its ability to retrieve all relevant documents. On the other hand, for tasks like customer support chatbots or recommendation systems, where understanding the intent behind a query is crucial, vector embeddings might offer superior results.</p>
 <p>While BM25 doesn't capture semantic nuances like vector search does, for many applications, especially those dealing with domain-specific content or structured information, the lexical matching provided by BM25 is often sufficient and, in some cases, can even outperform semantic search.</p>
 <p>BM25 shines in scenarios where precision and recall are paramount. For instance, in scientific or medical databases where exact terminology is crucial, BM25’s focus on term frequency and document length can deliver more precise results than vector search, which might misinterpret technical terms.</p>
-<p>If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast [^5]: the biggest search competitor to Google is using BM25.</p>
+<p>If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">5</a></sup>: the biggest search competitor to Google is using BM25.</p>
 <p>On a personal level, I used BM25 for searching my local notes database. It lets me quickly search a large set of notes and return everything related to my query at fast speeds, with quick reindexing. I can use this as a tool for local LLMs to help me write posts like these.</p>
 <h2>But is it really all you need?</h2>
 <p>The title of this essay is a playful nod to the famous 'Attention is All You Need' paper, but the truth is BM25 isn’t always all you need—though it often comes close. Certainly it’s better to start with BM25 rather than jumping into more sophisticated patterns using vector embeddings. BM25 is a great baseline, so if your vector search can’t outperform it, you should default to using it until you can improve those results. This is much more cost effective and lower complexity to manage. There is no need to pay for a vector database or worry much about whether you have enough compute to run these algorithms at scale with concurrent users.</p>
@@ -87,20 +100,34 @@
 <p>Does this mean BM25 is always the answer? Of course not. But it does mean that before you jump into complex vector search implementations, it's worth considering whether BM25 might solve your problem just as well, if not better. Often, it offers the best balance of simplicity, performance, and cost-effectiveness.</p>
 <p>Ultimately, the right search solution depends on your specific use case. But don't overlook BM25 – sometimes, it really is all you need.</p>
 <h3>Notes</h3>
-<p>[^1]: <a href="https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw">What is an answer engine?</a>
-[^2]: <a href="https://www.perplexity.ai/search/what-is-the-difference-between-Tr.H2evOS5qK.7MPKR3bxg">What is the difference between embeddings and transformers?</a>
-[^3]: <a href="https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ">TF-DF and it's shortcomings</a>
-[^4]: <a href="https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce">What is BM25?</a>
-[^5]: <a href="https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&amp;t=6987">Perplexity CEO on Lex Friedman Podcast</a></p>
-        </div>
-        
-        <footer>
-            <p><a href="/listings.html" class="back-link">> listings_</a></p>
-        </footer>
-    </article>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw">What is an answer engine?</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.perplexity.ai/search/what-is-the-difference-between-Tr.H2evOS5qK.7MPKR3bxg">What is the difference between embeddings and transformers?</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ">TF-DF and it's shortcomings</a>
+[^4]  <a href="https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html">The OKAPI Information Retrieval System</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce">What is BM25?</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&amp;t=6987">Perplexity CEO on Lex Friedman Podcast</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
 </div>
-
+                </div>
+                
+                <footer>
+                    <p><a href="/listings.html" class="back-link">> blog_</a></p>
+                </footer>
+            </article>
+        </div>
     </div>
-    
 </body>
 </html>

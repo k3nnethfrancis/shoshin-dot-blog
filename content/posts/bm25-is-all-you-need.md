@@ -4,25 +4,23 @@ tags: [ai, technology]
 readTime: 10 minutes
 ---
 
-# BM25 Is All You Need
+# BM25 is all you need
 
 It’s never been easier to build a search engine.
 
-Since the emergence of large language models, vector embeddings have gained widespread adoption. Their ability to capture semantic relationships across large sets of text pairs perfectly with LLMs ability to provide great answers to questions given the right context. The combination of the two have given birth to the answer engine [^1], which has sent the Google search monopoly on a run for its money. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code.
+When LLMs took off, vector embeddings followed. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code. As it turns out, there are benefits to molding language space into coherent semantic clusters. The result of which, for these two technologies, gave birth to the answer engine[^1].
 
-Like language models, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, developers quickly fall for the demo mirage—an illusion that leads one to believe that since their demo works, it shouldn’t be hard to put it into production.
+Another reason reason adoption has been smooth is that for many cases, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, we can quickly fall for demo mirages: illusions that demos will be easy to scale into production, especially across the range of inputs for your users.
 
-Spoiler alert: it’s not.
+In practice, production is a lot harder than building a demo. This is especially true with the current wave of AI tech. This is a feature, not a bug. The nondeterminism in LLM models suggests that the range of inputs and outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your thing really works.
 
-In practice, production is a lot harder than building a demo. This is especially true with the current wave of AI tech. One of the key reasons for this is a feature, not a bug—the non-deterministic nature of AI technology suggests that the range of inputs and outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your thing really works.
-
-When it comes to AI, we ought to consider how “pretty-good-out-of-the-box” solutions can create these illusions.
+It's proabably good for someone building in AI to consider how “pretty-good-out-of-the-box” solutions can create these kinds of illusions.
 
 ## Vector search and it’s problems 
 
 It’s incredible that vector embeddings work at all. And yet using them can feel almost like magic.
 
-Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text. [^2]
+Yet, from a mathematical standpoint, they are relatively simple. Vector embeddings work by capturing the relationships between words based on their context, allowing models to understand how similar or different concepts are. Like language models, an embedding model is created from a large corpora of text. Generally, the main difference is that embedding models focus on learning representations of words based on context, while language models aim to generate or predict sequences of text.[^2]
 
 When calculating embeddings, we train the model using the contexts in which a word appears. This process captures semantic relationships based on co-occurrence patterns across the corpus. This is like using math to derive context clues from surrounding words to understanding the meaning of the target word.
 
@@ -42,33 +40,35 @@ Bag-of-words is a pre-transformer approach to NLP, where text is reduced to a co
 
 While fairly limited compared to transformers, we can still get fairly sophisticated by building on this approach. TF-IDF (Term Frequency-Inverse Document Frequency) is one example of how bag-of-words can get us to some pretty interesting NLP algorithms.
 
-TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and." [^3]
+TF-IDF is an extension of the bag-of-words approach that not only counts word frequency but also weighs words by how unique they are across documents. It assigns more importance to words that appear frequently in a specific document but less frequently in the overall corpus. This helps highlight words that are more relevant to a given document, rather than common words like "the" or "and."[^3]
 
 This approach turns out to be pretty useful because it helps identify the most important or distinguishing terms in a document, making it easier to retrieve relevant information. By balancing term frequency with how rare a word is across the corpus, TF-IDF improves search and retrieval tasks by emphasizing the words that truly matter in a specific context.
 
 But most importantly, from TF-IDF we got BM25.
 
-## BM25 
+## Okapi: best matching 25
 
-BM25 is a direct descendant of TF-IDF, built to address some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. It refines the process by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
+BM25 is a direct descendant of TF-IDF. It's full name is Okapi BM25, after the experimental retrival systemed developed by the Center for Interactive Systems Research in the Department of Information Science at City Univeristy, London.[^4] It addresses some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. The process is refined by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
 
-BM25 doesn't impose a limit on the number of results it retrieves, ensuring exhaustive recall while balancing relevance and performance, making it a more reliable option for large-scale search. It’s also computationally efficient, able to process large document sets on a single CPU with a fraction of the memory requirements.
+An important feature of BM25 is its ability to assign a relevance score to each document, including scores of 0 or effectively no score at all. This allows for potentially high recall by not imposing arbitrary limits on the number of results retrieved. BM25 balances this potential for high recall with its nuanced scoring approach, which considers relevance factors like term frequency and document length. This makes it well-suited for large-scale search applications. Additionally, BM25 is computationally efficient, capable of processing substantial document collections with relatively modest hardware requirements compared to more complex algorithms.
 
-BM25 is essentially a souped-up version of TF-IDF. Here's a simplified version of how it calculates the relevance score for a document:
-```
-score(D,Q) = ∑ IDF(qi) * (f(qi,D) * (k1 + 1)) / (f(qi,D) + k1 * (1 - b + b * |D| / avgdl))
-```
+Here's a simplified version of how it calculates the relevance score for a document:
+
+$$
+\text{score}(D,Q) = \sum \text{IDF}(q_i) \cdot \frac{f(q_i,D) \cdot (k_1 + 1)}{f(q_i,D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{\text{avgdl}})}
+$$
 
 Where:
-- D is the document
-- Q is the query
-- qi is a term in the query
-- f(qi,D) is the frequency of qi in D
-- |D| is the length of the document
-- avgdl is the average document length
-- k1 and b are free parameters
 
-This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF. [^4]
+- $D$ is the document
+- $Q$ is the query
+- $q_i$ is a term in the query
+- $f(q_i,D)$ is the frequency of $q_i$ in $D$
+- $|D|$ is the length of the document
+- $\text{avgdl}$ is the average document length
+- $k_1$ and $b$ are free parameters
+
+What is happening here is that we are taking the inverse document frequency of the term, multiplying it by the frequency of the term in the document, and then scaling it by the document length. We then sum this value for all terms in the query to get the final score. This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF.[^5]
 
 ## Battle of the search algos
 
@@ -84,7 +84,7 @@ While BM25 doesn't capture semantic nuances like vector search does, for many ap
 
 BM25 shines in scenarios where precision and recall are paramount. For instance, in scientific or medical databases where exact terminology is crucial, BM25’s focus on term frequency and document length can deliver more precise results than vector search, which might misinterpret technical terms.
 
-If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast [^5]: the biggest search competitor to Google is using BM25.
+If you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast[^6]: the biggest search competitor to Google is using BM25.
 
 On a personal level, I used BM25 for searching my local notes database. It lets me quickly search a large set of notes and return everything related to my query at fast speeds, with quick reindexing. I can use this as a tool for local LLMs to help me write posts like these.
 
@@ -106,5 +106,6 @@ Ultimately, the right search solution depends on your specific use case. But don
 [^1]: [What is an answer engine?](https://www.perplexity.ai/page/what-is-an-answer-engine-G7w5zRTmQw604cVDmaPHkw)
 [^2]: [What is the difference between embeddings and transformers?](https://www.perplexity.ai/search/what-is-the-difference-between-Tr.H2evOS5qK.7MPKR3bxg)
 [^3]: [TF-DF and it's shortcomings](https://www.perplexity.ai/search/what-is-tf-idf-and-what-are-it-GM13VNvWRgauuvvdDa_UcQ)
-[^4]: [What is BM25?](https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce)
-[^5]: [Perplexity CEO on Lex Friedman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)
+[^4]  [The OKAPI Information Retrieval System](https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html)
+[^5]: [What is BM25?](https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce)
+[^6]: [Perplexity CEO on Lex Friedman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)

@@ -10,7 +10,7 @@
 
 .post-title {
     font-size: 2.5rem;
-    color: var(--text-primary);
+    color: var(--highlight);
     margin-bottom: 1rem;
 }
 
@@ -47,4 +47,39 @@
 
 .back-link:hover {
     text-decoration: underline;
+}
+
+.footnote {
+    font-size: 0.9em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+.footnotes {
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.footnotes ol {
+    padding-left: 1.5rem;
+}
+
+.footnotes li {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.footnote-backref {
+    text-decoration: none;
+    color: var(--accent);
+}
+
+.MathJax {
+    font-size: 1.1em;
+}
+
+.math-display {
+    overflow-x: auto;
+    margin: 1em 0;
 }
