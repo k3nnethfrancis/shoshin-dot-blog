@@ -68,9 +68,16 @@ Where:
 - $\text{avgdl}$ is the average document length
 - $k_1$ and $b$ are free parameters
 
-What is happening here is that we are taking the inverse document frequency of the term, multiplying it by the frequency of the term in the document, and then scaling it by the document length. We then sum this value for all terms in the query to get the final score. This formula allows BM25 to balance term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF.[^5]
+What's happening:
 
-## Battle of the search algos
+- We calculate the inverse document frequency (IDF) of a term, which gives higher weight to rare terms.
+- We multiply this by how often the term appears in the document (its frequency).
+- Then we adjust this based on the document's length (so longer documents don’t unfairly dominate).
+- Finally, we sum this for all the terms in the query to get the overall score.
+
+Doing this for every document in your corpus allows you to rank them based on their relevance to the query by balancing term frequency, document length, and inverse document frequency in a more nuanced way than basic TF-IDF.[^5]
+
+## Trade-offs
 
 When you compare vector search and BM25 side-by-side, it's hard to say one is definitively better. They each have trade-offs:
 
