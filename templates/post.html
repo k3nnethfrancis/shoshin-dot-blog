@@ -47,12 +47,11 @@
                 
                 {% if footnotes %}
                 <div class="footnotes">
-                    <hr>
                     <ol>
                         {% for footnote in footnotes %}
-                        <li id="fn:{{ post_filename }}-{{ footnote.id }}">
+                        <li id="fn:{{ footnote.id }}">
                             {{ footnote.text | safe }}
-                            <a href="#fnref:{{ post_filename }}-{{ footnote.id }}" class="footnote-backref">↩</a>
+                            <a href="#fnref:{{ footnote.id }}" class="footnote-backref">↩</a>
                         </li>
                         {% endfor %}
                     </ol>
