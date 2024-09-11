@@ -46,9 +46,9 @@ This approach turns out to be pretty useful because it helps identify the most i
 
 But most importantly, from TF-IDF we got BM25.
 
-## Okapi: best matching 25
+## Okapi
 
-BM25 is a direct descendant of TF-IDF. It's full name is Okapi BM25, after the experimental retrival systemed developed by the Center for Interactive Systems Research in the Department of Information Science at City Univeristy, London.[^4] It addresses some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. The process is refined by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
+BM25 is a direct descendant of TF-IDF. It's full name is Okapi Best Matching 25 (for version 25), after the experimental retrival systemed developed by the Center for Interactive Systems Research in the Department of Information Science at City Univeristy, London.[^4] It addresses some of its shortcomings by introducing more flexibility and nuance in calculating document relevance. The process is refined by considering not just the frequency of terms but also the length of documents and the diminishing returns of term frequency, allowing for a more balanced scoring system.
 
 An important feature of BM25 is its ability to assign a relevance score to each document, including scores of 0 or effectively no score at all. This allows for potentially high recall by not imposing arbitrary limits on the number of results retrieved. BM25 balances this potential for high recall with its nuanced scoring approach, which considers relevance factors like term frequency and document length. This makes it well-suited for large-scale search applications. Additionally, BM25 is computationally efficient, capable of processing substantial document collections with relatively modest hardware requirements compared to more complex algorithms.
 
