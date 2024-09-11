@@ -20,7 +20,7 @@ Before answering this, let's first define a mental state: a condition of the min
 
 For example, the belief that I am writing, the desire that I convey this information clearly, or the intention that I publish this in May.
 
-From mental states, we are able to arrive at a proposition–an attitude, argument, theory, proposal, etc., which may lead to actions[1].
+From mental states, we are able to arrive at a proposition–an attitude, argument, theory, proposal, etc., which may lead to actions[^1].
 
 In our thought experiment, both parties arrive at the same mental state–the belief that the coffee shop is located on Smith street. Of course, there are differences in the way that mental state was reached, but that is less a matter of mental state than it is a matter of vehicle.
 
@@ -48,10 +48,10 @@ Just like in the thought experiment when you leveraged Google Maps to remember t
 
 Now, consider this same idea but at scale: systems of people utilizing information technology as an extension of mind.
 
-Organizations with well-leveraged information systems have the foundations for collective intelligence; an extension of social interactivity and interconnected processes among networks of human nodes. Like an organizational hive mind, the social and technical subsystems[2] of a larger work system have the potential to synthesize.
+Organizations with well-leveraged information systems have the foundations for collective intelligence; an extension of social interactivity and interconnected processes among networks of human nodes. Like an organizational hive mind, the social and technical subsystems[^2] of a larger work system have the potential to synthesize.
 
 The most effective organizations in the future of work will learn how to make this happen.
 
-Footnotes:
-Actions are not mental states but are often the result of them.
-The social subsystem refers to the division of labor and methods of coordination used to transform inputs into outputs in an organization. The technical subsystem refers to the tools, systems, and procedures used in that organization's transformation process.
+#### Notes
+[^1]: Actions are not mental states but are often the result of them.
+[^2]: The social subsystem refers to the division of labor and methods of coordination used to transform inputs into outputs in an organization. The technical subsystem refers to the tools, systems, and procedures used in that organization's transformation process.

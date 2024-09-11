@@ -53,6 +53,9 @@
     font-size: 0.9em;
     vertical-align: super;
     line-height: 0;
+    margin-top: 2em;
+    border-top: 1px solid #ccc;
+    padding-top: 1em;
 }
 
 .footnotes {
@@ -82,4 +85,9 @@
 .math-display {
     overflow-x: auto;
     margin: 1em 0;
+}
+
+.footnote-ref {
+    font-size: 0.8em;
+    vertical-align: super;
 }

@@ -8,17 +8,17 @@ readTime: 7 minutes
 
 Microsoft researchers claim OpenAI's latest model has the 'sparks of AGI'. I think when we look back at this time it will seem obvious. It probably won't ever be clear-cut, but GPT-4's capacity to generalize over almost anything in the form of text doesn't look like narrow intelligence to me. At the same time, it's possible that stacking more layers onto the underlying neural network might not be needed for fully realizing artificial general intelligence.
 
-Microsoft researchers, in their extensive paper, "Sparks of artificial general intelligence: early experiments with GPT-4," [^1] make a compelling case for why GPT-4 may have crossed a key threshold.
+Microsoft researchers, in their extensive paper, "Sparks of artificial general intelligence: early experiments with GPT-4,"[^1] make a compelling case for why GPT-4 may have crossed a key threshold.
 
 [If you are skeptical of these claims and haven't read or skimmed it, I would suggest at least watching this to get up to speed.]
 
 The experiments they conducted, however, all occurred inside GPT-4's box. That is, they chatted with GPT-4 but did not integrate it with external systems. They, rightfully, assessed its base intelligence.
 
-In this essay, I'll explore the engineering paradigms aimed at taking GPT-4 out of its box and augmenting its intelligence. In effect, this allows us to build AI systems capable of operating in the world and generalizing to a growing set of domains. As this paradigm continues to develop, we'll eventually achieve PASTA: a process for automating scientific and technological advancement [^2], for which we'll look at some early signs. I'll conclude with a brief discussion on the implications for AI safety.
+In this essay, I'll explore the engineering paradigms aimed at taking GPT-4 out of its box and augmenting its intelligence. In effect, this allows us to build AI systems capable of operating in the world and generalizing to a growing set of domains. As this paradigm continues to develop, we'll eventually achieve PASTA: a process for automating scientific and technological advancement[^2], for which we'll look at some early signs. I'll conclude with a brief discussion on the implications for AI safety.
 
 ## Key limitations of the base model: Does GPT-4 Need a System II?
 
-Microsoft's research highlights GPT-4's inability to plan as a key limitation of its intelligence. I think this is an important point because their consensus definition of intelligence [^3] explicitly includes planning ability. In this sense, GPT-4 falls short.
+Microsoft's research highlights GPT-4's inability to plan as a key limitation of its intelligence. I think this is an important point because their consensus definition of intelligence[^3] explicitly includes planning ability. In this sense, GPT-4 falls short.
 
 That said, this perspective might be limiting. To draw an analogy, consider Daniel Kahneman's two modes of thought: System 1 and System 2.
 
@@ -68,7 +68,7 @@ Consider a recent paper titled, "Emergent autonomous scientific research capabil
 
 I was blown away by this. To me, PASTA represents the holy grail. But there is still plenty of work to do. For one, APIs don't exist for conducting any arbitrary scientific experiment. Scientists and researchers who want to integrate AI into their workflows will have to build API wrappers around their stack, assuming they are writing code for their work, which represents another hurdle that science has yet to overcome. Though automation is a great economic incentive and I think it's likely that it pushes scientific research towards this direction. There are fields like chemistry and biology that tend to be more adapted to these tools, which I think will serve as examples for other scientific disciplines.
 
-Like the rest of science as it adopts these tools, things will start off slow; first by automating low-hanging-fruit tasks then by compounding those automations. Automated scientific research and discovery will accelerate human progress at a rate unimaginable to us today. This could mean curing all diseases, solving the climate crisis, free energy, and colonies on Mars. While there is plenty of hope for what we could achieve if things go well, the reality is there's loads of uncertainty too. Things going wrong could mean serious consequences for humanity. [^7]
+Like the rest of science as it adopts these tools, things will start off slow; first by automating low-hanging-fruit tasks then by compounding those automations. Automated scientific research and discovery will accelerate human progress at a rate unimaginable to us today. This could mean curing all diseases, solving the climate crisis, free energy, and colonies on Mars. While there is plenty of hope for what we could achieve if things go well, the reality is there's loads of uncertainty too. Things going wrong could mean serious consequences for humanity.[^7]
 
 Doing this safely
 Building AI systems that can pursue goals reliably in the world isn't trivial, but it doesn't seem like we'll be able to keep people from developing them. As pointed out by Zvi, the development of agent systems comes with important safety concerns.
@@ -83,24 +83,14 @@ Fortunately, these are programs that can be monitored and intervened upon if the
 
 Ultimately, AI agent systems have the potential to revolutionize many aspects of our lives, but their development must be pursued with a keen eye on safety. If you are developing these systems, you have a responsibility to the human race to exercise caution and minimize harm. These are crucial steps we must take in harnessing the benefits of what may be the most important technology we have ever created.
 
-## Notes
-
+### Notes
 [^1] Bubeck, S., Chandrasekaran, V., Eldan, R., Gehrke, J., Horvitz, E., Kamar, E., ... & Zhang, Y. (2023). Sparks of artificial general intelligence: Early experiments with gpt-4. arXiv preprint arXiv:2303.12712
-
 [^2] Karnofsky, Holden. (2021). Forecasting Transformative AI, Part 1: What Kind of AI?
-
 [^3] The consensus definition of intelligence used in Microsoft research comes from this statement which was drafted in 1994. Includes signatures from expert academics from universities across the U.S. It should be noted that it was sent to 131 researchers described as "experts in intelligence and allied fields". Of these, 52 signed the statement, 48 returned the request with an explicit refusal to sign, and 31 ignored the request. In 1996 the president of the American Psychological Association claimed only 10 of the signatures where from actual intelligence experts. However, the statement contains many controversial claims and, in my view their definition of intelligence is the least of t "Intelligence is a very general mental capability that, among other things, involves the ability to reason, plan, solve problems, think abstractly, comprehend complex ideas, learn quickly and learn from experience. It is not merely book learning, a narrow academic skill, or test-taking smarts. Rather, it reflects a broader and deeper capability for comprehending our surroundings—"catching on," "making sense" of things, or "figuring out" what to do."
-
 [^4] A good post from Farnam Street on System 1 and System 2 thinking.
-
 [^5] Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., & Scialom, T. (2023). Toolformer: Language models can teach themselves to use tools. arXiv preprint arXiv:2302.04761.
-
 [^6] Boiko, D. A., MacKnight, R., & Gomes, G. (2023). Emergent autonomous scientific research capabilities of large language models. arXiv preprint arXiv:2304.05332.
-
 [^7] Overview of the AI alignment problem.
-
 [^8] Post on the implications of agents like AutoGPT.
-
 [^9] Post about forecasting AI science capabilities.
-
 [^10] *Epistemic status: shoshin. ~4 years in analytics sparsely using ML. Self taught cs & ai. ~2 years tinkering with LLM projects. GPT-4 access for 1-month.*

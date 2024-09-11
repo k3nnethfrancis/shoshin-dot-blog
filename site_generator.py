@@ -42,10 +42,17 @@ def generate_index():
 
 def generate_posts():
     template = env.get_template('post.html')
-    md = markdown.Markdown(extensions=['fenced_code', 'tables', FootnoteExtension(), KatexExtension()])
     
     for filepath in os.listdir('content/posts'):
         if filepath.endswith('.md'):
+            # Create a new Markdown instance for each post
+            md = markdown.Markdown(extensions=[
+                'fenced_code', 
+                'tables', 
+                FootnoteExtension(UNIQUE_IDS=True),
+                KatexExtension()
+            ])
+            
             with open(os.path.join('content/posts', filepath), 'r', encoding='utf-8') as file:
                 content = file.read()
                 _, frontmatter, body = content.split('---', 2)
@@ -57,9 +64,6 @@ def generate_posts():
                 
                 # Remove the title from the body
                 body = re.sub(r'^#\s*.+\n', '', body, 1, re.MULTILINE)
-                
-                # We no longer need to process LaTeX separately as KatexExtension will handle it
-                # body = process_latex(body)
                 
                 html_content = md.convert(body)
                 post_filename = os.path.splitext(filepath)[0]
