@@ -1,7 +1,6 @@
 .profile-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
@@ -11,7 +10,7 @@
     overflow: hidden;
     border-radius: 15px;
     z-index: 25;
-    margin-bottom: 15px; /* Add margin to the bottom */
+    margin-right: 20px;
     flex-shrink: 0;
 }
 
@@ -23,8 +22,7 @@
 }
 
 .intro {
-    text-align: center;
-    width: 100%;
+    flex-grow: 1;
 }
 
 .intro h1 {
@@ -39,8 +37,8 @@
 .links {
     display: flex;
     gap: 15px;
-    margin: 15px 0;
-    justify-content: center; /* Center the links */
+    margin: 20px 0;
+    justify-content: flex-start; /* Change this line */
 }
 
 .links a {
@@ -83,9 +81,9 @@
 }
 
 .recent-posts .post-date {
-    color: var(--text-secondary);
     font-size: 0.8em;
     margin-left: 10px;
+    /* Remove the color property to use the default text color */
 }
 
 hr {
@@ -100,25 +98,4 @@ hr {
     object-fit: cover;
     opacity: 1;
     visibility: visible;
-}
-
-/* Add media query for larger screens */
-@media (min-width: 768px) {
-    .profile-section {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .profile-pic-container {
-        margin-right: 20px;
-        margin-bottom: 0;
-    }
-
-    .intro {
-        text-align: left;
-    }
-
-    .links {
-        justify-content: flex-start;
-    }
 }
