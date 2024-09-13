@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const texts = ["technologist", "researcher", "developer", "entrepreneur"];
-    const interests = ["ai", "memetics", "decentralized science"];
+    const interests = ["ai", "memetics", "desci"];
     let textIndex = 0;
     let interestIndex = 0;
 
