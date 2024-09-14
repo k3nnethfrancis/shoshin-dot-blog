@@ -8,13 +8,11 @@ readTime: 10 minutes
 
 It’s never been easier to build a search engine.
 
-When LLMs took off, vector embeddings followed. Now, new frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code. As it turns out, there are benefits to molding language space into coherent semantic clusters. The result of which, for these two technologies, gave birth to the answer engine[^1].
+Since the emergence of chatGPT era language models, the space of search has been dominated by vector embeddings. New frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code. As it turns out, there are benefits to molding language space into coherent semantic clusters. The merging of these two technologies gave birth to the answer engine[^1].
 
-Another reason reason adoption has been smooth is that for many cases, vector embeddings just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, we can quickly fall for demo mirages: illusions that demos will be easy to scale into production, especially across the range of inputs for your users.
+Like LLMs, much of the allure of vector embeddings is that they just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, we can quickly fall for the demo's mirage: the illusion that scaling to production won't be a problem because a demo was easy to build.
 
-In practice, production is a lot harder than building a demo. This is especially true with the current wave of AI tech. This is a feature, not a bug. The nondeterminism in LLM models suggests that the range of inputs and outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your thing really works.
-
-It's proabably good for someone building in AI to consider how “pretty-good-out-of-the-box” solutions can create these kinds of illusions.
+As it turns out, this is a feature, not a bug. Non-determinism in LLMs suggests that the range of outputs is hard to predict. Until you have enough data to derive this distribution from your user's inputs, you won’t have a broad enough set of test cases to confirm your thing really works in production. In this regard, vector embeddings aren't much different, coming with their own problems at scale that don't present themselves in smaller demos.
 
 ## Vector search and it’s problems 
 
@@ -97,11 +95,9 @@ On a personal level, I used BM25 for searching my local notes database. It lets 
 
 ## But is it really all you need?
 
-The title of this essay is a playful nod to the famous 'Attention is All You Need' paper, but the truth is BM25 isn’t always all you need—though it often comes close. Certainly it’s better to start with BM25 rather than jumping into more sophisticated patterns using vector embeddings. BM25 is a great baseline, so if your vector search can’t outperform it, you should default to using it until you can improve those results. This is much more cost effective and lower complexity to manage. There is no need to pay for a vector database or worry much about whether you have enough compute to run these algorithms at scale with concurrent users.
+The title of this post is intentionally tongue-in-cheek, but the truth is BM25 isn’t always all you need — although it often comes close. Certainly it’s better to start with BM25 rather than jumping into more sophisticated patterns using vector embeddings. BM25 is a great baseline, so if your vector search can’t outperform it, you should default to using it until you can improve those results. This is much more cost effective and lower complexity to manage. There is no need to pay for a vector database or worry much about whether you have enough compute to run these algorithms at scale with concurrent users.
 
 But even for Perplexity, BM25 is just a great way to improve their semantic search engine. Instead of just using one or the other, they use a hybrid system that gives them the best of both worlds: fast, instant results from BM25, plus a runtime re-ranker using vector embeddings for better semantic matching. 
-
-## Final thoughts
 
 In a world where we often reach for the newest, shiniest tool, BM25 reminds us of the value of tried-and-true methods. It's computationally efficient, capable of ranking entire document collections, and often surprisingly effective.
 

@@ -12,6 +12,8 @@
     z-index: 25;
     margin-right: 20px;
     flex-shrink: 0;
+    align-self: flex-end; /* Add this line to move the picture down */
+    margin-bottom: 10px; /* Add some bottom margin to fine-tune position */
 }
 
 .profile-pic {
@@ -98,4 +100,15 @@ hr {
     object-fit: cover;
     opacity: 1;
     visibility: visible;
+}
+
+/* Add a media query for mobile devices */
+@media (max-width: 767px) {
+    .profile-section {
+        align-items: flex-start; /* Align items to the start on mobile */
+    }
+
+    .profile-pic-container {
+        margin-top: 10px; /* Add some top margin on mobile */
+    }
 }
