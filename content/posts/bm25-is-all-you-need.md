@@ -8,9 +8,15 @@ readTime: 10 minutes
 
 It’s never been easier to build a search engine.
 
-Since the emergence of chatGPT era language models, the space of search has been dominated by vector embeddings. New frameworks and tools are making it easy for developers to index and search over documents in just a few lines of code. As it turns out, there are benefits to molding language space into coherent semantic clusters. The merging of these two technologies gave birth to the answer engine[^1].
+Since the emergence of chatGPT era language models, vector embeddings have dominated the search discourse. RAG frameworks and vector databases have made it easy for developers to implement a semantic search engine in just a few lines of code.
 
-Like LLMs, much of the allure of vector embeddings is that they just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. Yet like many LLM applications, we can quickly fall for the demo's mirage: the illusion that scaling to production won't be a problem because a demo was easy to build.
+The ability of LLMs to produce coherent outputs given a problem expressed over text   meant they could be taught to generate search queries. RAG systems are generally just that: an LLM that runs internal search queries, giving it more context to produce better answers.
+
+As it turns out, there are benefits to molding language space into coherent semantic clusters. The merging of these two technologies gave birth to the answer engine[^1].
+
+Like LLMs, much of the allure of vector embeddings is that they just work. When used to index a set of documents, they are remarkably good at returning the most relevant documents given an input query. This makes it really easy for the LLM to get good query results, because the meaning of the search query gets processed by the vector retriever, which pulls in anything close in semantic space. This just works really well with sets of text documents.
+
+Yet like many LLM applications, we can quickly fall for the demo's mirage: the illusion that scaling to production won't be a problem because a demo was easy to build.
 
 As it turns out, this is a feature, not a bug. Non-determinism in LLMs suggests that the range of outputs is hard to predict. Until you have enough data to derive this distribution from your user's inputs, you won’t have a broad enough set of test cases to confirm your thing really works in production. In this regard, vector embeddings aren't much different, coming with their own problems at scale that don't present themselves in smaller demos.
 
