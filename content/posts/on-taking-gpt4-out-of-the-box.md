@@ -93,4 +93,3 @@ Ultimately, AI agent systems have the potential to revolutionize many aspects of
 [^7]: Overview of the AI alignment problem.
 [^8]: Post on the implications of agents like AutoGPT.
 [^9]: Post about forecasting AI science capabilities.
-[^10]: *Epistemic status: shoshin. ~4 years in analytics sparsely using ML. Self taught cs & ai. ~2 years tinkering with LLM projects. GPT-4 access for 1-month.*
