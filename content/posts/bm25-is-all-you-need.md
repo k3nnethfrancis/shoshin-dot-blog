@@ -6,14 +6,6 @@ readTime: 10 minutes
 
 # BM25 is all you need
 
-*Background: Earlier this year, I worked on an AI-driven search product that helped users discover creative talent with natural language.*
-
-*We built a graph-based vector retrieval system that integrated with an LLM to help users run nuanced searches. The tech was fairly sophisticated, but we started running into problems as the size of our index grew. Not only did queries take too long to process, but we couldn’t reliably return more than 25 results per query. This meant that despite growing our database, users experienced slower query times and the same limitations on results.*
-
-*Dealing with the limitations of vector search algorithms can be tricky. Our users wanted lots of results, fast. We considered solutions ranging from tuning to agentic procedures. But we were a small team. We needed a simple solution that we could get working quickly. That’s when I realized we might be overcomplicating a retrieval problem that had been solved long ago.*
-
----
-
 It’s never been easier to build a search engine.
 
 Since the emergence of ChatGPT-era language models, vector embeddings have dominated the search discourse. The synergy of the these two technologies gave birth to the answer engine[^1], allowing scrappy startups like Perplexity AI to take on search grandmasters like Google.
@@ -25,6 +17,16 @@ Like LLMs, much of the allure of vector embeddings comes from the fact that they
 Yet like many LLM applications, mirages are everywhere — illusions that scaling to production won’t be hard because building a demo was easy.
 
 As it turns out, this is a feature, not a bug. Non-determinism in LLMs suggests that the range of outputs is hard to predict. Until you have enough data to derive this distribution from users, you won’t have a broad enough set of test cases to confirm your solution really works in production. In this regard, vector embeddings aren't much different, coming with their own set of problems that often don't present themselves until scaling.
+
+> <small>...</small>
+
+> <small>*Epistemics: earlier this year, I worked on an [AI-driven search product](https://noometic.com) that helped users discover creative talent with natural language.*</small>
+
+> <small>*We built a graph-based vector retrieval system that integrated with an LLM to help users run nuanced searches. The tech was fairly sophisticated, but we started running into problems as the size of our index grew. Not only did queries take too long to process, but we couldn’t reliably return more than 25 results per query. This meant that despite growing our database, users experienced slower query times and the same limitations on results.*</small> 
+
+> <small>*Dealing with the limitations of vector search algorithms can be tricky. Our users wanted lots of results, fast. We considered solutions ranging from tuning to agentic procedures. But we were a small team. We needed a simple solution that we could get working quickly. That’s when I realized we might be overcomplicating a retrieval problem that had been solved long ago...*</small>
+
+> <small>...</small>
 
 ## Vector search and it’s problems 
 
@@ -66,11 +68,11 @@ BM25, also known as Okapi BM25, is a ranking function used in information retrie
 
 While BM25 shares similarities with TF-IDF—both consider term frequency and inverse document frequency—it originates from a different theoretical foundation. BM25 refines these concepts within a probabilistic model to calculate document relevance more effectively. The algorithm introduces flexibility and nuance by considering not just the frequency of terms but also the length of documents and adjusting for the diminishing returns of term frequency. This means that each additional occurrence of a term contributes less to the relevance score than the previous one, preventing term frequency from disproportionately influencing the ranking.
 
-Here's a simplified version[^6] of how it calculates the relevance score for a document:
+Here's a simplified version of how it calculates the relevance score for a document[^6]:
 
-$$
+<p>$$
 \text{score}(D,Q) = \sum \text{IDF}(q_i) \cdot \frac{f(q_i,D) \cdot (k_1 + 1)}{f(q_i,D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{\text{avgdl}})}
-$$
+$$</p>
 
 Where:
 
@@ -86,11 +88,7 @@ Central to BM25 are two parameters, **k₁** and **b**, which allow for fine-tun
 - **k₁** controls the saturation of term frequency; it dictates how quickly the impact of term frequency increases and then levels off, reflecting the diminishing returns of repetitive terms.
 - **b** manages document length normalization; it adjusts the extent to which document length influences the score, ensuring that longer documents are neither unfairly favored nor penalized.
 
-This adaptable approach makes BM25 suitable for a wide range of applications, including large-scale web search engines. Its computational efficiency enables it to process substantial document collections using relatively modest hardware resources compared to more complex algorithms.
-
-In essence, BM25 calculates a relevance score by cohesively balancing term frequency, inverse document frequency, and document length. It gives higher weight to rare terms (through IDF), accounts for the diminishing returns of term frequency, and normalizes based on document length. By summing these scores for all terms in the query, BM25 effectively ranks documents according to their relevance.
-
-By applying this method to every document in your corpus, BM25 efficiently ranks them based on their relevance to the query, making it a powerful and adaptable tool for information retrieval tasks.
+In essence, BM25 calculates a relevance score by cohesively balancing term frequency, inverse document frequency, and document length. It gives higher weight to rare terms (through IDF), accounts for the diminishing returns of term frequency, and normalizes based on document length. This adaptable approach makes BM25 suitable for a wide range of applications, including large-scale web search engines. Its computational efficiency enables it to process substantial document collections using relatively modest hardware resources compared to more complex algorithms.
 
 ## Trade-offs
 

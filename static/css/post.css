@@ -8,16 +8,31 @@
     padding: 20px 0;
 }
 
+nav {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--text-primary);
+}
+
 .post-title {
     font-size: 2.5rem;
     color: var(--highlight);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .post-metadata {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
 }
 
 .metadata-item {
@@ -29,7 +44,7 @@
     max-height: 400px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .post-content {
@@ -81,4 +96,24 @@
 .footnote-ref {
     font-size: 0.8em;
     vertical-align: super;
+}
+
+.post-nav {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.post-nav a {
+    color: #888;
+    text-decoration: none;
+}
+
+.post-nav a:hover {
+    color: #fff;
+}
+
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1em 0;
 }
