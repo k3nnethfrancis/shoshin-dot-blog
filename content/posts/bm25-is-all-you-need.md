@@ -106,8 +106,6 @@ BM25 shines in scenarios where precision and recall are paramount. For instance,
 
 If still you don’t believe me, just ask Perplexity CEO Aravind Srinivas, who recently shared his take on the Lex Friedman podcast[^7]: the biggest search competitor to Google is using BM25.
 
-I've had my own use cases for BM25, so I can attest to its suprising effectiveness as a swap in for vector search in RAG applications. It's used in a creator discovery [product](https://noometic.com) I previously co-developed, as well as for local use cases, like searching my obsidian directory. For both these cases, BM25 lets me retrieve high volumes of documents at fast speeds, with reindexing in less than a minute on my mac studio and hardly has any noticable effect on RAG performance, as far as I can tell.
-
 ## But is it really all you need?
 
 The title of this post is intentionally tongue-in-cheek, but the truth is BM25 isn’t always all you need—although it often comes close. Certainly, it’s better to start with BM25 rather than jumping into more sophisticated patterns using vector embeddings. BM25 is a great baseline, so if your vector search can’t outperform it, you should default to using it until you can improve those results. This is much more cost-effective and lower complexity to manage. There is no need to pay for a vector database or worry much about whether you have enough compute to run these algorithms at scale with concurrent users.
