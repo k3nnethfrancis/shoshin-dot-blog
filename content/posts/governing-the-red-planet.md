@@ -1,6 +1,6 @@
 ---
 date: 2022-04-15
-tags: [space, crypto, decentralization]
+tags: [space, web3]
 readTime: 7 minutes
 ---
 

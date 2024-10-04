@@ -1,6 +1,6 @@
 ---
 date: 2022-06-03
-tags: [science, web3, open source, culture]
+tags: [science, web3, open source]
 readTime: 7 minutes
 ---
 

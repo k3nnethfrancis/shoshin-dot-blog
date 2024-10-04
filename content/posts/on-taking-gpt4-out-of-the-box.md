@@ -1,6 +1,6 @@
 ---
 date: 2023-05-02
-tags: [ai, philosophy, science]
+tags: [ai, philosophy]
 readTime: 7 minutes
 ---
 
