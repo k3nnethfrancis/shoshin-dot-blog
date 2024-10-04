@@ -125,4 +125,4 @@ Ultimately, the right search solution depends on your specific use case. But don
 [^4]: [The OKAPI Information Retrieval System](https://smcse.city.ac.uk/doc/cisr/web/okapi/okapi.html)
 [^5]: [History of the Okapi BM25 Algorithm](https://www.perplexity.ai/page/history-of-the-okapi-bm25-algo-ap40DDZKTUWu73bgcZ9FhA)
 [^6]: [What is BM25?](https://pub.aimind.so/understanding-the-bm25-ranking-algorithm-19f6d45c6ce)
-[^7]: [Perplexity CEO on Lex Friedman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)
+[^7]: [Perplexity CEO on Lex Fridman Podcast](https://youtu.be/e-gwvmhyU7A?si=jcxhNX58t9V_Vl9A&t=6987)

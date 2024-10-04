@@ -1,27 +1,28 @@
-:root {
-    --background: #161A3C;
-    --background-medium: #2D3142;
-    --text-primary: #9097C0;
-    --text-secondary: #FBFFF1;
-    --highlight: #EB5160;
-    --link-color: #FBFFF1;
-  }
+  :root {
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --accent-color: #4a4a4a;
+    --highlight: #E63946; /* Keeping the muted red for highlights */
+    --border-color: #e0e0e0;
+    --text-secondary: #666;
+}
   
   body {
-    font-family: 'Fira Code', monospace;
+    /* font-family: 'Inter', sans-serif; New font */
+    font-family: 'JetBrains Mono', monospace;
     line-height: 1.6;
     color: var(--text-primary);
     background-color: var(--background);
     margin: 0;
-    padding: 20px;
+    padding: 40px 20px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
   
   .content-wrapper {
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
   }
   
@@ -32,51 +33,35 @@
   }
   
   h1, h2 {
-    color: var(--highlight);
-    margin-bottom: 10px;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-weight: 600;
   }
   
   h2::before {
-    content: "> ";
+    content: none; /* Remove the ">" prefix */
   }
   
   a {
     color: var(--link-color);
     text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
   }
   
   a:hover {
     color: var(--highlight);
-    text-decoration: underline;
+    border-bottom-color: var(--highlight);
+    text-decoration: none !important; /* Add this line */
   }
   
-  /* CRT effect and scanlines */
-  .crt-effect {
-    animation: flicker 0.15s infinite;
-    background: linear-gradient(var(--background) 50%, #000 50%);
-    background-size: 100% 4px;
-    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+  /* Remove CRT effect and scanlines */
+  .crt-effect, body::after {
+    display: none;
   }
   
-  @keyframes flicker {
-    0% { opacity: 0.97; }
-    100% { opacity: 1; }
-  }
-  
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.03),
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    pointer-events: none;
-    z-index: 9999;
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
   }

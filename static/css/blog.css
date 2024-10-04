@@ -13,13 +13,13 @@
 
 .blog-meta {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--accent-color);
     margin-bottom: 1rem;
 }
 
 .blog-content {
     line-height: 1.6;
-    color: var(--text-primary);
+    color: var(--text-color);
 }
 
 /* Blog post list styles */
@@ -60,7 +60,8 @@
 }
 
 body {
-    font-family: 'Fira Code', monospace;
+    /* font-family: 'Fira Code', monospace; */
+    /* font-family: 'JetBrains Mono', monospace; */
     background-color: var(--background);
     color: var(--text-primary);
     line-height: 1.6;
@@ -73,19 +74,20 @@ body {
 }
 
 .container {
+    color: var(--accent-color);
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
 header h1 {
-    color: var(--highlight);
+    color: var(--accent-color);
     font-size: 2em;
     margin-bottom: 10px;
 }
 
 nav a {
-    color: var(--link-color);
+    color: var(--text-secondary);
     text-decoration: none;
 }
 
@@ -104,6 +106,7 @@ nav a:hover {
 }
 
 .post-item {
+    color: var(--text-primary);
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -113,15 +116,15 @@ nav a:hover {
 .post-title {
     font-size: 1em;
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .post-title a {
-    color: inherit;
     text-decoration: none;
+    color: var(--text-primary);
 }
 
 .post-title a:hover {
@@ -130,7 +133,7 @@ nav a:hover {
 
 .post-metadata {
     font-size: 0.9em;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     white-space: nowrap;
     margin-left: 20px;
 }

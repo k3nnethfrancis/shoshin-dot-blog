@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}shoshin.blog{% endblock %}
+{% block title %}kenneth cavanagh{% endblock %}
 
 {% block additional_css %}
 <link rel="stylesheet" href="/static/css/home.css">
@@ -8,38 +8,34 @@
 
 {% block content %}
 <div class="content-wrapper">
-    <header>
-        <div class="profile-section">
-            <div class="profile-pic-container">
-                <img src="/static/images/pfp/profile.png" alt="kenneth's pfp" class="profile-image">
-            </div>
-            <div class="intro">
-                <h1>> hello_</h1>
-                <p>i'm ken. i'm a <span id="dynamic-text" class="dynamic-text" aria-live="polite"></span></p>
-                <p>interested in <span id="dynamic-interest" class="dynamic-text" aria-live="polite"></span></p>
-            </div>
+    <header class="profile-section">
+        <img src="/static/images/pfp/pfp.png" alt="ken's blog" class="profile-image">
+        <div class="profile-info">
+            <h1>> ken_</h1>
+            <p class="subtitle">industrial psychologist · technologist · ai developer</p>
+            <nav class="profile-links">
+                <a href="/blog.html" class="profile-link">blog</a>
+                <a href="https://x.com/local0ptimist" target="_blank" rel="noopener noreferrer" class="profile-link">x</a>
+                <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="profile-link">github</a>
+                <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="profile-link">consulting</a>
+            </nav>
         </div>
     </header>
-    <nav class="links">
-        <a href="https://github.com/k3nnethfrancis">[github]</a>
-        <a href="https://x.com/local0ptimist">[x dot com]</a>
-        <a href="/listings.html">[blog]</a>
-        <a href="https://agency42.co">[agency42]</a>
-    </nav>
-    <hr>
+    
     <main>
-        <section class="bio">
-            <p>i'm a technologist interested in ai systems, memetics, decentralized science and other fringe levers for change.</p>
-            <p>shoshin (<a href="https://www.perplexity.ai/page/what-are-shoshin-s-origins-and-mMe2o1vdRnSWsNV3ChiQ_g">初心</a>) is the zen buddhists term for beginner's mind. it serves as a reminder for embodying humility and curiosity in everything we do.</p>
+        <section class="about">
+            <h2></h2>
+            <p>I'm an industrial psychologist by training and a creative technologist at heart. I led operations analytics at spacex for 3 years before getting into startups. I previously co-created talentDAO and noometic AI. I'm currently integrating AI into at-home medical devices for [stealth].</p>
+            <p>This blog is a repository of some of my better ideas. Shoshin (初心) is the zen buddhists term for beginner's mind. It is as a reminder for embodying humility and curiosity in everything I do.</p>
         </section>
-        <hr>
-        <section class="recent-posts">
-            <h2>recent posts_</h2>
-            <ul>
+        
+        <section class="essays">
+            <h2>Recent Posts</h2>
+            <ul class="post-list">
                 {% for post in recent_posts %}
-                <li>
-                    <a href="/post/{{ post.filename }}.html">{{ post.title }}</a>
+                <li class="post-item">
                     <span class="post-date">{{ post.date }}</span>
+                    <a href="/post/{{ post.filename }}.html" class="post-title">{{ post.title }}</a>
                 </li>
                 {% endfor %}
             </ul>

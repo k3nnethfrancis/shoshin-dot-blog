@@ -77,15 +77,12 @@ def generate_posts():
                 with open(f'output/post/{post_filename}.html', 'w', encoding='utf-8') as output_file:
                     output_file.write(html)
 
-# We can remove the process_latex function as it's no longer needed
-# def process_latex(content):
-#     ...
-    
-def generate_listings():
-    template = env.get_template('listings.html')
+
+def generate_blog_listings():
+    template = env.get_template('blog.html')
     posts = read_markdown_files()
     html = template.render(posts=posts)
-    with open('output/listings.html', 'w', encoding='utf-8') as file:
+    with open('output/blog.html', 'w', encoding='utf-8') as file:
         file.write(html)
 
 def generate_skilltree():
@@ -97,12 +94,12 @@ def generate_skilltree():
 def main():
     os.makedirs('output', exist_ok=True)
     generate_index()
-    generate_listings()
+    generate_blog_listings()
     generate_posts()
-    generate_skilltree()
+    # generate_skilltree()
     
     # Copy static files to output directory
-    shutil.copytree('static', 'output/static', dirs_exist_ok=True)
+    copy_static_files()
     
     # Copy CNAME file to output directory
     shutil.copy('CNAME', 'output/CNAME')
@@ -112,6 +109,9 @@ def main():
         pass
     
     print("Static site generated successfully.")
+
+def copy_static_files():
+    shutil.copytree('static', 'output/static', dirs_exist_ok=True)
 
 if __name__ == "__main__":
     main()
