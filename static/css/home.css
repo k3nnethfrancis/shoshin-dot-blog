@@ -16,35 +16,43 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .profile-info h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin: 0 0 5px 0;
 }
 
 .subtitle {
     font-size: 16px;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
+    color: #666;
 }
 
 .profile-links {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .profile-link {
     font-size: 14px;
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-link:hover {
+    text-decoration: underline;
 }
 
 .about, .essays {
@@ -80,11 +88,16 @@ body {
     .profile-section {
         flex-direction: row;
         text-align: left;
+        align-items: flex-start;
     }
 
     .profile-image {
         margin-right: 30px;
         margin-bottom: 0;
+    }
+
+    .profile-info {
+        flex: 1;
     }
 
     .profile-links {
