@@ -1,4 +1,5 @@
 import os
+import argparse
 from dotenv import load_dotenv
 from openai import OpenAI
 from anthropic import Anthropic
@@ -30,7 +31,7 @@ def generate_image_prompt(post_content, client='openai'):
         "Given the content of a blog post, create a concise and vivid prompt for "
         "an image that captures the essence of the post. The prompt should be "
         "suitable for an AI image generation model like DALL-E. "
-        "Styles we like are glitch, pixel art, and retro, bladerunner, and cyberpunk, trippy, and renaissance surreal."
+        "Styles we like are glitch, pixel art, retro, manga, 70s pulp comic, and solarpunk, monochrom with splashes of color."
     )
     if client == 'anthropic':
         response = anthropic_client.messages.create(
@@ -84,6 +85,7 @@ def generate_and_save_image(prompt, filename):
     
     # Save the cropped image
     img_path = f"static/images/posts/{filename}.png"
+    cropped_img.save(img_path)
     
     logging.info(f"Image saved: {img_path}")
     return img_path
@@ -99,23 +101,87 @@ def generate_post_image(post_content, post_title):
     img_path = generate_and_save_image(prompt, sanitized_title)
     return img_path
 
-def process_all_posts():
+def process_post(file_path, force=False):
+    """Process a single post file."""
+    logging.info(f"Processing file: {file_path}")
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+        _, frontmatter, body = content.split('---', 2)
+        metadata = yaml.safe_load(frontmatter)
+        title = metadata.get('title', os.path.splitext(os.path.basename(file_path))[0])
+        
+        existing_image = metadata.get('image')
+        if existing_image and not force:
+            logging.info(f"Image already exists for {title}. Skipping.")
+            return
+        
+        logging.info(f"Generating image for post: {title}")
+        img_path = generate_post_image(body, title)
+        
+        # Update the frontmatter with the generated image path
+        metadata['image'] = '/' + img_path
+        updated_frontmatter = yaml.dump(metadata, default_flow_style=False)
+        
+        # Write the updated content back to the file
+        updated_content = f"---\n{updated_frontmatter}---\n{body}"
+        with open(file_path, 'w', encoding='utf-8') as updated_file:
+            updated_file.write(updated_content)
+        
+        logging.info(f"Updated frontmatter for {title} with new image path: {img_path}")
+
+def process_all_posts(force=False):
     """Process all markdown files in the posts directory."""
-    posts_dir = 'posts'
+    posts_dir = 'content/posts'
     for filename in os.listdir(posts_dir):
         if filename.endswith('.md'):
-            logging.info(f"Processing file: {filename}")
             file_path = os.path.join(posts_dir, filename)
-            with open(file_path, 'r', encoding='utf-8') as file:
-                content = file.read()
-                _, frontmatter, body = content.split('---', 2)
-                metadata = yaml.safe_load(frontmatter)
-                title = metadata.get('title', os.path.splitext(filename)[0])
-                
-                logging.info(f"Generating image for post: {title}")
-                generate_post_image(body, title)
+            process_post(file_path, force)
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate images for blog posts.")
+    parser.add_argument("--all", action="store_true", help="Generate images for all posts")
+    parser.add_argument("--force", action="store_true", help="Force regeneration of images even if they already exist")
+    parser.add_argument("--posts", nargs="+", help="Generate images for specific posts (provide filenames)")
+    parser.add_argument("--missing", action="store_true", help="Generate images only for posts without existing images")
+    parser.add_argument("--luxury-constraints", action="store_true", help="Generate image for luxury-constraints post")
+
+    args = parser.parse_args()
+
+    posts_dir = 'content/posts'
+
+    if args.luxury_constraints:
+        file_path = os.path.join(posts_dir, "luxury-constraints.md")
+        if os.path.exists(file_path):
+            process_post(file_path, force=True)
+        else:
+            logging.error(f"Post file not found: luxury-constraints.md")
+    elif args.all:
+        logging.info("Generating images for all posts")
+        for filename in os.listdir(posts_dir):
+            if filename.endswith('.md'):
+                file_path = os.path.join(posts_dir, filename)
+                process_post(file_path, force=args.force)
+    elif args.posts:
+        logging.info(f"Generating images for specified posts: {args.posts}")
+        for post in args.posts:
+            file_path = os.path.join(posts_dir, post)
+            if os.path.exists(file_path):
+                process_post(file_path, force=args.force)
+            else:
+                logging.warning(f"Post file not found: {post}")
+    elif args.missing:
+        logging.info("Generating images for posts without existing images")
+        for filename in os.listdir(posts_dir):
+            if filename.endswith('.md'):
+                file_path = os.path.join(posts_dir, filename)
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    content = file.read()
+                    _, frontmatter, _ = content.split('---', 2)
+                    metadata = yaml.safe_load(frontmatter)
+                    if 'image' not in metadata:
+                        process_post(file_path, force=False)
+    else:
+        logging.error("No action specified. Use --all, --posts, or --missing")
 
 if __name__ == "__main__":
-    logging.info("Starting image generation process")
-    process_all_posts()
-    logging.info("Image generation process completed")
+    main()

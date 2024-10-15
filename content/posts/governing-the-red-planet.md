@@ -1,8 +1,12 @@
 ---
 date: 2022-04-15
-tags: [space, web3]
+image: /static/images/posts/governing-the-red-planet.png
 readTime: 7 minutes
+tags:
+- space
+- web3
 ---
+
 
 # Governing the red planet
 

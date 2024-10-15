@@ -7,6 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 from markdown.extensions import fenced_code, tables
 from markdown.extensions.footnotes import FootnoteExtension
 from markdown_katex import KatexExtension
+from custom_markdown_extension import FigureExtension
 
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader('templates'))
@@ -50,7 +51,8 @@ def generate_posts():
                 'fenced_code', 
                 'tables', 
                 FootnoteExtension(UNIQUE_IDS=True),
-                KatexExtension()
+                KatexExtension(),
+                FigureExtension()
             ])
             
             with open(os.path.join('content/posts', filepath), 'r', encoding='utf-8') as file:
@@ -65,8 +67,12 @@ def generate_posts():
                 # Remove the title from the body
                 body = re.sub(r'^#\s*.+\n', '', body, 1, re.MULTILINE)
                 
-                html_content = md.convert(body)
                 post_filename = os.path.splitext(filepath)[0]
+                
+                # Copy images and update their paths
+                body = copy_post_images(body, post_filename)
+                
+                html_content = md.convert(body)
                 html = template.render(
                     title=title,
                     content=html_content,
@@ -77,6 +83,18 @@ def generate_posts():
                 with open(f'output/post/{post_filename}.html', 'w', encoding='utf-8') as output_file:
                     output_file.write(html)
 
+def copy_post_images(content, post_filename):
+    img_pattern = r'!\[.*?\]\((.*?)\)'
+    matches = re.findall(img_pattern, content)
+    
+    for img_path in matches:
+        src_path = os.path.join('content', img_path.lstrip('/'))
+        dst_dir = os.path.join('output', 'static', 'images', 'posts', post_filename)
+        os.makedirs(dst_dir, exist_ok=True)
+        dst_path = os.path.join(dst_dir, os.path.basename(img_path))
+        shutil.copy(src_path, dst_path)
+    
+    return content.replace('](/images/', f'](/static/images/posts/{post_filename}/')
 
 def generate_blog_listings():
     template = env.get_template('blog.html')
