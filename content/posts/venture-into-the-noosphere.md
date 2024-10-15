@@ -27,15 +27,12 @@ These days, it's as if we're all dipping into the same memetic pool. We're at a 
 
 As a 90s kid working in tech, I'm deeply entrenched in these ideas. I've watched the internet develop from the Kid Goku days of screeching dial-up to Super Saiyan web3 on virtual reality, blockchain, and artificial intelligence.
 
+![The internet in the 90s [depicted as Kid Goku]](/images/kidgoku.png)
 
-The internet in the 90s [depicted as Kid Goku]
 For people like me, the internet is culture.
 
-I believe we are witnessing the next phase of human evolution towards the noosphere.
+I believe we are witnessing the next phase of human evolution towards the noosphere. One where DAOs could play an important role.
 
-DAOs are the next phase of evolution towards the noosphere
-
-— k3nn.eth (@k3nnethfrancis) February 4, 2022
 The 'noosphere' is an idea popularized by Pierre Teilhard de Chardin with his book, The Phenomenon of Man. It describes a product of evolution where human consciousness reflects an increasingly connected hive mind – a sort of thought biosphere.
 
 I find the noosphere interesting because it represents the stage of evolution where consciousness as we know it is no longer a singular phenomenon. One of Teilhard's points, however, is that it never really was.

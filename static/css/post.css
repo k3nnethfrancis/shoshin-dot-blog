@@ -60,9 +60,11 @@ nav a:hover {
 
 .post-content img {
     max-width: 100%;
+    width: auto;
     height: auto;
+    max-height: 400px;
     display: block;
-    margin: 0 auto;
+    margin: 2rem auto;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -76,12 +78,14 @@ nav a:hover {
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
+    .post-content img,
     .post-content figure {
         max-width: 80%;
     }
 }
 
 @media (min-width: 1024px) {
+    .post-content img,
     .post-content figure {
         max-width: 70%;
     }
@@ -95,9 +99,16 @@ nav a:hover {
 
 /* Optional: For extra-large screens */
 @media (min-width: 1440px) {
+    .post-content img,
     .post-content figure {
         max-width: 60%;
     }
+}
+
+/* Ensure images don't exceed their natural size */
+.post-content img {
+    max-width: 100% !important;
+    height: auto !important;
 }
 
 .back-link {
@@ -166,10 +177,63 @@ nav a:hover {
     padding: 1em 0;
 }
 
+/* Main post hero image */
 .post-hero-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
+    width: 100% !important;
+    max-height: 400px !important;
+    object-fit: cover !important;
+    margin-bottom: 1.5rem !important;
+    border-radius: 8px !important;
+}
+
+/* Image container for centering */
+.image-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 2rem 0 !important;
+}
+
+/* Content images */
+.post-content .image-container img {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Figure and caption styling */
+.post-content figure {
+    margin: 0 !important;
+    text-align: center !important;
+    max-width: 100% !important;
+}
+
+.post-content figcaption {
+    margin-top: 0.5rem !important;
+    font-size: 0.9em !important;
+    color: #666 !important;
+    font-style: italic !important;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .post-content .image-container {
+        max-width: 80% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .post-content .image-container {
+        max-width: 70% !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    .post-content .image-container {
+        max-width: 60% !important;
+    }
 }

@@ -29,6 +29,15 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('.post-content img').forEach(img => {
+                img.style.maxWidth = '100%';
+                img.style.height = 'auto';
+                img.style.maxHeight = '400px';
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="content-wrapper">

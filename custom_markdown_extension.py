@@ -11,11 +11,18 @@ class FigureTreeprocessor(Treeprocessor):
         children = list(element)
         for child in children:
             if child.tag == 'img':
-                figure = SubElement(element, 'figure')
-                element.remove(child)
-                figure.append(child)
+                # Create a new div for centering
+                center_div = SubElement(element, 'div')
+                center_div.set('class', 'image-container')
+                
+                # Create figure inside the centering div
+                figure = SubElement(center_div, 'figure')
                 caption = SubElement(figure, 'figcaption')
                 caption.text = child.get('alt')
+                
+                # Move the image into the figure
+                element.remove(child)
+                figure.insert(0, child)
             else:
                 self.process_element(child)
 
