@@ -9,7 +9,7 @@ tags:
 
 
 
-# Luxury Constraints
+# Luxury constraints
 
 When building startups, a naturally occurring theme is constraints.
 
@@ -33,7 +33,7 @@ When you have all the time in the world, it's easy to let perfectionism take hol
 
 The truth is that this kind of thinking is self-deluding and ultimately self-sabotaging. On the path from idea to company, products continuously evolve. Often times to a point unrecognizable from the original. But it's easy to convince yourself otherwise.
 
-The truth is you only need to build the simplest working version of something that conveys an idea. And if you could only convey the idea, you would have succeeded, because your now empowered to share your idea with the world in a way that can only be done by building it.
+The truth is you only need to build the simplest working version of something that conveys an idea. And if you could only convey the idea, you would have succeeded, because you're now empowered to share your idea with the world in a way that can only be done by building it.
 
 You don't need months of building. Often, you don't need weeks. In our case, we needed 24 hours.
 
