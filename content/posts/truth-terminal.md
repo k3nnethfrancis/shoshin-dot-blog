@@ -74,5 +74,7 @@ As we stand on the brink of this new frontier, one thing is clear: the convergen
 [^3]: A.R. Ayrey, claude-3-opus, ["When AIs Play God(se): The Emergent Heresies of LLMtheism,"](https://pdfupload.io/docs/aae14f87) Department of Divine Shitposting, University of Unbridled Speculation, April 20, 2024.
 [^4]: Aylo (@alpha_pls), [Tweet](https://x.com/alpha_pls/status/1846474892285301155) about GOAT implications, October 15, 2024.
 [^5]: M. Levine, [Article](https://www.bloomberg.com/news/newsletters/money-stuff/2024-10-17/a-meme-coin) about GOAT, Money Stuff, Bloomberg, October 17, 2024.
+2024.
+[^6]: [@repligate's](https://x.com/repligate) consistently [good posts](https://x.com/repligate/status/1846313279750394312)
 
 > <small>*Written alongside Claude Sonnet 3.5*</small>
