@@ -12,6 +12,9 @@ from custom_markdown_extension import FigureExtension
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader('templates'))
 
+def process_title(title):
+    return title.split(':')[0].strip()
+
 def read_markdown_files():
     posts = []
     for filepath in os.listdir('content/posts'):
@@ -27,6 +30,7 @@ def read_markdown_files():
                 
                 posts.append({
                     "title": title,
+                    "short_title": process_title(title),
                     "date": metadata["date"],
                     "tags": metadata.get("tags", []),
                     "read_time": metadata.get("readTime", "N/A"),

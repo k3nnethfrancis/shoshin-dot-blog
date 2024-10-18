@@ -37,7 +37,7 @@
                 {% for post in recent_posts %}
                 <li class="post-item">
                     <span class="post-date">{{ post.date }}</span>
-                    <a href="/post/{{ post.filename }}.html" class="post-title">{{ post.title }}</a>
+                    <a href="/post/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>
                 </li>
                 {% endfor %}
             </ul>
