@@ -1,5 +1,5 @@
 ---
-date: 2024-10-17
+date: 2024-10-18
 image: /static/images/posts/truth-terminal.png
 readTime: 4 minutes
 tags:
