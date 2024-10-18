@@ -141,21 +141,14 @@ def main():
     parser = argparse.ArgumentParser(description="Generate images for blog posts.")
     parser.add_argument("--all", action="store_true", help="Generate images for all posts")
     parser.add_argument("--force", action="store_true", help="Force regeneration of images even if they already exist")
-    parser.add_argument("--posts", nargs="+", help="Generate images for specific posts (provide filenames)")
+    parser.add_argument("--posts", nargs="+", help="Generate images for specific posts (provide filenames or base names)")
     parser.add_argument("--missing", action="store_true", help="Generate images only for posts without existing images")
-    parser.add_argument("--luxury-constraints", action="store_true", help="Generate image for luxury-constraints post")
 
     args = parser.parse_args()
 
     posts_dir = 'content/posts'
 
-    if args.luxury_constraints:
-        file_path = os.path.join(posts_dir, "luxury-constraints.md")
-        if os.path.exists(file_path):
-            process_post(file_path, force=True)
-        else:
-            logging.error(f"Post file not found: luxury-constraints.md")
-    elif args.all:
+    if args.all:
         logging.info("Generating images for all posts")
         for filename in os.listdir(posts_dir):
             if filename.endswith('.md'):
@@ -164,13 +157,16 @@ def main():
     elif args.posts:
         logging.info(f"Generating images for specified posts: {args.posts}")
         for post in args.posts:
+            if not post.endswith('.md'):
+                post += '.md'
             file_path = os.path.join(posts_dir, post)
             if os.path.exists(file_path):
                 process_post(file_path, force=args.force)
             else:
                 logging.warning(f"Post file not found: {post}")
     elif args.missing:
-        logging.info("Generating images for posts without existing images")
+        logging.info("Checking for posts without existing images")
+        missing_images_count = 0
         for filename in os.listdir(posts_dir):
             if filename.endswith('.md'):
                 file_path = os.path.join(posts_dir, filename)
@@ -180,6 +176,12 @@ def main():
                     metadata = yaml.safe_load(frontmatter)
                     if 'image' not in metadata:
                         process_post(file_path, force=False)
+                        missing_images_count += 1
+        
+        if missing_images_count == 0:
+            logging.info("No missing images found. All posts have images.")
+        else:
+            logging.info(f"Generated images for {missing_images_count} posts.")
     else:
         logging.error("No action specified. Use --all, --posts, or --missing")
 

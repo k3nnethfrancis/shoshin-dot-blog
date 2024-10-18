@@ -1,8 +1,13 @@
 ---
 date: 2024-09-01
-tags: [ai, technology]
+image: /static/images/posts/bm25-is-all-you-need.png
 readTime: 10 minutes
+tags:
+- ai
+- technology
 ---
+
+
 
 # BM25 is all you need
 

@@ -1,8 +1,12 @@
 ---
 date: 2023-10-24
-tags: [ai, philosophy]
+image: /static/images/posts/on-taking-gpt4-out-of-the-box.png
 readTime: 7 minutes
+tags:
+- ai
+- philosophy
 ---
+
 
 # On taking gpt-4 out of the box
 

@@ -1,8 +1,13 @@
 ---
 date: 2021-05-23
-tags: [philosophy, psychology, ar/vr]
+image: /static/images/posts/extended-mind.png
 readTime: 2 minutes
+tags:
+- philosophy
+- psychology
+- ar/vr
 ---
+
 
 # Work systems and the extended mind
 

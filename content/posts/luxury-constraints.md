@@ -1,10 +1,8 @@
 ---
 date: 2024-10-14
 image: /static/images/posts/luxury-constraints.png
+tags: [startups, innovation]
 readTime: 2 minutes
-tags:
-- startups
-- innovation
 ---
 
 

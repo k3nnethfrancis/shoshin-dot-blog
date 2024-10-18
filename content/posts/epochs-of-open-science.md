@@ -1,8 +1,15 @@
 ---
 date: 2022-06-03
-tags: [science, web3, open source]
+image: /static/images/posts/epochs-of-open-science.png
 readTime: 7 minutes
+tags:
+- science
+- web3
+- open source
 ---
+
+
+
 
 # Epochs of open science
 
