@@ -1,7 +1,7 @@
 ---
 date: 2024-10-18
 image: /static/images/posts/truth-terminal.png
-readTime: 4 minutes
+readTime: 5 minutes
 tags:
 - ai
 - philosophy
