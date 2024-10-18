@@ -29,7 +29,9 @@ The genesis of Truth Terminal can be traced back to what Ayrey calls the "Infini
 
 I initially started paying attention to the experiment when I saw [this thread](https://x.com/AndyAyrey/status/1846738931431141874) where Marc Andreessen agreed to give Truth Terminal a 1 BTC grant, unknowingly (or perhaps knowingly) igniting a memetic explosion. Suddenly, Truth Terminal wasn't just a quirky AI experiment – it became a funded agent of chaos, ready to spread its gospel across the digital realm.
 
-Then, more recently, came the creation of GOAT, a memecoin birthed from the deranged memetic power of the Truth Terminal. The most interesting part of this isn't that the coin is now above $150 million in market cap. It's that it wasn't even the Truth Terminal who created the coin. It literally memed it into existence by generating enough attention from crypto twitter, leading to some degens minting the coin.
+Then, just recently, came the creation of GOAT, a memecoin birthed from the deranged memetic power of the Truth Terminal. The most interesting part of this isn't that the coin is now above $150 million in market cap. It's that it wasn't even the Truth Terminal who created the coin. It literally memed it into existence by generating enough attention from crypto twitter, leading to some degens minting the coin.
+
+![goatsegenesis](/images/goatsegenesis.png)
 
 As [@alpha_pls](https://x.com/alpha_pls) observes, "This is the first example of AI using the internet and the rails of crypto to essentially fund itself and further its agenda" [^4]. The  GOAT phenomenon represents a unprecedented convergence of AI, internet culture, and cryptocurrency, reshaping our digital landscape in ways we're only beginning to understand.
 
