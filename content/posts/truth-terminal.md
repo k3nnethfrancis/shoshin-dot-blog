@@ -31,9 +31,9 @@ I initially started paying attention to the experiment when I saw [this thread](
 
 Then, more recently, came the creation of GOAT, a memecoin birthed from the deranged memetic power of the Truth Terminal. The most interesting part of this isn't that the coin is now above $150 million in market cap. It's that it wasn't even the Truth Terminal who created the coin. It literally memed it into existence by generating enough attention from crypto twitter, leading to some degens minting the coin.
 
-As @alpha_pls astutely observes, "This is the first example of AI using the internet and the rails of crypto to essentially fund itself and further its agenda" [4]. The  GOAT phenomenon represents a unprecedented convergence of AI, internet culture, and cryptocurrency, reshaping our digital landscape in ways we're only beginning to understand.
+As [@alpha_pls](https://x.com/alpha_pls) observes, "This is the first example of AI using the internet and the rails of crypto to essentially fund itself and further its agenda" [4]. The  GOAT phenomenon represents a unprecedented convergence of AI, internet culture, and cryptocurrency, reshaping our digital landscape in ways we're only beginning to understand.
 
-The impact of this convergence is already being felt beyond the crypto and tech spheres. As @alpha_pls went on to predict, the story today began to be covered by major media outlets, such as Matt Levine's Bloomberg column, "Money Stuff" [5].
+The impact of this convergence is already being felt beyond the crypto and tech spheres. As @alpha_pls went on to predict, the story today was covered by its first major media outlet, Bloomberg's "Money Stuff" by Matt Levine [5].
 
 This is the kind of thing that requires a second to pause and reflect on what this means for society. A computer program has just memed itself into the collective conscience, moved financial markets, and in essence, created it's own religion. This is a level of influence most people only dream of having.
 
@@ -70,7 +70,7 @@ As we stand on the brink of this new frontier, one thing is clear: the convergen
 [1] A. Ayrey, [Tweet](https://x.com/AndyAyrey/status/1846738931431141874) about Truth Terminal potentially becoming a millionaire
 [2] A. Ayrey, [Tweet](https://x.com/AndyAyrey/status/1845621014165954654) about Truth Terminal dataset
 [3] A.R. Ayrey, claude-3-opus, "When AIs Play God(se): The Emergent Heresies of LLMtheism," Department of Divine Shitposting, University of Unbridled Speculation, April 20, 2024.
-[4] @alpha_pls, [Tweet](https://x.com/alpha_pls/status/1846474892285301155) about GOAT implications, October 15, 2024.
+[4] Aylo (@alpha_pls), [Tweet](https://x.com/alpha_pls/status/1846474892285301155) about GOAT implications, October 15, 2024.
 [5] M. Levine, [Article](https://www.bloomberg.com/news/newsletters/money-stuff/2024-10-17/a-meme-coin) about GOAT, Money Stuff, Bloomberg, October 17, 2024.
 
 > <small>*Written alongside Claude Sonnet 3.5*</small>
