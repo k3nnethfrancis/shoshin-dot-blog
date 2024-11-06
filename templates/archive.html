@@ -22,7 +22,7 @@
         <section class="post-list">
             {% for post in posts %}
             <article class="post-item">
-                <h2 class="post-title"><a href="/post/{{ post.filename }}.html">{{ post.title }}</a></h2>
+                <h2 class="post-title"><a href="/{{ post.filename }}.html">{{ post.title }}</a></h2>
                 <span class="post-metadata">[ {{ post.date }} ] [ {{ post.tags | join(', ') }} ]</span>
             </article>
             {% endfor %}

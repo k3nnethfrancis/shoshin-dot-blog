@@ -83,8 +83,7 @@ def generate_posts():
                     metadata=metadata,
                     img_path=f"/static/images/posts/{post_filename}.png"
                 )
-                os.makedirs('output/post', exist_ok=True)
-                with open(f'output/post/{post_filename}.html', 'w', encoding='utf-8') as output_file:
+                with open(f'output/{post_filename}.html', 'w', encoding='utf-8') as output_file:
                     output_file.write(html)
 
 def copy_post_images(content, post_filename):
@@ -101,10 +100,10 @@ def copy_post_images(content, post_filename):
     return content.replace('](/images/', f'](/static/images/posts/{post_filename}/')
 
 def generate_blog_listings():
-    template = env.get_template('blog.html')
+    template = env.get_template('archive.html')
     posts = read_markdown_files()
     html = template.render(posts=posts)
-    with open('output/blog.html', 'w', encoding='utf-8') as file:
+    with open('output/archive.html', 'w', encoding='utf-8') as file:
         file.write(html)
 
 def generate_skilltree():

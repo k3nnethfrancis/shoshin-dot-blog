@@ -15,7 +15,7 @@
             <h1>> ken_</h1>
             <p class="subtitle">i/o psychologist · ai developer</p>
             <nav class="profile-links">
-                <a href="/blog.html" class="profile-link">blog</a>
+                <a href="/archive.html" class="profile-link">blog</a>
                 <!-- <a href="https://x.com/local0ptimist" target="_blank" rel="noopener noreferrer" class="profile-link">x</a> -->
                 <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="profile-link">github</a>
                 <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="profile-link">agency42</a>
@@ -37,7 +37,7 @@
                 {% for post in recent_posts %}
                 <li class="post-item">
                     <span class="post-date">{{ post.date }}</span>
-                    <a href="/post/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>
+                    <a href="/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>
                 </li>
                 {% endfor %}
             </ul>
