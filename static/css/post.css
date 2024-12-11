@@ -1,13 +1,11 @@
+/* Post page layout */
 .post-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.blog-post {
-    padding: 20px 0;
-}
-
+/* Navigation */
 nav {
     margin-bottom: 1rem;
     font-size: 0.9rem;
@@ -22,6 +20,7 @@ nav a:hover {
     color: var(--highlight);
 }
 
+/* Post header */
 .post-title {
     font-size: 2.5rem;
     color: var(--accent-color);
@@ -39,6 +38,7 @@ nav a:hover {
     margin-right: 1rem;
 }
 
+/* Post hero image */
 .post-image {
     width: 100%;
     max-height: 400px;
@@ -47,11 +47,13 @@ nav a:hover {
     margin-bottom: 1.5rem;
 }
 
+/* Post content */
 .post-content {
     line-height: 1.6;
     color: var(--text-color);
 }
 
+/* Image handling in post content */
 .post-content figure {
     margin: 2rem auto;
     text-align: center;
@@ -72,11 +74,11 @@ nav a:hover {
 .post-content figcaption {
     margin-top: 0.5rem;
     font-size: 0.9em;
-    color: #666;
+    color: var(--text-secondary);
     font-style: italic;
 }
 
-/* Responsive adjustments */
+/* Responsive image adjustments */
 @media (min-width: 768px) {
     .post-content img,
     .post-content figure {
@@ -89,151 +91,11 @@ nav a:hover {
     .post-content figure {
         max-width: 70%;
     }
-    
-    .post-content img {
-        max-width: 100%;
-        max-height: 500px; /* Adjust this value as needed */
-        object-fit: contain;
-    }
 }
 
-/* Optional: For extra-large screens */
 @media (min-width: 1440px) {
     .post-content img,
     .post-content figure {
         max-width: 60%;
-    }
-}
-
-/* Ensure images don't exceed their natural size */
-.post-content img {
-    max-width: 100% !important;
-    height: auto !important;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 2rem;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.back-link:hover {
-    text-decoration: underline;
-}
-
-.footnotes {
-    border-top: 1px solid var(--border-color);
-    margin-top: 2rem;
-    padding-top: 1rem;
-}
-
-.footnotes ol {
-    padding-left: 1.5rem;
-}
-
-.footnotes li {
-    font-size: 0.9em;
-    color: var(--text-secondary);
-}
-
-.footnote-backref {
-    text-decoration: none;
-    color: var(--accent);
-}
-
-.MathJax {
-    font-size: 1.1em;
-}
-
-.math-display {
-    overflow-x: auto;
-    margin: 1em 0;
-}
-
-.footnote-ref {
-    font-size: 0.8em;
-    vertical-align: super;
-}
-
-.post-nav {
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.post-nav a {
-    color: #888;
-    text-decoration: none;
-}
-
-.post-nav a:hover {
-    color: #fff;
-}
-
-.katex-display {
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 1em 0;
-}
-
-/* Main post hero image */
-.post-hero-image {
-    width: 100% !important;
-    max-height: 400px !important;
-    object-fit: cover !important;
-    margin-bottom: 1.5rem !important;
-    border-radius: 8px !important;
-}
-
-/* Image container for centering */
-.image-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 2rem 0 !important;
-}
-
-/* Content images */
-.post-content .image-container img {
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 400px !important;
-    border-radius: 4px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Figure and caption styling */
-.post-content figure {
-    margin: 0 !important;
-    text-align: center !important;
-    max-width: 100% !important;
-}
-
-.post-content figcaption {
-    margin-top: 0.5rem !important;
-    font-size: 0.9em !important;
-    color: #666 !important;
-    font-style: italic !important;
-}
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
-    .post-content .image-container {
-        max-width: 80% !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-}
-
-@media (min-width: 1024px) {
-    .post-content .image-container {
-        max-width: 70% !important;
-    }
-}
-
-@media (min-width: 1440px) {
-    .post-content .image-container {
-        max-width: 60% !important;
     }
 }

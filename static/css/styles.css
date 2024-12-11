@@ -1,67 +1,143 @@
-  :root {
+:root {
     --bg-color: #f5f5f5;
     --text-color: #333;
     --accent-color: #4a4a4a;
-    --highlight: #E63946; /* Keeping the muted red for highlights */
+    --highlight: #E63946;
     --border-color: #e0e0e0;
     --text-secondary: #666;
+    --link-color: var(--text-color);
+    --text-primary: var(--text-color);
+    --scanline-opacity: 0.02;
+    --cursor-color: var(--accent-color);
+    --selection-bg: rgba(70, 70, 70, 0.2);
 }
   
-  body {
-    /* font-family: 'Inter', sans-serif; New font */
+body {
     font-family: 'JetBrains Mono', monospace;
     line-height: 1.6;
-    color: var(--text-primary);
-    background-color: var(--background);
+    color: var(--text-color);
+    background-color: var(--bg-color);
     margin: 0;
     padding: 40px 20px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-  }
+}
   
-  .content-wrapper {
-    max-width: 700px;
-    width: 100%;
-  }
-  
-  main {
+.content-wrapper {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
-  }
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+}
   
-  h1, h2 {
+main {
+    width: 100%;
+    margin: 0 auto;
+}
+  
+h1, h2 {
     color: var(--text-primary);
     margin-bottom: 20px;
     font-weight: 600;
-  }
+}
   
-  h2::before {
-    content: none; /* Remove the ">" prefix */
-  }
+h2::before {
+    content: none;
+}
   
-  a {
+a {
     color: var(--link-color);
     text-decoration: none;
     border-bottom: 1px solid var(--border-color);
     transition: color 0.3s ease, border-bottom-color 0.3s ease;
-  }
+}
   
-  a:hover {
+a:hover {
     color: var(--highlight);
     border-bottom-color: var(--highlight);
-    text-decoration: none !important; /* Add this line */
-  }
+    text-decoration: none !important;
+}
   
-  /* Remove CRT effect and scanlines */
-  .crt-effect, body::after {
-    display: none;
-  }
+/* Standardized CRT effect and scanlines */
+.crt-effect {
+    animation: flicker 0.15s infinite;
+    background: linear-gradient(var(--bg-color) 50%, rgba(0, 0, 0, 0.02) 50%);
+    background-size: 100% 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, var(--scanline-opacity)),
+        rgba(0, 0, 0, var(--scanline-opacity)) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
   
-  hr {
+hr {
     border: none;
     border-top: 1px solid var(--border-color);
     margin: 30px 0;
-  }
+}
+
+/* Base responsive styles */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+    
+    .content-wrapper {
+        padding: 1rem;
+    }
+}
+
+/* Ensure proper box-sizing across all elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Add blinking cursor effect to headings with "_" */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+h1:after {
+    content: "_";
+    color: var(--cursor-color);
+    animation: blink 2.25s step-end infinite;
+}
+
+/* Add text selection styling */
+::selection {
+    background: var(--selection-bg);
+    color: var(--text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --text-color: #e0e0e0;
+        --accent-color: #a0a0a0;
+        --border-color: #333;
+        --text-secondary: #888;
+    }
+}

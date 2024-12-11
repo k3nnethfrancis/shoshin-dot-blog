@@ -41,4 +41,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     changeText();
     changeInterest();
+
+    // Add hover effect to show full title if truncated
+    document.querySelectorAll('.post-title').forEach(title => {
+        title.addEventListener('mouseover', (e) => {
+            if (e.target.offsetWidth < e.target.scrollWidth) {
+                e.target.title = e.target.textContent;
+            }
+        });
+    });
 });
