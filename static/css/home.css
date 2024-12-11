@@ -5,6 +5,7 @@
     align-items: center;
     text-align: left;
     margin-bottom: 3rem;
+    transition: flex-direction 0.3s ease;
 }
 
 .profile-image {
@@ -145,4 +146,10 @@ h2 {
 html {
     overflow-x: hidden;
     width: 100%;
+}
+
+.typing {
+    min-width: 8ch;  /* Adjust based on your content */
+    display: inline-block;
+    white-space: pre;
 }

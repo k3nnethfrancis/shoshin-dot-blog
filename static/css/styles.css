@@ -23,6 +23,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    min-height: 100%;
+    overflow-y: auto;
+    position: fixed;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
   
 .content-wrapper {
@@ -120,7 +125,7 @@ hr {
     50% { opacity: 0; }
 }
 
-h1:after {
+h1:not(.typing):after {
     content: "_";
     color: var(--cursor-color);
     animation: blink 2.25s step-end infinite;
@@ -139,5 +144,47 @@ h1:after {
         --accent-color: #a0a0a0;
         --border-color: #333;
         --text-secondary: #888;
+        --link-color: var(--text-color);
+        --text-primary: var(--text-color);
+        --selection-bg: rgba(255, 255, 255, 0.1);
     }
+}
+
+/* Typing effect container */
+h1.typing {
+    min-width: 8ch;
+    display: inline-block;
+    white-space: pre;
+    position: relative;
+    height: 3rem;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+/* Override blog.css styles */
+.container h1.typing {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: var(--accent-color);
+}
+
+/* Remove the existing typing styles from blog.css and home.css */
+
+/* Ensure dark background covers entire viewport, even during bounce/overscroll */
+html {
+    background-color: var(--bg-color);
+    height: 100%;
+    overflow: hidden;  /* Prevent bounce on desktop */
+}
+
+body {
+    background-color: var(--bg-color);
+    min-height: 100%;
+    overflow-y: auto;  /* Allow scrolling within body */
+    position: fixed;   /* Prevent bounce on mobile */
+    width: 100%;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
 }

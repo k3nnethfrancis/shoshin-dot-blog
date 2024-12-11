@@ -1,13 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const texts = ["technologist", "researcher", "developer", "entrepreneur"];
-    const interests = ["ai", "memetics", "desci"];
-    let textIndex = 0;
-    let interestIndex = 0;
-
     function typeText(element, text, index, callback) {
         if (index < text.length) {
             element.innerHTML += text.charAt(index);
-            setTimeout(() => typeText(element, text, index + 1, callback), 100);
+            setTimeout(() => typeText(element, text, index + 1, callback), 50);
         } else {
             setTimeout(callback, 1000);
         }
@@ -23,24 +18,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function changeText() {
-        const element = document.getElementById('dynamic-text');
-        eraseText(element, () => {
-            textIndex = (textIndex + 1) % texts.length;
-            typeText(element, texts[textIndex], 0, changeText);
-        });
-    }
-
-    function changeInterest() {
-        const element = document.getElementById('dynamic-interest');
-        eraseText(element, () => {
-            interestIndex = (interestIndex + 1) % interests.length;
-            typeText(element, interests[interestIndex], 0, changeInterest);
-        });
-    }
-
-    changeText();
-    changeInterest();
+    // Modified to work with class instead of id
+    const typingElements = document.querySelectorAll('.typing');
+    typingElements.forEach(element => {
+        const originalText = element.innerHTML;
+        element.innerHTML = '';  // Start empty
+        setTimeout(() => {
+            typeText(element, '> ' + originalText, 0, () => {});
+        }, 300);
+    });
 
     // Add hover effect to show full title if truncated
     document.querySelectorAll('.post-title').forEach(title => {

@@ -5,12 +5,6 @@
     padding: 20px;
 }
 
-.blog-title {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
 .blog-meta {
     font-size: 0.9rem;
     color: var(--accent-color);
@@ -57,6 +51,11 @@
     color: var(--text-secondary);
     white-space: nowrap;
     flex-shrink: 0;
+    transition: color 0.3s ease;
+}
+
+.post-item:hover .post-metadata {
+    color: var(--accent-color);
 }
 
 /* Container styles */
@@ -87,4 +86,10 @@ header {
         margin-left: 0;
         margin-top: 0.5rem;
     }
+}
+
+.typing {
+    min-width: 6ch;  /* Adjust based on your content */
+    display: inline-block;
+    white-space: pre;
 }
