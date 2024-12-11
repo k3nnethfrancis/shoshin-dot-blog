@@ -23,11 +23,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: 100%;
-    overflow-y: auto;
-    position: fixed;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
 }
   
 .content-wrapper {
@@ -176,15 +172,5 @@ h1.typing {
 /* Ensure dark background covers entire viewport, even during bounce/overscroll */
 html {
     background-color: var(--bg-color);
-    height: 100%;
-    overflow: hidden;  /* Prevent bounce on desktop */
-}
-
-body {
-    background-color: var(--bg-color);
     min-height: 100%;
-    overflow-y: auto;  /* Allow scrolling within body */
-    position: fixed;   /* Prevent bounce on mobile */
-    width: 100%;
-    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
 }
