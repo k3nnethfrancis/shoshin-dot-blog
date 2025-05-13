@@ -7,6 +7,7 @@ import site_generator
 import socket
 
 def generate():
+    print("Generating site...")
     site_generator.main()
 
 def get_local_ip():
@@ -25,6 +26,7 @@ def get_local_ip():
 generate()
 
 # Create a server
+print("Creating server...")
 server = Server()
 
 # Watch for changes in content, templates, and static files

@@ -1,6 +1,6 @@
 ---
 date: 2021-05-23
-image: /static/images/posts/extended-mind.png
+image: /static/images/posts/extended-mind.jpg
 readTime: 2 minutes
 tags:
 - philosophy
@@ -9,11 +9,14 @@ tags:
 ---
 
 
+
+
+
+
+
 # Work systems and the extended mind
 
-As it turns out, On information technology was a discussion of the extended mind hypothesis.
-
-This is the idea that the mind is not limited to the inside of the head. But rather, we leverage systems and tools to extend our minds outside of the head, into the world.
+The Extended Mind Hypothesis is the idea that the mind is not limited to the inside of the head. But rather, we leverage systems and tools to extend our minds outside of the head, into the world.
 
 Consider the following thought experiment:
 

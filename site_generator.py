@@ -81,7 +81,7 @@ def generate_posts():
                     title=title,
                     content=html_content,
                     metadata=metadata,
-                    img_path=f"/static/images/posts/{post_filename}.png"
+                    img_path=metadata.get('image')
                 )
                 with open(f'output/{post_filename}.html', 'w', encoding='utf-8') as output_file:
                     output_file.write(html)

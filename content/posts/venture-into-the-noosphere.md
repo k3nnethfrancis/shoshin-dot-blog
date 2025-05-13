@@ -1,12 +1,18 @@
 ---
 date: 2022-02-03
-image: /static/images/posts/venture-into-the-noosphere.png
+image: /static/images/posts/venture-into-the-noosphere.jpg
 readTime: 3 minutes
 tags:
 - science
 - web3
 - culture
 ---
+
+
+
+
+
+
 
 
 # Venture into the noosphere
