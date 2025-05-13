@@ -1,5 +1,5 @@
 ---
-date: 2025-05-10
+date: 2025-05-12
 image: /static/images/posts/naive-ventures.jpg
 readTime: 7 minutes
 tags:
