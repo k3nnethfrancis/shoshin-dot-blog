@@ -17,7 +17,7 @@ I thought I knew what it would be like to start a company. I had taken what I th
 
 I call these 'naïve ventures'. They were projects I started, usually alongside others, that told a story about the world that I wanted to contribute to. But in reality, they were nothing that I would have ever quit my day job for. 
 
-So when I did quit my day job to start a company, it felt like jumping into arctic waters with no wetsuit after spening hours in the hot tub.
+So when I did quit my day job to start a company, it felt like jumping into arctic waters with no wetsuit after spending the last hour in the hot tub.
 
 It's not like my previous ventures didn't teach me valuable lessons. I don't think I'd have made it this far without those experiences.
 
