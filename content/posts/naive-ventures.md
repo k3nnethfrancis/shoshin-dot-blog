@@ -37,8 +37,7 @@ Eric was a talented mathematician and engineer. When we met, I was doing researc
 
 The biggest challenge for us was building the data operations to index and scale a search engine. We built a dataset of millions of creators that took us much too long to curate. Looking back, this was a clear cold start problem that we should have anticipated, but we underestimated the complexity and importance of factors like data enrichment and ranking algorthims. To put the difficulty of the creator search problem into perspective, consider your favorite influencer and try to imagine searching for them on social media without using their name, any associated tags, brands, or going through friends pages. Now that you're thinking of all the ways you can describe an influencer, imagine doing that for millions of creators across multiple platforms.
 
-
-Ultimately, we took the route of greatly simplifying our algorithm (see [BM25 is all you need](https://shoshin.blog/bm25-is-all-you-need.html)) to focus on UX. But after six months of trying to balance a 50+ hour/week day job with 20+ hours/week on a startup that was struggling to gain traction, I was extremely burnt out. 
+Ultimately, we took the route of greatly simplifying our algorithm (see *[BM25 is all you need](https://shoshin.blog/bm25-is-all-you-need.html)*) to focus on UX. But after six months of trying to balance a 50+ hour/week day job with 20+ hours/week on a startup that was struggling to gain traction, I was extremely burnt out. 
 
 It was time for me to take a break. I put my head down at SpaceX for a while. I got engaged, planned a wedding, and coasted for a bit. Life was good, but I couldn't shake the feeling that timelines were accelerating.
 
