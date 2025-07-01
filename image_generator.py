@@ -62,7 +62,7 @@ def generate_image_prompt(post_content, client='openai'):
     else:
         raise ValueError(f"Invalid client: {client}")
 
-def generate_and_save_image(prompt, filename, post_content, max_retries=3):
+def generate_and_save_image(prompt, filename, post_content, max_retries=3, subfolder='posts'):
     """Generate image, save raw with timestamp, crop, save final, and return path."""
     for attempt in range(max_retries):
         try:
@@ -96,9 +96,10 @@ def generate_and_save_image(prompt, filename, post_content, max_retries=3):
             top = (height - new_height) // 2
             bottom = top + new_height
             cropped_img = img.crop((0, top, width, bottom))
-            os.makedirs("static/images/posts", exist_ok=True)
+            output_dir = os.path.join("static", "images", subfolder)
+            os.makedirs(output_dir, exist_ok=True)
             final_img_filename = f"{filename}.jpg"
-            final_img_path = os.path.join("static/images/posts", final_img_filename)
+            final_img_path = os.path.join(output_dir, final_img_filename)
             cropped_img.save(final_img_path, format="JPEG", quality=85, optimize=True)
             logging.info(f"Cropped image saved: {final_img_path}")
             # -------------------------------------------
@@ -118,12 +119,11 @@ def sanitize_filename(filename):
     """Sanitize the filename to be safe for file systems."""
     return re.sub(r'[^\w\-_\. ]', '_', filename)
 
-def generate_post_image(post_content, post_title):
-    """Main function to generate and save an image for a blog post."""
-    prompt = generate_image_prompt(post_content)
-    sanitized_title = sanitize_filename(post_title)
-    img_path = generate_and_save_image(prompt, sanitized_title, post_content)
-    return img_path
+def generate_generic_image(text, title, subfolder='posts'):
+    """Generate and save an image given text, returns path."""
+    prompt = generate_image_prompt(text)
+    sanitized_title = sanitize_filename(title)
+    return generate_and_save_image(prompt, sanitized_title, text, subfolder=subfolder)
 
 def process_post(file_path, force=False):
     """Process a single post file."""
@@ -140,7 +140,7 @@ def process_post(file_path, force=False):
             return
         
         logging.info(f"Generating image for post: {title}")
-        img_path = generate_post_image(body, title)
+        img_path = generate_generic_image(body, title)
         
         if img_path:  # Only update if image generation was successful
             # Update the frontmatter with the generated image path
@@ -170,6 +170,7 @@ def main():
     parser.add_argument("--force", action="store_true", help="Force regeneration of images even if they already exist")
     parser.add_argument("--posts", nargs="+", help="Generate images for specific posts (provide filenames or base names)")
     parser.add_argument("--missing", action="store_true", help="Generate images only for posts without existing images")
+    parser.add_argument("--quests", nargs="+", help="Generate images for quests, provide slug:description pairs (description optional)")
 
     args = parser.parse_args()
 
@@ -191,6 +192,16 @@ def main():
                 process_post(file_path, force=args.force)
             else:
                 logging.warning(f"Post file not found: {post}")
+    elif args.quests:
+        logging.info("Generating images for quests")
+        for item in args.quests:
+            if ':' in item:
+                slug, desc = item.split(':', 1)
+            else:
+                slug, desc = item, item
+            img_path = generate_generic_image(desc, slug, subfolder='quests')
+            if img_path:
+                logging.info(f"Generated quest image saved at {img_path}")
     elif args.missing:
         logging.info("Checking for posts without existing images")
         missing_images_count = 0

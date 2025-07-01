@@ -19,6 +19,7 @@
                 <!-- <a href="https://x.com/local0ptimist" target="_blank" rel="noopener noreferrer" class="profile-link">x</a> -->
                 <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="profile-link">github</a>
                 <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="profile-link">agency42</a>
+                <a href="/artifacts.html" class="profile-link">artifacts</a>
             </nav>
         </div>
     </header>
@@ -26,16 +27,16 @@
     <main>
         <section class="about">
             <h2></h2>
-            <p>I'm an industrial psychologist and technologist helping companies integrate AI.</p>
-            <p>Previously, I led people analytics at SpaceX. I believe that in life, it is important to explore your ever-growing list of side quests. So far I've been lucky to do that alongside amazing creators, scientists, engineers, and friends.</p>
+            <p>I'm an industrial psychologist helping companies integrate AI. Previously, I led people analytics at SpaceX.</p>
+            <p>I believe that in life, it is important to have an ever-growing list of side quests. So far, I've been lucky to explore them alongside amazing scientists, creators, engineers, and friends.</p>
             <p>Shoshin (初心) is the zen buddhists term for beginner's mind. It is my reminder to embody humility and curiosity in everything I do.</p>
             <p>This blog serves as a repository for some of my better ideas.</p>
         </section>
         
         <section class="essays">
-            <h2>Recent Posts</h2>
+            <h2>Featured Posts</h2>
             <ul class="post-list">
-                {% for post in recent_posts %}
+                {% for post in featured_posts %}
                 <li class="post-item">
                     <span class="post-date">{{ post.date }}</span>
                     <a href="/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>

@@ -12,6 +12,12 @@ from custom_markdown_extension import FigureExtension
 # Set up Jinja2 environment
 env = Environment(loader=FileSystemLoader('templates'))
 
+FEATURED_SLUGS = [
+    'bm25-is-all-you-need',
+    'on-taking-gpt4-out-of-the-box',
+    'extended-mind'
+]
+
 def process_title(title):
     return title.split(':')[0].strip()
 
@@ -40,8 +46,10 @@ def read_markdown_files():
 
 def generate_index():
     template = env.get_template('index.html')
-    posts = read_markdown_files()[:3]  # Get the 3 most recent posts
-    html = template.render(recent_posts=posts)
+    all_posts = read_markdown_files()
+    slug_to_post = {p['filename']: p for p in all_posts}
+    featured_posts = [slug_to_post[slug] for slug in FEATURED_SLUGS if slug in slug_to_post]
+    html = template.render(featured_posts=featured_posts)
     with open('output/index.html', 'w', encoding='utf-8') as file:
         file.write(html)
 
@@ -112,12 +120,19 @@ def generate_skilltree():
     with open('output/skilltree.html', 'w', encoding='utf-8') as file:
         file.write(html)
 
+def generate_sidequests():
+    template = env.get_template('artifacts.html')
+    html = template.render()
+    with open('output/artifacts.html', 'w', encoding='utf-8') as file:
+        file.write(html)
+
 def main():
     os.makedirs('output', exist_ok=True)
     generate_index()
     generate_blog_listings()
     generate_posts()
     # generate_skilltree()
+    generate_sidequests()
     
     # Copy static files to output directory
     copy_static_files()
