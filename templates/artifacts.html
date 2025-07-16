@@ -14,6 +14,14 @@
     .questbook h1 {
         margin-bottom: 1.5rem;
     }
+    .questbook h1::after {
+        display: none; /* Disable the default blinking cursor */
+    }
+    .questbook-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
     .quests {
         list-style: none;
         padding: 0;
@@ -24,6 +32,10 @@
         padding: 1rem;
         margin-bottom: 1rem;
         background: var(--bg-color);
+        transition: all 0.2s ease;
+    }
+    .quest details:hover {
+        border-color: var(--accent-color);
     }
     .quest summary {
         cursor: pointer;
@@ -31,6 +43,7 @@
         display: flex;
         align-items: center;
         outline: none;
+        user-select: none;
     }
     .quest summary::-webkit-details-marker {
         display: none;
@@ -38,6 +51,9 @@
     .quest summary::before {
         content: "\1F4C1"; /* folder emoji */
         margin-right: 0.5rem;
+    }
+    .quest details[open] summary::before {
+        content: "\1F4C2"; /* open folder emoji */
     }
     .quest a {
         border: none;
@@ -70,8 +86,8 @@
     <nav style="margin-bottom: 1rem;">
         <a href="/" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">home</a>
     </nav>
-    <h1>> artifacts_</h1>
-    <p>Click a folder to inspect each project.</p>
+    <h1 class="typing">artifacts_</h1>
+    <p class="questbook-subtitle">Remnants of my journey.</p>
 
     <ul class="quests">
         <!-- Noometic AI first -->
@@ -115,4 +131,8 @@
         </li>
     </ul>
 </section>
+{% endblock %} 
+
+{% block scripts %}
+<script src="/static/js/typing-effect.js"></script>
 {% endblock %} 
