@@ -99,3 +99,20 @@ nav a:hover {
         max-width: 60%;
     }
 }
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.75rem;
+    }
+    
+    .post-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 1.5rem;
+    }
+}
