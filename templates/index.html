@@ -7,47 +7,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 {% endblock %}
 
-{% block content %}
-<div class="content-wrapper">
-    <header class="profile-section">
-        <img src="/static/images/pfp/pfp.PNG" alt="pfp" class="profile-image">
-        <div class="profile-info">
-            <h1 class="typing">ken_</h1>
-            <p class="subtitle">i/o psychologist · ai developer</p>
-            <nav class="profile-links">
-                <a href="/archive.html" class="profile-link">blog</a>
-                <!-- <a href="https://x.com/local0ptimist" target="_blank" rel="noopener noreferrer" class="profile-link">x</a> -->
-                <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="profile-link">github</a>
-                <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="profile-link">agency42</a>
-                <a href="/artifacts.html" class="profile-link">artifacts</a>
-            </nav>
-        </div>
-    </header>
-    
-    <main>
-        <section class="about">
-            <h2></h2>
-            <p>I'm an industrial psychologist building a full-stack AI agency. Previously, I led operations analytics at SpaceX.</p>
-            <p>Throughout my career, I've always kept an ever-growing list of side quests, which I've been lucky to pursue alongside amazing creators, scientists, engineers, and friends.</p>
-            <p>This blog serves as a repository of ideas and lessons I've learned along the way.</p>
-            <p><em>Shoshin (初心) is the zen buddhists term for beginner's mind. It is my reminder to embody humility and curiosity in everything I do.</em></p>
-        </section>
-        
-        <section class="essays">
-            <h2>Featured Posts</h2>
-            <ul class="post-list">
-                {% for post in featured_posts %}
-                <li class="post-item">
-                    <span class="post-date">{{ post.date }}</span>
-                    <a href="/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </main>
+{% block fixed_elements %}
+<button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false" style="position:fixed;top:24px;right:24px;width:20px;height:14px;display:flex;flex-direction:column;justify-content:space-between;background:transparent;border:none;cursor:pointer;padding:0;z-index:9999;">
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+</button>
+
+<div class="menu-popup" id="menu-popup" style="position:fixed;top:50px;right:24px;z-index:9998;display:none;">
+    <nav class="menu-popup-content" style="background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:0.5rem;min-width:120px;">
+        <a href="/archive.html" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">blog</a>
+        <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">agency42</a>
+        <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">github</a>
+        <a href="/artifacts.html" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">artifacts</a>
+    </nav>
 </div>
+{% endblock %}
+
+{% block content %}
+<header class="profile-section">
+    <img src="/static/images/pfp/pfp.PNG" alt="pfp" class="profile-image">
+    <div class="profile-info">
+        <h1 class="typing">ken_</h1>
+        <p class="subtitle">i/o psychologist · ai developer</p>
+    </div>
+</header>
+
+<main>
+    <section class="about">
+        <p>I'm an industrial psychologist working in applied AI.</p>
+        <p>My experience bridges data science and operations roles across organizations like SpaceX, Omnicom, a few startups, and the Brooklyn College Psychology Department.</p>
+        <p>Currently, I'm building AI agents for enterprise clients, while taking on a few special projects on the side, including my own AI research, which explores LLM psychology and cybernetics.</p>
+        <p>This blog serves as a repository of ideas and lessons I've learned along the way.</p>
+        <p><em>Shoshin (初心)</em> is the Zen Buddhist's term for <em>"beginner's mind"</em>. It is my reminder to embody humility and curiosity in everything I do.</p>
+    </section>
+    
+    <section class="essays">
+        <h2>Featured Posts</h2>
+        <ul class="post-list">
+            {% for post in featured_posts %}
+            <li class="post-item">
+                <span class="post-date">{{ post.date }}</span>
+                <a href="/{{ post.filename }}.html" class="post-title">{{ post.short_title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
 {% endblock %}
 
 {% block scripts %}
 <script src="/static/js/typing-effect.js"></script>
+<script>
+    (function() {
+        const hamburgerButton = document.querySelector('.hamburger-menu');
+        const menuPopup = document.getElementById('menu-popup');
+        
+        // Reset menu state on page load/restore
+        function resetMenu() {
+            if (menuPopup) {
+                menuPopup.style.display = 'none';
+            }
+            if (hamburgerButton) {
+                hamburgerButton.setAttribute('aria-expanded', 'false');
+            }
+        }
+        
+        // Reset on page show (handles bfcache restoration)
+        window.addEventListener('pageshow', resetMenu);
+        
+        // Also reset immediately
+        resetMenu();
+        
+        if (hamburgerButton && menuPopup) {
+            hamburgerButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+                hamburgerButton.setAttribute('aria-expanded', !isExpanded);
+                menuPopup.style.display = isExpanded ? 'none' : 'block';
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!menuPopup.contains(e.target) && !hamburgerButton.contains(e.target)) {
+                    menuPopup.style.display = 'none';
+                    hamburgerButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    })();
+</script>
 {% endblock %}

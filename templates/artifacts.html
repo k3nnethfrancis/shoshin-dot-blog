@@ -81,11 +81,25 @@
 </style>
 {% endblock %}
 
+{% block fixed_elements %}
+<button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false" style="position:fixed;top:24px;right:24px;width:20px;height:14px;display:flex;flex-direction:column;justify-content:space-between;background:transparent;border:none;cursor:pointer;padding:0;z-index:9999;">
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+</button>
+
+<div class="menu-popup" id="menu-popup" style="position:fixed;top:50px;right:24px;z-index:9998;display:none;">
+    <nav class="menu-popup-content" style="background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:0.5rem;min-width:120px;">
+        <a href="/" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">home</a>
+        <a href="/archive.html" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">blog</a>
+        <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">agency42</a>
+        <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="menu-link" style="color:#666;text-decoration:none;font-size:0.85rem;padding:0.2rem 0;border-bottom:none;">github</a>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
 <section class="questbook">
-    <nav style="margin-bottom: 1rem;">
-        <a href="/" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">home</a>
-    </nav>
     <h1 class="typing">artifacts_</h1>
     <p class="questbook-subtitle">Remnants of my journey.</p>
 
@@ -131,8 +145,38 @@
         </li>
     </ul>
 </section>
-{% endblock %} 
+{% endblock %}
 
 {% block scripts %}
 <script src="/static/js/typing-effect.js"></script>
-{% endblock %} 
+<script>
+    (function() {
+        const hamburgerButton = document.querySelector('.hamburger-menu');
+        const menuPopup = document.getElementById('menu-popup');
+        
+        function resetMenu() {
+            if (menuPopup) menuPopup.style.display = 'none';
+            if (hamburgerButton) hamburgerButton.setAttribute('aria-expanded', 'false');
+        }
+        
+        window.addEventListener('pageshow', resetMenu);
+        resetMenu();
+        
+        if (hamburgerButton && menuPopup) {
+            hamburgerButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+                hamburgerButton.setAttribute('aria-expanded', !isExpanded);
+                menuPopup.style.display = isExpanded ? 'none' : 'block';
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!menuPopup.contains(e.target) && !hamburgerButton.contains(e.target)) {
+                    menuPopup.style.display = 'none';
+                    hamburgerButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    })();
+</script>
+{% endblock %}
