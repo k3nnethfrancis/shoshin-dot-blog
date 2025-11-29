@@ -1,0 +1,132 @@
+/* Menu styles */
+.menu-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+    border-bottom: none;
+    transition: color 0.2s ease;
+}
+
+.menu-link:hover {
+    color: var(--highlight);
+}
+
+/* Post page layout */
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation */
+nav {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--highlight);
+}
+
+/* Post header */
+.post-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.post-metadata {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.metadata-item {
+    margin-right: 1rem;
+}
+
+/* Post hero image */
+.post-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* Post content */
+.post-content {
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Image handling in post content */
+.post-content figure {
+    margin: 2rem auto;
+    text-align: center;
+    max-width: 100%;
+}
+
+.post-content img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 400px;
+    display: block;
+    margin: 2rem auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-content figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Responsive image adjustments */
+@media (min-width: 768px) {
+    .post-content img,
+    .post-content figure {
+        max-width: 80%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .post-content img,
+    .post-content figure {
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .post-content img,
+    .post-content figure {
+        max-width: 60%;
+    }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 1.75rem;
+    }
+    
+    .post-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 1.25rem;
+    }
+}
