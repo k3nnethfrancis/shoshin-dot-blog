@@ -1,3 +1,17 @@
+/* Menu styles */
+.menu-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+    border-bottom: none;
+    transition: color 0.2s ease;
+}
+
+.menu-link:hover {
+    color: var(--highlight);
+}
+
 /* Blog post styles */
 .blog-post {
     max-width: 800px;

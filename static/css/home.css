@@ -143,11 +143,11 @@
     font-size: 0.85rem;
     padding: 0.2rem 0;
     border-bottom: none;
+    transition: color 0.2s ease;
 }
 
 .menu-link:hover {
     color: var(--highlight);
-    border-bottom: none;
 }
 
 /* Content section styles */
@@ -182,6 +182,27 @@ h2::after {
     height: 1px;
     background-color: var(--border-color);
     opacity: 0.6;
+}
+
+.heading-icon {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+    color: var(--text-secondary);
+    border: none !important;
+    border-bottom: none !important;
+    transition: color 0.2s ease;
+}
+
+.heading-icon:hover {
+    color: var(--highlight);
+    border: none !important;
+    border-bottom: none !important;
+}
+
+.heading-icon svg {
+    display: block;
 }
 
 .about p {
