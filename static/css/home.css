@@ -4,58 +4,82 @@
     flex-direction: row;
     align-items: center;
     text-align: left;
-    margin-bottom: 3rem;
-    transition: flex-direction 0.3s ease;
+    margin-bottom: 0;
+    gap: 2rem;
 }
 
 .profile-image {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    margin-right: 2rem;
+    flex-shrink: 0;
     object-fit: cover;
     object-position: center 20%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .profile-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
+    gap: 0.25rem;
 }
 
 .profile-info h1 {
-    font-size: 2.5rem;
-    margin: 0 0 0.5rem 0;
+    font-size: 2.25rem;
+    margin: 0;
     color: var(--accent-color);
+    line-height: 1.1;
 }
 
 .subtitle {
-    margin: 0 0 1rem 0;
+    margin: 0;
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
 }
 
 .profile-links {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
     margin-top: 0.75rem;
 }
 
-.profile-link {
+.profile-links a.profile-link {
     color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.85rem;
-    border-bottom: none;
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
     transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
 }
 
-.profile-link:hover {
+.profile-links a.profile-link svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.profile-links a.profile-link:hover {
     color: var(--highlight);
-    border-bottom: none;
+    border: none !important;
+    border-bottom: none !important;
+}
+
+/* HR divider after profile section */
+.profile-section + hr {
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: var(--border-color);
+    opacity: 0.6;
 }
 
 /* Hamburger menu - top right corner */
@@ -127,23 +151,48 @@
 }
 
 /* Content section styles */
-.about, .essays {
-    margin-top: 30px;
+main {
+    padding-bottom: 2rem;
+}
+
+.about {
+    margin-top: 0;
+}
+
+.essays {
+    margin-top: 2.5rem;
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--accent-color);
-    margin-top: 2rem;
+    margin-top: 0;
     margin-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
+    border-bottom: none;
+    padding-bottom: 0.75rem;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background-color: var(--border-color);
+    opacity: 0.6;
 }
 
 .about p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
     font-size: 1rem;
     color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.about p:last-child {
+    margin-bottom: 0;
 }
 
 /* Post list styles */
@@ -164,7 +213,7 @@ h2 {
 }
 
 .post-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--link-color);
     text-decoration: none;
@@ -188,24 +237,36 @@ h2 {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 1rem;
     }
 
     .profile-image {
-        margin-right: 0;
-        margin-bottom: 1.5rem;
+        width: 130px;
+        height: 130px;
     }
 
-    .profile-links {
-        justify-content: center;
-        flex-wrap: wrap;
+    .profile-info {
+        align-items: center;
+        gap: 0.2rem;
     }
 
     .profile-info h1 {
-        font-size: 2rem;
+        font-size: 1.85rem;
     }
 
     .subtitle {
         font-size: 0.9rem;
+    }
+
+    .profile-links {
+        justify-content: center;
+        margin-top: 0.6rem;
+        gap: 1.25rem;
+    }
+
+    .profile-section + hr {
+        margin-top: 1.75rem;
+        margin-bottom: 1.75rem;
     }
 
     h2 {
