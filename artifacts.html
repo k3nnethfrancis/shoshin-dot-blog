@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>artifacts</title>
+    <!-- Add JetBrains Mono font -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    
+<link rel="stylesheet" href="/static/css/post.css">
+<style>
+    /* questbook aesthetic */
+    .questbook {
+        font-family: "JetBrains Mono", monospace;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .questbook h1 {
+        margin-bottom: 1.5rem;
+    }
+    .questbook h1::after {
+        display: none; /* Disable the default blinking cursor */
+    }
+    .questbook-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+    .quests {
+        list-style: none;
+        padding: 0;
+    }
+    .quest details {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: var(--bg-color);
+        transition: all 0.2s ease;
+    }
+    .quest details:hover {
+        border-color: var(--accent-color);
+    }
+    .quest summary {
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        outline: none;
+        user-select: none;
+    }
+    .quest summary::-webkit-details-marker {
+        display: none;
+    }
+    .quest summary::before {
+        content: "\1F4C1"; /* folder emoji */
+        margin-right: 0.5rem;
+    }
+    .quest details[open] summary::before {
+        content: "\1F4C2"; /* open folder emoji */
+    }
+    .quest a {
+        border: none;
+        font-style: italic;
+        text-decoration: underline;
+    }
+    .quest a:hover {
+        color: var(--highlight);
+    }
+    .badge {
+        background: var(--border-color);
+        color: var(--text-secondary);
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        margin-left: 0.5rem;
+    }
+    .quest-img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        margin: 0.5rem 0 1rem;
+        border-radius: 4px;
+    }
+</style>
+
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+    <!-- End of favicon links -->
+    <meta name="theme-color" content="#f5f5f5">
+    <meta name="description" content="Thoughts on technology, philosophy, psychology, and the future.">
+</head>
+<body>
+    
+<button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false" style="position:fixed;top:24px;right:24px;width:20px;height:14px;display:flex;flex-direction:column;justify-content:space-between;background:transparent;border:none;cursor:pointer;padding:0;z-index:9999;">
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+</button>
+
+<div class="menu-popup" id="menu-popup" style="position:fixed;top:50px;right:24px;z-index:9998;display:none;">
+    <nav class="menu-popup-content" style="background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:0.5rem;min-width:120px;">
+        <a href="/" class="menu-link">home</a>
+        <a href="/archive.html" class="menu-link">blog</a>
+        <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="menu-link">github</a>
+        <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="menu-link">agency</a>
+    </nav>
+</div>
+
+    <div class="content-wrapper">
+        
+<section class="questbook">
+    <h1 class="typing">artifacts_</h1>
+    <p class="questbook-subtitle">Remnants of my journey.</p>
+
+    <ul class="quests">
+        <!-- Noometic AI first -->
+        <li class="quest">
+            <details>
+                <summary>Noometic AI <span class="badge">startups</span></summary>
+                <img src="/static/images/quests/noometic-ai.jpg" alt="Noometic AI" class="quest-img">
+                <p>A creator-search product designed to make it easy for anyone to find Instagram &amp; TikTok creators with natural-language queries. Building it taught us sometimes simple is better. Users wanted fast search and composable filters over precision vector searches. We added a BM25 fallback to help solve this (see <a href="/bm25-is-all-you-need.html"><em>"BM25 is all you need."</em></a>)</p>
+                <ul>
+                    <li><a href="https://github.com/NoometicAI/vector-creator-search" target="_blank" rel="noopener noreferrer">The vector search engine</a></li>
+                    <li><a href="https://github.com/k3nnethfrancis/bm25s_creator_search" target="_blank" rel="noopener noreferrer">BM25 creator search</a></li>
+                </ul>
+            </details>
+        </li>
+
+        <!-- Project LION second -->
+        <li class="quest">
+            <details>
+                <summary>Project LION <span class="badge">development</span></summary>
+                <img src="/static/images/quests/project-lion.jpg" alt="Project LION" class="quest-img">
+                <p>An open-source initiative to build AI tooling for DAOs. Ambitiously sketched in the <a href="https://project-lion-ai.github.io/hello-world/" target="_blank" rel="noopener noreferrer">LION manifesto</a>, we shipped an early Discord agent that could answer questions about the DAO and published a toolkit for Discord community analytics—network graphs, sentiment &amp; psychometric scores via LLMs.</p>
+                <ul>
+                    <li><a href="https://project-lion-ai.github.io/hello-world/" target="_blank" rel="noopener noreferrer">Project overview & vision</a></li>
+                    <li><a href="https://github.com/Project-LION-AI/lionOS" target="_blank" rel="noopener noreferrer">LLM people analytics notebooks</a></li>
+                    <li><a href="https://github.com/Project-LION-AI/leo" target="_blank" rel="noopener noreferrer">Leo Discord agent (GPT-4)</a></li>
+                </ul>
+            </details>
+        </li>
+
+        <!-- talentDAO third -->
+        <li class="quest">
+            <details>
+                <summary>talentDAO <span class="badge">research</span></summary>
+                <img src="/static/images/quests/talentdao.jpg" alt="talentDAO" class="quest-img">
+                <p>An organizational-science DAO that explored the future of work. I co-authored the open-source <em>DAO Health Survey</em>, helped raise&nbsp;≈$70 k through Gitcoin's quadratic-funding rounds for DeSci, and contributed to the community newsletter.</p>
+                <ul>
+                    <li><a href="https://talentdao.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter</a></li>
+                    <li><a href="https://talentdao.mirror.xyz/1rT8KGt6wHzC03UQphG-upuW8HqRX6bP9YfFTtijl0Y" target="_blank" rel="noopener noreferrer">DAO Health Survey</a></li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</section>
+
+    </div>
+    
+<script src="/static/js/typing-effect.js"></script>
+<script>
+    (function() {
+        const hamburgerButton = document.querySelector('.hamburger-menu');
+        const menuPopup = document.getElementById('menu-popup');
+        
+        function resetMenu() {
+            if (menuPopup) menuPopup.style.display = 'none';
+            if (hamburgerButton) hamburgerButton.setAttribute('aria-expanded', 'false');
+        }
+        
+        window.addEventListener('pageshow', resetMenu);
+        resetMenu();
+        
+        if (hamburgerButton && menuPopup) {
+            hamburgerButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+                hamburgerButton.setAttribute('aria-expanded', !isExpanded);
+                menuPopup.style.display = isExpanded ? 'none' : 'block';
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!menuPopup.contains(e.target) && !hamburgerButton.contains(e.target)) {
+                    menuPopup.style.display = 'none';
+                    hamburgerButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

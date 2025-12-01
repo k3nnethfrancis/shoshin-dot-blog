@@ -1,0 +1,308 @@
+/* Profile section styles */
+.profile-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 0;
+    gap: 2rem;
+}
+
+.profile-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: center 20%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.profile-info h1 {
+    font-size: 2.25rem;
+    margin: 0;
+    color: var(--accent-color);
+    line-height: 1.1;
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+}
+
+.profile-links {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+}
+
+.profile-links a.profile-link {
+    color: var(--text-secondary);
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+.profile-links a.profile-link svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.profile-links a.profile-link:hover {
+    color: var(--highlight);
+    border: none !important;
+    border-bottom: none !important;
+}
+
+/* HR divider after profile section */
+.profile-section + hr {
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: var(--border-color);
+    opacity: 0.6;
+}
+
+/* Hamburger menu - top right corner */
+.hamburger-menu {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 20px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 9999;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--text-secondary);
+    border-radius: 1px;
+    transition: all 0.2s ease;
+}
+
+.hamburger-menu:hover span {
+    background-color: var(--highlight);
+}
+
+/* Menu popup - hidden by default */
+.menu-popup {
+    position: fixed;
+    top: 50px;
+    right: 24px;
+    z-index: 9998;
+    display: none;
+}
+
+.menu-popup.active {
+    display: block;
+}
+
+.menu-popup-content {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1.25rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.menu-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+    border-bottom: none;
+    transition: color 0.2s ease;
+}
+
+.menu-link:hover {
+    color: var(--highlight);
+}
+
+/* Content section styles */
+main {
+    padding-bottom: 2rem;
+}
+
+.about {
+    margin-top: 0;
+}
+
+.essays {
+    margin-top: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: none;
+    padding-bottom: 0.75rem;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background-color: var(--border-color);
+    opacity: 0.6;
+}
+
+.heading-icon {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+    color: var(--text-secondary);
+    border: none !important;
+    border-bottom: none !important;
+    transition: color 0.2s ease;
+}
+
+.heading-icon:hover {
+    color: var(--highlight);
+    border: none !important;
+    border-bottom: none !important;
+}
+
+.heading-icon svg {
+    display: block;
+}
+
+.about p {
+    margin-bottom: 0.9rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.about p:last-child {
+    margin-bottom: 0;
+}
+
+/* Post list styles */
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.post-item {
+    margin-bottom: 1.5rem;
+}
+
+.post-date {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.post-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-title:hover {
+    color: var(--highlight);
+    text-decoration: underline;
+}
+
+/* Dynamic text effect */
+.dynamic-text {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .profile-image {
+        width: 130px;
+        height: 130px;
+    }
+
+    .profile-info {
+        align-items: center;
+        gap: 0.2rem;
+    }
+
+    .profile-info h1 {
+        font-size: 1.85rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .profile-links {
+        justify-content: center;
+        margin-top: 0.6rem;
+        gap: 1.25rem;
+    }
+
+    .profile-section + hr {
+        margin-top: 1.75rem;
+        margin-bottom: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Prevent horizontal scrolling */
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.typing {
+    min-width: 8ch;  /* Adjust based on your content */
+    display: inline-block;
+    white-space: pre;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shoshin</title>
+    <!-- Add JetBrains Mono font -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    
+<link rel="stylesheet" href="/static/css/blog.css">
+
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/images/favicon/android-chrome-192x192.png">
+    <link rel="manifest" href="/static/images/favicon/site.webmanifest">
+    <!-- End of favicon links -->
+    <meta name="theme-color" content="#f5f5f5">
+    <meta name="description" content="Thoughts on technology, philosophy, psychology, and the future.">
+</head>
+<body>
+    
+<button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false" style="position:fixed;top:24px;right:24px;width:20px;height:14px;display:flex;flex-direction:column;justify-content:space-between;background:transparent;border:none;cursor:pointer;padding:0;z-index:9999;">
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+    <span style="display:block;width:100%;height:1.5px;background-color:#666;border-radius:1px;"></span>
+</button>
+
+<div class="menu-popup" id="menu-popup" style="position:fixed;top:50px;right:24px;z-index:9998;display:none;">
+    <nav class="menu-popup-content" style="background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1.25rem;box-shadow:0 2px 12px rgba(0,0,0,0.08);display:flex;flex-direction:column;gap:0.5rem;min-width:120px;">
+        <a href="/" class="menu-link">home</a>
+        <a href="https://github.com/k3nnethfrancis" target="_blank" rel="noopener noreferrer" class="menu-link">github</a>
+        <a href="https://agency42.co" target="_blank" rel="noopener noreferrer" class="menu-link">agency</a>
+    </nav>
+</div>
+
+    <div class="content-wrapper">
+        
+<div class="container">
+    <header>
+        <h1 class="typing">blog_</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <p>Thoughts on technology, psychology, startups, and the future.</p>
+        </section>
+        <section class="post-list">
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/naive-ventures.html">Naïve ventures</a></h2>
+                <span class="post-metadata">[ 2025-05-12 ] [ meditations ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/truth-terminal.html">Terminal of truths: anti-alignment and other memetic implications</a></h2>
+                <span class="post-metadata">[ 2024-10-18 ] [ ai, philosophy ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/luxury-constraints.html">Luxury constraints</a></h2>
+                <span class="post-metadata">[ 2024-10-14 ] [ startups, innovation ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/bm25-is-all-you-need.html">BM25 is all you need</a></h2>
+                <span class="post-metadata">[ 2024-09-01 ] [ ai, technology ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/on-taking-gpt4-out-of-the-box.html">On taking gpt-4 out of the box</a></h2>
+                <span class="post-metadata">[ 2023-10-24 ] [ ai, philosophy ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/epochs-of-open-science.html">Epochs of open science</a></h2>
+                <span class="post-metadata">[ 2022-06-03 ] [ science, web3, open source ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/governing-the-red-planet.html">Governing the red planet</a></h2>
+                <span class="post-metadata">[ 2022-04-15 ] [ space, web3 ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/venture-into-the-noosphere.html">Venture into the noosphere</a></h2>
+                <span class="post-metadata">[ 2022-02-03 ] [ science, web3, culture ]</span>
+            </article>
+            
+            <article class="post-item">
+                <h2 class="post-title"><a href="/extended-mind.html">Work systems and the extended mind</a></h2>
+                <span class="post-metadata">[ 2021-05-23 ] [ philosophy, psychology, ar/vr ]</span>
+            </article>
+            
+        </section>
+    </main>
+</div>
+
+    </div>
+    
+<script src="/static/js/typing-effect.js"></script>
+<script>
+    (function() {
+        const hamburgerButton = document.querySelector('.hamburger-menu');
+        const menuPopup = document.getElementById('menu-popup');
+        
+        function resetMenu() {
+            if (menuPopup) menuPopup.style.display = 'none';
+            if (hamburgerButton) hamburgerButton.setAttribute('aria-expanded', 'false');
+        }
+        
+        window.addEventListener('pageshow', resetMenu);
+        resetMenu();
+        
+        if (hamburgerButton && menuPopup) {
+            hamburgerButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = hamburgerButton.getAttribute('aria-expanded') === 'true';
+                hamburgerButton.setAttribute('aria-expanded', !isExpanded);
+                menuPopup.style.display = isExpanded ? 'none' : 'block';
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!menuPopup.contains(e.target) && !hamburgerButton.contains(e.target)) {
+                    menuPopup.style.display = 'none';
+                    hamburgerButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>
